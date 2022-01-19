@@ -83,6 +83,9 @@ const continueStory = (dispatch: Dispatch<any>) => {
     type: 'setChoices',
     choices: story.currentChoices.map(toChoiceType),
   })
+  if (!story.canContinue && story.currentChoices.length === 0) {
+    dispatch({ type: 'addParagraph', paragraph: 'THE END' })
+  }
 }
 
 export const StoryProvider: ComponentType = ({ children }) => {

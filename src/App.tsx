@@ -1,20 +1,28 @@
+import { useDispatch, useSelector } from 'react-redux'
 import './App.css'
-import { useStory } from './useStory'
+import { StoryState } from './store'
+import { makeChoice, resetStory } from './story.slice'
 
 function App() {
-  const { paragraphs, choices, reset, makeChoice } = useStory()
+  //const { paragraphs, choices, reset, makeChoice } = useStory()
+  const { paragraphs, choices } = useSelector(
+    (state: StoryState) => state.story
+  )
+  const dispatch = useDispatch()
 
   return (
     <div>
       <h1>Story</h1>
-      <button onClick={reset}>reset</button>
+      <button onClick={() => dispatch(resetStory)}>reset</button>
+      <br />
       {paragraphs.map((paragraph) => (
         <p key={paragraph}>{paragraph}</p>
       ))}
+
       {choices.map((choice) => (
         <button
           key={choice.index + choice.text}
-          onClick={() => makeChoice(choice.index)}
+          onClick={() => dispatch(makeChoice(choice))}
         >
           {choice.text}
         </button>

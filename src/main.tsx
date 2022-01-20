@@ -2,13 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import { StoryProvider } from './story.provider'
+import { Provider as ReduxProvider } from 'react-redux'
+import { store } from './store'
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoryProvider>
+    <ReduxProvider store={store}>
       <App />
-    </StoryProvider>
+    </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )

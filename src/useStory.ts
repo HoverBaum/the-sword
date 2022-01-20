@@ -1,14 +1,16 @@
-import { Story } from 'inkjs'
-import { useContext } from 'react'
-import { StoryContext } from './story.provider'
+import { useSelector } from 'react-redux'
+import { StoryState } from './store'
+import { makeChoice, resetStory } from './story.slice'
 
 export const useStory = () => {
-  const { state, dispatch, reset, makeChoice } = useContext(StoryContext)
+  const { paragraphs, choices } = useSelector(
+    (state: StoryState) => state.story
+  )
 
   return {
-    paragraphs: state.paragraphs,
-    choices: state.choices,
+    paragraphs,
+    choices,
     makeChoice,
-    reset,
+    resetStory,
   }
 }

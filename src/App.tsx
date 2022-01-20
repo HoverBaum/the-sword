@@ -4,15 +4,14 @@ import { StoryState } from './store'
 import { makeChoice, resetStory } from './story.slice'
 
 function App() {
-  //const { paragraphs, choices, reset, makeChoice } = useStory()
-  const { paragraphs, choices } = useSelector(
+  const { paragraphs, choices, title } = useSelector(
     (state: StoryState) => state.story
   )
   const dispatch = useDispatch()
 
   return (
     <div>
-      <h1>Story</h1>
+      <h1>{title}</h1>
       <button onClick={() => dispatch(resetStory)}>reset</button>
       <br />
       {paragraphs.map((paragraph) => (

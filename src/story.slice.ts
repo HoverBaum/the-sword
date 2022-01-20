@@ -1,22 +1,32 @@
 import * as ink from 'inkjs'
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
-import { ChoiceType, ParagraphType } from './story.d'
-import { Choice } from 'inkjs/engine/Choice'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ChoiceType, ParagraphType, Tag } from './story.d'
 import { Story } from 'inkjs/engine/Story'
+import { parseChoice, parseTag } from './story.util'
+import { StoryDispatch } from './store'
 
 //@ts-ignore
 let story: Story
+let currentStoryJSON: string
 
 export interface StoryState {
+  globalTags: Tag[]
   title: string
+  author: string
   paragraphs: ParagraphType[]
   choices: ChoiceType[]
+  currentTags: Tag[]
+  image: string
 }
 
 const initialState: StoryState = {
+  globalTags: [],
   title: '',
+  author: '',
   paragraphs: [],
   choices: [],
+  currentTags: [],
+  image: '',
 }
 
 export const storySlice = createSlice({
@@ -38,31 +48,57 @@ export const storySlice = createSlice({
     reset: () => {
       return initialState
     },
+    setGlobalTags: (state, action: PayloadAction<Tag[]>) => {
+      state.globalTags = action.payload
+      // Handle special tags.
+      action.payload.forEach((tag) => {
+        if (tag.type === 'author') {
+          state.author = tag.value
+        } else if (tag.type === 'title') {
+          state.title = tag.value
+        }
+      })
+    },
+    setCurrentTags: (state, action: PayloadAction<Tag[]>) => {
+      state.currentTags = action.payload
+    },
+    setImage: (state, action: PayloadAction<string>) => {
+      state.image = action.payload
+    },
   },
 })
 
-const toChoiceType = (choice: Choice): ChoiceType => ({
-  index: choice.index,
-  text: choice.text,
-})
+const handleTags = (tags: Tag[], dispatch: StoryDispatch) => {
+  dispatch(setCurrentTags(tags))
+  tags.forEach((tag) => {
+    if (/image/i.test(tag.type)) {
+      dispatch(setImage(tag.value))
+    }
+  })
+}
 
-const continueStory = (dispatch: Dispatch) => {
+const continueStory = (dispatch: StoryDispatch) => {
   while (story.canContinue) {
     dispatch(addParagraph(story.Continue() as string))
+    const currentTags = story.currentTags?.map(parseTag) ?? []
+    handleTags(currentTags, dispatch)
+
+    console.log('CONTINUE')
+    console.log(story.currentText)
+    console.log(story.currentTags)
+    console.log(story.state)
   }
-  dispatch(setChoices(story.currentChoices.map(toChoiceType)))
+  dispatch(setChoices(story.currentChoices.map(parseChoice)))
   if (!story.canContinue && story.currentChoices.length === 0) {
     dispatch(addParagraph('The END'))
   }
 }
 
-export const resetStory = (dispatch: Dispatch) => {
-  dispatch(reset())
-  story.ResetState()
-  continueStory(dispatch)
+export const resetStory = (dispatch: StoryDispatch) => {
+  tellStory(currentStoryJSON)(dispatch)
 }
 
-export const makeChoice = (choice: ChoiceType) => (dispatch: Dispatch) => {
+export const makeChoice = (choice: ChoiceType) => (dispatch: StoryDispatch) => {
   // Dispatch ana ction to make the choice visible in Redux dev tools.
   dispatch({ type: 'story/makeChoice', payload: choice })
   story.ChooseChoiceIndex(choice.index)
@@ -70,15 +106,30 @@ export const makeChoice = (choice: ChoiceType) => (dispatch: Dispatch) => {
   continueStory(dispatch)
 }
 
-export const tellStory = (storyJSON: string) => (dispatch: Dispatch) => {
+export const tellStory = (storyJSON: string) => (dispatch: StoryDispatch) => {
+  currentStoryJSON = storyJSON
   dispatch(reset())
   story = new ink.Story(storyJSON)
+  if (story.globalTags) {
+    dispatch(setGlobalTags(story.globalTags.map(parseTag)))
+  } else {
+    console.warn('No global tags found in story.')
+  }
+
   continueStory(dispatch)
 }
 
 // Action creators are generated for each case reducer function
 // Action for internal usage.
-const { addParagraph, setChoices, reset, clearChoices } = storySlice.actions
+const {
+  addParagraph,
+  setChoices,
+  reset,
+  clearChoices,
+  setGlobalTags,
+  setCurrentTags,
+  setImage,
+} = storySlice.actions
 // Actions to be used by the application.
 export const {} = storySlice.actions
 

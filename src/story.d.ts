@@ -10,3 +10,15 @@ export type Tag = {
   type: string
   value: string
 }
+
+export type ImageBackground = {
+  type: 'image'
+  credit: string
+  creditLink: string
+  src: string
+}
+
+export type Background = {
+  id: string
+  textColor: string
+} & ImageBackground

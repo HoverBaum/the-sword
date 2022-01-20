@@ -1,9 +1,10 @@
 import * as ink from 'inkjs'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ChoiceType, ParagraphType, Tag } from './story.d'
+import { Background, ChoiceType, ParagraphType, Tag } from './story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { StoryDispatch } from './store'
+import { backgrounds } from './backgrounds'
 
 //@ts-ignore
 let story: Story
@@ -16,7 +17,7 @@ export interface StoryState {
   paragraphs: ParagraphType[]
   choices: ChoiceType[]
   currentTags: Tag[]
-  image: string
+  background: Background | undefined
 }
 
 const initialState: StoryState = {
@@ -26,7 +27,7 @@ const initialState: StoryState = {
   paragraphs: [],
   choices: [],
   currentTags: [],
-  image: '',
+  background: undefined,
 }
 
 export const storySlice = createSlice({
@@ -62,8 +63,8 @@ export const storySlice = createSlice({
     setCurrentTags: (state, action: PayloadAction<Tag[]>) => {
       state.currentTags = action.payload
     },
-    setImage: (state, action: PayloadAction<string>) => {
-      state.image = action.payload
+    setBackground: (state, action: PayloadAction<Background>) => {
+      state.background = action.payload
     },
   },
 })
@@ -72,7 +73,12 @@ const handleTags = (tags: Tag[], dispatch: StoryDispatch) => {
   dispatch(setCurrentTags(tags))
   tags.forEach((tag) => {
     if (/image/i.test(tag.type)) {
-      dispatch(setImage(tag.value))
+      const background = backgrounds.find((bg) => bg.id === tag.value)
+      if (background) {
+        dispatch(setBackground(background))
+      } else {
+        console.warn('No background configured for tag', tag)
+      }
     }
   })
 }
@@ -128,7 +134,7 @@ const {
   clearChoices,
   setGlobalTags,
   setCurrentTags,
-  setImage,
+  setBackground,
 } = storySlice.actions
 // Actions to be used by the application.
 export const {} = storySlice.actions

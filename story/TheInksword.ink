@@ -3,7 +3,7 @@
 -> Beginning
 
 === Beginning ===
-#IMAGE: bonfire.jpg
+#IMAGE: beginning/bonfire
 
 It was one of those evenings around the bonfire where stories gush out like water from a spring and grow into cascading streams of adventure like rivers before they reach the sea.
 
@@ -12,7 +12,7 @@ And now, it was Bens turn to stand up...
 * [listen] -> BensStory
 
 === BensStory ===
-#IMAGE: sword.jpg
+#IMAGE: beginning/sword
 
 "Once there was a sword signifying the rule over this land" he began.
 

@@ -1,15 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import { css, Global } from '@emotion/react'
-import { useDispatch, useSelector } from 'react-redux'
-import './App.css'
-import { StoryState } from './store'
-import { makeChoice, resetStory } from './story.slice'
+import { css, Global } from "@emotion/react"
+import { Button } from "@geist-ui/core"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Choices } from "./Choices"
+import { StoryState } from "./store"
+import { makeChoice, resetStory } from "./story.slice"
 
 function App() {
-  const { paragraphs, choices, title, background } = useSelector(
+  const { paragraphs, title, background } = useSelector(
     (state: StoryState) => state.story
   )
   const dispatch = useDispatch()
+  const [theme, setTheme] = useState("light")
+
+  useEffect(() => console.log("theme is", theme), [theme])
+
+  useEffect(() => {
+    setTimeout(() => setTheme("Custom"), 1000)
+  }, [])
 
   return (
     <div
@@ -22,7 +31,7 @@ function App() {
         width: 100vw;
         box-sizing: border-box;
         padding: 4rem;
-        color: ${background?.textColor || 'inherit'};
+        color: ${background?.textColor || "inherit"};
       `}
     >
       <Global
@@ -35,7 +44,7 @@ function App() {
         `}
       />
       <h1>{title}</h1>
-      <button onClick={() => dispatch(resetStory)}>reset</button>
+      <Button onClick={() => dispatch(resetStory)}>reset</Button>
       <br />
       <div
         css={css`
@@ -51,18 +60,7 @@ function App() {
           <p key={paragraph}>{paragraph}</p>
         ))}
 
-        {choices.map((choice) => (
-          <>
-            <br />
-            <button
-              key={choice.index + choice.text}
-              onClick={() => dispatch(makeChoice(choice))}
-            >
-              {choice.text}
-            </button>
-            <br />
-          </>
-        ))}
+        <Choices />
       </div>
     </div>
   )

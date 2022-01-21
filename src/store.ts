@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import storySlice, { tellStory } from './story.slice'
+import { storyContent } from '../story/storyContent'
 
 export const store = configureStore({
   reducer: {

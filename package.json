@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ink:compile": "zx ./scripts/compile.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -12,7 +13,8 @@
     "inkjs": "^2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "zx": "^4.3.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",

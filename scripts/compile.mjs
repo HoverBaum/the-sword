@@ -10,9 +10,12 @@ let inklecatePath
 if (process.platform === 'darwin') {
   inklecatePath = path.join(__dirname, './../inklecate/mac/inklecate')
 }
+if(process.platform === 'win32') {
+  inklecatePath = path.join(__dirname, './../inklecate/win32/inklecate.exe')
+}
 
-if (!inklecatePath) {
-  console.error('No inklecate configured for your OS.')
+if (!inklecatePath || fs.ensureFileSync(inklecatePath)) {
+  console.error(`No inklecate configured for your OS "${process.platform}".`)
   process.exit(1)
 }
 

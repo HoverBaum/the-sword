@@ -1,5 +1,7 @@
 #!/usr/bin/env zx
 
+let IS_WATCHING = false
+
 const { fs } = require('zx')
 
 const inkFile = path.join(__dirname, './../story/TheInkSword.ink')
@@ -33,13 +35,15 @@ const createTSFile = async () => {
   console.log('TS file updated')
 }
 
-fs.watchFile(inkFile, { interval: 500 }, (curr, prev) => {
-  console.log(`\n${inkFile} Changed`)
-
-  // Compile the story to json using inklecate
-  compileFile(inkFile)
-})
-
 console.log('Compiling initial json')
 await compileFile(inkFile)
-console.log('\nWaiting for changes')
+
+if(IS_WATCHING) {
+  fs.watchFile(inkFile, { interval: 500 }, (curr, prev) => {
+    console.log(`\n${inkFile} Changed`)
+  
+    // Compile the story to json using inklecate
+    compileFile(inkFile)
+  })
+  console.log('\nWaiting for changes')
+  }

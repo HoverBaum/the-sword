@@ -16,7 +16,7 @@ Run game locally.
 npm run dev
 ```
 
-Compile ink file to TypeScript. This also watches the ink file for changes and re-compiles on change. (current win and mac supported)
+Compile ink file to TypeScript. (current win and mac supported)
 
 ```
 npm run ink:compile

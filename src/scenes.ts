@@ -1,8 +1,18 @@
 import { Scene } from './story'
 import beginningBonfire from './images/beginning-bonfire.jpg'
 import beginningSword from './images/beginning-sword.jpg'
+import libraryImage from './images/library.jpg'
 
 export const scenes: Scene[] = [
+  {
+    id: 'library',
+    type: 'image',
+    credit: 'Prateek Katyal',
+    creditLink: 'https://unsplash.com/photos/Tl0lYXcyT-A',
+    src: libraryImage,
+    textColor: 'white',
+    backgroundColor: '#1b0a0e'
+  },
   {
     id: 'beginning/bonfire',
     type: 'image',

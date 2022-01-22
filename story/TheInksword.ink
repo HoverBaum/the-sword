@@ -3,7 +3,20 @@
 
 LIST mood = adventurous, distrusting, (neutral)
 
--> Beginning
+-> Library
+
+=== Library ===
+#SCENE: library
+
+Welcome to Storytellers demo story "Ink Sword".
+
+Please open this tab in full screen for the best experience (optimized for desktop).
+
+You can use "tab" to select an option and "enter" to confirm. Or simply click on your choice.
+
+And now, enjoy 😊
+
+* Read story -> Beginning
 
 === Beginning ===
 #SCENE: beginning/bonfire

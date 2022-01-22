@@ -1,10 +1,10 @@
 import * as ink from 'inkjs'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Background, ChoiceType, ParagraphType, Tag } from './story.d'
+import { Scene, ChoiceType, ParagraphType, Tag } from './story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { StoryDispatch } from './store'
-import { backgrounds } from './backgrounds'
+import { scenes } from './scenes'
 
 //@ts-ignore
 let story: Story
@@ -17,7 +17,7 @@ export interface StoryState {
   paragraphs: ParagraphType[]
   choices: ChoiceType[]
   currentTags: Tag[]
-  background: Background | undefined
+  scene: Scene | undefined
 }
 
 const initialState: StoryState = {
@@ -27,7 +27,7 @@ const initialState: StoryState = {
   paragraphs: [],
   choices: [],
   currentTags: [],
-  background: undefined,
+  scene: undefined,
 }
 
 export const storySlice = createSlice({
@@ -63,8 +63,8 @@ export const storySlice = createSlice({
     setCurrentTags: (state, action: PayloadAction<Tag[]>) => {
       state.currentTags = action.payload
     },
-    setBackground: (state, action: PayloadAction<Background>) => {
-      state.background = action.payload
+    setBackground: (state, action: PayloadAction<Scene>) => {
+      state.scene = action.payload
     },
   },
 })
@@ -72,8 +72,8 @@ export const storySlice = createSlice({
 const handleTags = (tags: Tag[], dispatch: StoryDispatch) => {
   dispatch(setCurrentTags(tags))
   tags.forEach((tag) => {
-    if (/background/i.test(tag.type)) {
-      const background = backgrounds.find((bg) => bg.id === tag.value)
+    if (/scene/i.test(tag.type)) {
+      const background = scenes.find((bg) => bg.id === tag.value)
       if (background) {
         dispatch(setBackground(background))
       } else {

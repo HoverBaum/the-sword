@@ -8,7 +8,7 @@ import { StoryState } from "./store"
 import { resetStory } from "./story.slice"
 
 function App() {
-  const { paragraphs, title, background } = useSelector(
+  const { paragraphs, title, scene } = useSelector(
     (state: StoryState) => state.story
   )
   const dispatch = useDispatch()
@@ -23,15 +23,19 @@ function App() {
   return (
     <div
       css={css`
-        background-image: url(${background?.src});
+        background-image: url(${scene?.src});
         background-size: cover;
         background-position: center right;
         transition: background-image 0.5s ease-in-out;
         height: 100vh;
+        overflow-y: scroll;
+        ::-webkit-scrollbar {
+          display: none;
+        }
         width: 100vw;
         box-sizing: border-box;
         padding: 4rem;
-        color: ${background?.textColor || "inherit"};
+        color: ${scene?.textColor || "inherit"};
       `}
     >
       <Global
@@ -49,11 +53,6 @@ function App() {
       <div
         css={css`
           max-width: 40rem;
-          max-height: 100%;
-          overflow-y: scroll;
-          ::-webkit-scrollbar {
-            display: none;
-          }
         `}
       >
         {paragraphs.map((paragraph) => (

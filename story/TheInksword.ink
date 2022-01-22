@@ -6,7 +6,7 @@ LIST mood = adventurous, distrusting, (neutral)
 -> Beginning
 
 === Beginning ===
-#BACKGROUND: beginning/bonfire
+#SCENE: beginning/bonfire
 
 It was one of those evenings around the bonfire where stories gush out like water from a spring and grow into cascading streams of adventure like rivers before they reach the sea.
 
@@ -15,7 +15,7 @@ And now, it was Bens turn to stand up...
 * [listen] -> BensStory
 
 === BensStory ===
-#BACKGROUND: beginning/sword
+#SCENE: beginning/sword
 
 "Once there was a sword signifying the rule over this land" he began.
 

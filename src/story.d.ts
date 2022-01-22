@@ -18,7 +18,8 @@ export type ImageBackground = {
   src: string
 }
 
-export type Background = {
+export type Scene = {
   id: string
   textColor: string
+  backgroundColor: string
 } & ImageBackground

@@ -72,7 +72,7 @@ export const storySlice = createSlice({
 const handleTags = (tags: Tag[], dispatch: StoryDispatch) => {
   dispatch(setCurrentTags(tags))
   tags.forEach((tag) => {
-    if (/image/i.test(tag.type)) {
+    if (/background/i.test(tag.type)) {
       const background = backgrounds.find((bg) => bg.id === tag.value)
       if (background) {
         dispatch(setBackground(background))

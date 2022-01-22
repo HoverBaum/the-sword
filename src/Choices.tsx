@@ -1,3 +1,4 @@
+import { Button } from "@geist-ui/core"
 import { ComponentType } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { StoryState } from "./store"
@@ -13,13 +14,13 @@ export const Choices: ComponentType<ChoicesProps> = () => {
       {choices.map((choice) => (
         <div key={choice.index + choice.text}>
           <br />
-          <button
+          <Button
             key={choice.index + choice.text}
             onClick={() => dispatch(makeChoice(choice))}
             autoFocus={choice.index === 0}
           >
             {choice.text}
-          </button>
+          </Button>
           <br />
         </div>
       ))}

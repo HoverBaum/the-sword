@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from "@emotion/react"
+import { Button } from "@geist-ui/core"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Choices } from "./Choices"
@@ -43,7 +44,7 @@ function App() {
         `}
       />
       <h1>{title}</h1>
-      <button onClick={() => dispatch(resetStory)}>reset</button>
+      <Button onClick={() => dispatch(resetStory)}>reset</Button>
       <br />
       <div
         css={css`

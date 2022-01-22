@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
+    "@geist-ui/core": "^2.2.4",
     "@reduxjs/toolkit": "^1.7.1",
     "inkjs": "^2.0.0",
     "inter-ui": "^3.19.3",

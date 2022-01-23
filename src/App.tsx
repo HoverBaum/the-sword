@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from "@emotion/react"
 import { Button, Text } from "@geist-ui/core"
-import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Choices } from "./Choices"
 import { AudioPlayer } from "./components/AudioPlayer"

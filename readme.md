@@ -21,3 +21,22 @@ Compile ink file to TypeScript. (current win and mac supported)
 ```
 npm run ink:compile
 ```
+
+## Trivia
+
+- Focussing a button scrolls the content to that button. Thus we do not need to implement scrolling logic. We simply focus the first choice button.
+
+## Todos
+
+- ~~Stories state in Redux~~
+- ~~Compile ink to TS~~
+- ~~Backgorund images~~
+- ~~Clear paragraphs~~
+- ~~Handle tags~~
+- ~~Themable UI~~
+- ~~Scenes~~
+- Options in Image
+- Support for background music
+- Chapter title
+- Do Tunnels work?
+- Finish example story

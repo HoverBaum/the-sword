@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from "@emotion/react"
-import { Button } from "@geist-ui/core"
-import { useEffect, useState } from "react"
+import { Button, Text } from "@geist-ui/core"
 import { useDispatch, useSelector } from "react-redux"
 import { Choices } from "./Choices"
 import { StoryState } from "./store"
@@ -12,13 +11,6 @@ function App() {
     (state: StoryState) => state.story
   )
   const dispatch = useDispatch()
-  const [theme, setTheme] = useState("light")
-
-  useEffect(() => console.log("theme is", theme), [theme])
-
-  useEffect(() => {
-    setTimeout(() => setTheme("Custom"), 1000)
-  }, [])
 
   return (
     <div
@@ -47,7 +39,7 @@ function App() {
           }
         `}
       />
-      <h1>{title}</h1>
+      <Text h1>{title}</Text>
       <Button onClick={() => dispatch(resetStory)}>reset</Button>
       <br />
       <div
@@ -56,7 +48,9 @@ function App() {
         `}
       >
         {paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <Text p key={paragraph}>
+            {paragraph}
+          </Text>
         ))}
 
         <Choices />

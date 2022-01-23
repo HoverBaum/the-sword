@@ -1,20 +1,21 @@
-import { Choice } from 'inkjs/engine/Choice'
-import { ChoiceType, Tag } from './story'
+import { Choice } from "inkjs/engine/Choice"
+import { ChoiceType, Tag } from "./story"
 
 export const parseTag = (tag: string): Tag => {
   const trimmedTag = tag.trim()
-  const isValidTag = /^\w+:\s.+$/.test(trimmedTag)
+  const isValidTag =
+    /^\w+:\s.+$/.test(trimmedTag) || /^[A-Z]+$/.test(trimmedTag)
   if (!isValidTag) {
     return {
       originalContent: tag,
-      type: 'Malformed',
-      value: '',
+      type: "malformed",
+      value: "",
     }
   }
-  const [type, value] = trimmedTag.split(': ')
+  const [type, value] = trimmedTag.split(": ")
   return {
     originalContent: tag,
-    type,
+    type: type.toLocaleLowerCase(),
     value,
   }
 }

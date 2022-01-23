@@ -1,5 +1,5 @@
 # author: Hendrik Wallbaum
-# title: The Sword
+# title: InkSword
 
 LIST mood = adventurous, distrusting, (neutral)
 
@@ -16,10 +16,11 @@ You can use "tab" to select an option and "enter" to confirm. Or simply click on
 
 And now, enjoy 😊
 
-* Read story -> Beginning
+* [Read story] -> Beginning
 
 === Beginning ===
 #SCENE: beginning/bonfire
+#CLEAR
 
 It was one of those evenings around the bonfire where stories gush out like water from a spring and grow into cascading streams of adventure like rivers before they reach the sea.
 

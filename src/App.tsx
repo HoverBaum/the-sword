@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from "@emotion/react"
 import { Button, Text } from "@geist-ui/core"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Choices } from "./Choices"
+import { AudioPlayer } from "./components/AudioPlayer"
 import { StoryState } from "./store"
 import { resetStory } from "./story.slice"
 
@@ -39,6 +41,7 @@ function App() {
           }
         `}
       />
+      <AudioPlayer sound={scene?.sound} />
       <Text h1>{title}</Text>
       <Button onClick={() => dispatch(resetStory)}>reset</Button>
       <br />

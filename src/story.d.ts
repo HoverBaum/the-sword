@@ -12,14 +12,20 @@ export type Tag = {
 }
 
 export type ImageBackground = {
-  type: 'image'
+  type: "image"
   credit: string
   creditLink: string
   src: string
+}
+
+export type Sound = {
+  file: string
+  volume?: number
 }
 
 export type Scene = {
   id: string
   textColor: string
   backgroundColor: string
+  sound?: Sound
 } & ImageBackground

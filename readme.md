@@ -35,8 +35,10 @@ npm run ink:compile
 - ~~Handle tags~~
 - ~~Themable UI~~
 - ~~Scenes~~
-- Options in Image
-- Support for background music
+- ~~Support for background music~~
+- Display image credit
+- Choices in Image
 - Chapter title
 - Do Tunnels work?
+- Mood or something of protagonist??
 - Finish example story

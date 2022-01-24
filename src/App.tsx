@@ -1,15 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from "@emotion/react"
-import { Button, Text } from "@geist-ui/core"
-import { useDispatch, useSelector } from "react-redux"
+import { Text } from "@geist-ui/core"
+import { useSelector } from "react-redux"
 import { Choices } from "./Choices"
 import { SceneDisplay } from "./Scene/SceneDisplay"
 import { StoryState } from "./store"
-import { resetStory } from "./story.slice"
 
 function App() {
   const { paragraphs, title } = useSelector((state: StoryState) => state.story)
-  const dispatch = useDispatch()
 
   return (
     <div>
@@ -24,8 +22,6 @@ function App() {
       />
       <SceneDisplay>
         <Text h1>{title}</Text>
-        <Button onClick={() => dispatch(resetStory)}>reset</Button>
-        <br />
         <div
           css={css`
             max-width: 40rem;

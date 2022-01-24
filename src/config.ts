@@ -1,0 +1,5 @@
+export const config = {
+  INITIALLY_DISPLAYED_WORDS: 3,
+  WORD_FADE_IN_TIME: 0.5,
+  WORD_DELAY_TIME: 0.1,
+}

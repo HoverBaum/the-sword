@@ -8,10 +8,13 @@ export type StoryLine = {
   type: 'paragraph' | 'chapter heading' | 'title'
 }
 
-export type CountedStoryLine = {
+export type Counted = {
   lineNumber: number
   wordCount: number
-} & StoryLine
+}
+
+export type CountedStoryLine = Counted & StoryLine
+export type CountedChoice = Counted & ChoiceType
 
 export type Tag = {
   originalContent: string

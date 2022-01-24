@@ -1,6 +1,13 @@
 import * as ink from 'inkjs'
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Scene, ChoiceType, Tag, StoryLine, CountedStoryLine } from './story.d'
+import {
+  Scene,
+  ChoiceType,
+  Tag,
+  StoryLine,
+  CountedStoryLine,
+  CountedChoice,
+} from './story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { StoryDispatch } from './store'
@@ -15,7 +22,7 @@ export interface StoryState {
   title: string
   author: string
   storyLines: CountedStoryLine[]
-  choices: ChoiceType[]
+  choices: CountedChoice[]
   currentTags: Tag[]
   scene: Scene | undefined
 }
@@ -40,7 +47,7 @@ export const storySlice = createSlice({
     clearStoryLines: (state) => {
       state.storyLines = []
     },
-    setChoices: (state, action: PayloadAction<ChoiceType[]>) => {
+    setCountedChoices: (state, action: PayloadAction<CountedChoice[]>) => {
       state.choices = action.payload
     },
     clearChoices: (state) => {
@@ -137,6 +144,7 @@ export const tellStory = (storyJSON: string) => (dispatch: StoryDispatch) => {
 }
 
 export const addStoryLine = createAction<StoryLine>('story/addStoryLine')
+export const setChoices = createAction<ChoiceType[]>('story/setChoices')
 
 // Action creators are generated for each case reducer function
 // Action for internal usage.
@@ -149,6 +157,6 @@ const {
   setBackground,
 } = storySlice.actions
 // Actions to be used by the application.
-export const { addCountedStoryLine, setChoices } = storySlice.actions
+export const { addCountedStoryLine, setCountedChoices } = storySlice.actions
 
 export default storySlice.reducer

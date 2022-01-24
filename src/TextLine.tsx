@@ -2,30 +2,21 @@
 import { css, keyframes } from '@emotion/react'
 import { Text } from '@geist-ui/core'
 import { ComponentType } from 'react'
+import { fadeIn } from './animations'
+import { config } from './config'
 import { CountedStoryLine } from './story'
 import { lineToWords } from './story.util'
 
-const INITIALLY_DISPLAYED_WORDS = 3
-const WORD_FADE_IN_TIME = 0.5
-const WORD_DELAY_TIME = 0.1
+const { WORD_DELAY_TIME, WORD_FADE_IN_TIME, INITIALLY_DISPLAYED_WORDS } = config
 
 export type TextLineProps = {
   storyLine: CountedStoryLine
 }
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`
-
 export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
   const { type, text, wordCount } = storyLine
 
-  if (type === 'title') return <Text h1>text</Text>
+  if (type === 'title') return <Text h1>{text}</Text>
   if (type === 'chapter heading') return <Text h2>{text}</Text>
 
   return (

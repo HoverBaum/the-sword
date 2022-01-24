@@ -1,16 +1,41 @@
-import { Button } from "@geist-ui/core"
-import { ComponentType } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { StoryState } from "./store"
-import { makeChoice } from "./story.slice"
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
+import { Button } from '@geist-ui/core'
+import { ComponentType, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fadeIn } from './animations'
+import { config } from './config'
+import { StoryState } from './store'
+import { makeChoice } from './story.slice'
 
 export type ChoicesProps = {}
 
 export const Choices: ComponentType<ChoicesProps> = () => {
+  const [isHdden, setIsHidden] = useState(true)
   const { choices } = useSelector((state: StoryState) => state.story)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (choices.length < 1) return
+    setTimeout(
+      () => setIsHidden(false),
+      choices[0].wordCount * config.WORD_DELAY_TIME * 1000
+    )
+  }, [choices])
+
+  useEffect(() => {
+    setIsHidden(true)
+  }, [choices])
+
+  if (isHdden) return <></>
+
   return (
-    <div>
+    <div
+      css={css`
+        opacity: 0;
+        animation: ${fadeIn} ${config.WORD_FADE_IN_TIME}s ease-in-out forwards;
+      `}
+    >
       {choices.map((choice) => (
         <div key={choice.index + choice.text}>
           <br />

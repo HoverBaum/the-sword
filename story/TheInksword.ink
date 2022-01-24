@@ -19,8 +19,9 @@ And now, enjoy 😊
 * [Read story] -> Beginning
 
 === Beginning ===
-#SCENE: beginning/bonfire
 #CLEAR
+#SCENE: beginning/bonfire
+#CHAPTER: At the bonfire
 
 It was one of those evenings around the bonfire where stories gush out like water from a spring and grow into cascading streams of adventure like rivers before they reach the sea.
 
@@ -54,6 +55,7 @@ mood: {mood}
 * [continue] -> SettingOut
 
 === SettingOut ===
+#CHAPTER: The next morning
 
 Setting out...
 

@@ -37,8 +37,9 @@ npm run ink:compile
 - ~~Scenes~~
 - ~~Support for background music~~
 - ~~Display image credit~~
+- ~~Chapter title~~
+- Nicer reading flow with text appearing
 - Choices in Image
-- Chapter title
 - Do Tunnels work?
 - Mood or something of protagonist??
 - Finish example story

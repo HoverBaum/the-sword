@@ -1,10 +1,10 @@
-import * as ink from "inkjs"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Scene, ChoiceType, ParagraphType, Tag } from "./story.d"
-import { Story } from "inkjs/engine/Story"
-import { parseChoice, parseTag } from "./story.util"
-import { StoryDispatch } from "./store"
-import { scenes } from "./scenes"
+import * as ink from 'inkjs'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Scene, ChoiceType, Tag, StoryLine } from './story.d'
+import { Story } from 'inkjs/engine/Story'
+import { parseChoice, parseTag } from './story.util'
+import { StoryDispatch } from './store'
+import { scenes } from './scenes'
 
 //@ts-ignore
 let story: Story
@@ -14,7 +14,7 @@ export interface StoryState {
   globalTags: Tag[]
   title: string
   author: string
-  paragraphs: ParagraphType[]
+  storyLines: StoryLine[]
   choices: ChoiceType[]
   currentTags: Tag[]
   scene: Scene | undefined
@@ -22,24 +22,25 @@ export interface StoryState {
 
 const initialState: StoryState = {
   globalTags: [],
-  title: "",
-  author: "",
-  paragraphs: [],
+  title: '',
+  author: '',
+  storyLines: [],
   choices: [],
   currentTags: [],
   scene: undefined,
 }
 
 export const storySlice = createSlice({
-  name: "story",
+  name: 'story',
   initialState,
   reducers: {
-    addParagraph: (state, action: PayloadAction<string>) => {
-      state.paragraphs.push(action.payload)
+    addStoryLine: (state, action: PayloadAction<StoryLine>) => {
+      state.storyLines.push(action.payload)
     },
-    clearParagraphs: (state) => {
-      state.paragraphs = []
+    clearStoryLines: (state) => {
+      state.storyLines = []
     },
+
     setChoices: (state, action: PayloadAction<ChoiceType[]>) => {
       state.choices = action.payload
     },
@@ -53,9 +54,9 @@ export const storySlice = createSlice({
       state.globalTags = action.payload
       // Handle special tags.
       action.payload.forEach((tag) => {
-        if (tag.type === "author") {
+        if (tag.type === 'author') {
           state.author = tag.value
-        } else if (tag.type === "title") {
+        } else if (tag.type === 'title') {
           state.title = tag.value
         }
       })
@@ -74,16 +75,22 @@ const handleTags = (tags: Tag[], dispatch: StoryDispatch) => {
   tags.forEach((tag) => {
     const tagType = tag.type
     switch (tagType) {
-      case "scene":
+      case 'scene':
         const background = scenes.find((bg) => bg.id === tag.value)
         if (background) {
           dispatch(setBackground(background))
         } else {
-          console.warn("No background configured for tag", tag)
+          console.warn('No background configured for tag', tag)
         }
         break
-      case "clear":
-        dispatch(clearParagraphs())
+      case 'clear':
+        dispatch(clearStoryLines())
+        break
+      case 'chapter':
+        dispatch(addStoryLine({ text: tag.value, type: 'chapter heading' }))
+        break
+      case 'title':
+        dispatch(addStoryLine({ text: tag.value, type: 'title' }))
         break
       default:
         break
@@ -96,11 +103,11 @@ const continueStory = (dispatch: StoryDispatch) => {
     const nextLine = story.Continue() as string
     const currentTags = story.currentTags?.map(parseTag) ?? []
     handleTags(currentTags, dispatch)
-    dispatch(addParagraph(nextLine))
+    dispatch(addStoryLine({ text: nextLine, type: 'paragraph' }))
   }
   dispatch(setChoices(story.currentChoices.map(parseChoice)))
   if (!story.canContinue && story.currentChoices.length === 0) {
-    dispatch(addParagraph("The END"))
+    dispatch(addStoryLine({ text: 'The END', type: 'paragraph' }))
   }
 }
 
@@ -110,7 +117,7 @@ export const resetStory = (dispatch: StoryDispatch) => {
 
 export const makeChoice = (choice: ChoiceType) => (dispatch: StoryDispatch) => {
   // Dispatch ana ction to make the choice visible in Redux dev tools.
-  dispatch({ type: "story/makeChoice", payload: choice })
+  dispatch({ type: 'story/makeChoice', payload: choice })
   story.ChooseChoiceIndex(choice.index)
   dispatch(clearChoices())
   continueStory(dispatch)
@@ -121,9 +128,10 @@ export const tellStory = (storyJSON: string) => (dispatch: StoryDispatch) => {
   dispatch(reset())
   story = new ink.Story(storyJSON)
   if (story.globalTags) {
-    dispatch(setGlobalTags(story.globalTags.map(parseTag)))
+    const globalTags = story.globalTags.map(parseTag)
+    dispatch(setGlobalTags(globalTags))
   } else {
-    console.warn("No global tags found in story.")
+    console.warn('No global tags found in story.')
   }
 
   continueStory(dispatch)
@@ -132,14 +140,14 @@ export const tellStory = (storyJSON: string) => (dispatch: StoryDispatch) => {
 // Action creators are generated for each case reducer function
 // Action for internal usage.
 const {
-  addParagraph,
   setChoices,
   reset,
   clearChoices,
-  clearParagraphs,
+  clearStoryLines,
   setGlobalTags,
   setCurrentTags,
   setBackground,
+  addStoryLine,
 } = storySlice.actions
 // Actions to be used by the application.
 export const {} = storySlice.actions

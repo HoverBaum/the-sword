@@ -3,7 +3,10 @@ export type ChoiceType = {
   text: string
 }
 
-export type ParagraphType = string
+export type StoryLine = {
+  text: string
+  type: 'paragraph' | 'chapter heading' | 'title'
+}
 
 export type Tag = {
   originalContent: string
@@ -12,7 +15,7 @@ export type Tag = {
 }
 
 export type ImageBackground = {
-  type: "image"
+  type: 'image'
   credit: string
   creditLink: string
   src: string

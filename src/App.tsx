@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { css, Global } from "@emotion/react"
-import { Text } from "@geist-ui/core"
-import { useSelector } from "react-redux"
-import { Choices } from "./Choices"
-import { SceneDisplay } from "./Scene/SceneDisplay"
-import { StoryState } from "./store"
+import { css, Global } from '@emotion/react'
+import { useSelector } from 'react-redux'
+import { Choices } from './Choices'
+import { SceneDisplay } from './Scene/SceneDisplay'
+import { StoryState } from './store'
+import { TextLine } from './TextLine'
 
 function App() {
-  const { paragraphs, title } = useSelector((state: StoryState) => state.story)
+  const { storyLines } = useSelector((state: StoryState) => state.story)
 
   return (
     <div>
@@ -21,16 +21,13 @@ function App() {
         `}
       />
       <SceneDisplay>
-        <Text h1>{title}</Text>
         <div
           css={css`
             max-width: 40rem;
           `}
         >
-          {paragraphs.map((paragraph) => (
-            <Text p key={paragraph}>
-              {paragraph}
-            </Text>
+          {storyLines.map((line) => (
+            <TextLine storyLine={line} key={line.text} />
           ))}
 
           <Choices />

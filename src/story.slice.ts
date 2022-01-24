@@ -1,6 +1,6 @@
 import * as ink from 'inkjs'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Scene, ChoiceType, Tag, StoryLine } from './story.d'
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Scene, ChoiceType, Tag, StoryLine, CountedStoryLine } from './story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { StoryDispatch } from './store'
@@ -14,7 +14,7 @@ export interface StoryState {
   globalTags: Tag[]
   title: string
   author: string
-  storyLines: StoryLine[]
+  storyLines: CountedStoryLine[]
   choices: ChoiceType[]
   currentTags: Tag[]
   scene: Scene | undefined
@@ -34,13 +34,12 @@ export const storySlice = createSlice({
   name: 'story',
   initialState,
   reducers: {
-    addStoryLine: (state, action: PayloadAction<StoryLine>) => {
+    addCountedStoryLine: (state, action: PayloadAction<CountedStoryLine>) => {
       state.storyLines.push(action.payload)
     },
     clearStoryLines: (state) => {
       state.storyLines = []
     },
-
     setChoices: (state, action: PayloadAction<ChoiceType[]>) => {
       state.choices = action.payload
     },
@@ -137,19 +136,19 @@ export const tellStory = (storyJSON: string) => (dispatch: StoryDispatch) => {
   continueStory(dispatch)
 }
 
+export const addStoryLine = createAction<StoryLine>('story/addStoryLine')
+
 // Action creators are generated for each case reducer function
 // Action for internal usage.
 const {
-  setChoices,
   reset,
   clearChoices,
   clearStoryLines,
   setGlobalTags,
   setCurrentTags,
   setBackground,
-  addStoryLine,
 } = storySlice.actions
 // Actions to be used by the application.
-export const {} = storySlice.actions
+export const { addCountedStoryLine, setChoices } = storySlice.actions
 
 export default storySlice.reducer

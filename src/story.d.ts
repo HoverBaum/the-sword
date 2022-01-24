@@ -8,6 +8,11 @@ export type StoryLine = {
   type: 'paragraph' | 'chapter heading' | 'title'
 }
 
+export type CountedStoryLine = {
+  lineNumber: number
+  wordCount: number
+} & StoryLine
+
 export type Tag = {
   originalContent: string
   type: string

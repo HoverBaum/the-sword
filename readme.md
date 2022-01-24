@@ -36,7 +36,7 @@ npm run ink:compile
 - ~~Themable UI~~
 - ~~Scenes~~
 - ~~Support for background music~~
-- Display image credit
+- ~~Display image credit~~
 - Choices in Image
 - Chapter title
 - Do Tunnels work?

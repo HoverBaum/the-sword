@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import { StoryState } from "../store"
 import { Scene } from "../story"
 import { AudioPlayer } from "./AudioPlayer"
+import { Credit } from "./Credit"
 
 export type SceneProps = {
   scene: Scene
@@ -12,6 +13,7 @@ export type SceneProps = {
 
 export const SceneDisplay: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: StoryState) => state.story)
+  if (!scene) return <div>{children}</div>
 
   return (
     <div
@@ -28,11 +30,16 @@ export const SceneDisplay: ComponentType = ({ children }) => {
         width: 100vw;
         box-sizing: border-box;
         padding: 4rem;
-        color: ${scene?.textColor || "inherit"};
+        color: ${scene.textColor || "inherit"};
       `}
     >
       <AudioPlayer sound={scene?.sound} />
+
       {children}
+
+      <Credit href={scene.creditLink} backgroundColor={scene.backgroundColor}>
+        Image: {scene.credit}
+      </Credit>
     </div>
   )
 }

@@ -3,7 +3,7 @@ const baseConfid = {
   wordDelayTime: 0.1,
 }
 
-const textSpeed = 10
+const textSpeed = 20
 
 export const config = {
   INITIALLY_DISPLAYED_WORDS: 3,

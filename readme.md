@@ -39,6 +39,9 @@ npm run ink:compile
 - ~~Display image credit~~
 - ~~Chapter title~~
 - ~~Nicer reading flow with text appearing~~
+- Settings screen
+- Opening screen for game
+- Fade storyLines after a while
 - Choices in Image
 - Do Tunnels work?
 - Mood or something of protagonist??

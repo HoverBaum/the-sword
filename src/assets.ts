@@ -2,6 +2,9 @@ import LibraryImage from './images/library.jpg'
 import BonfireImage from './images/beginning-bonfire.jpg'
 import SwordImage from './images/beginning-sword.jpg'
 import CampImage from './images/camp.jpg'
+import ForrestImage from './images/forrest.jpg'
+import MountainImage from './images/mountain.jpg'
+import MorningImage from './images/morning.jpg'
 import BonfireSound from './sounds/bonfire.wav'
 import {
   ImageAsset,
@@ -9,6 +12,30 @@ import {
   LicenseIdentifier,
   SoundAsset,
 } from './assetTypes'
+
+export const morningImageAsset: ImageAsset = {
+  type: 'image',
+  file: MorningImage,
+  credit: 'Dawid Zawiła',
+  creditLink: 'https://unsplash.com/photos/-G3rw6Y02D0',
+  license: 'unsplash',
+}
+
+export const mountainImageAsset: ImageAsset = {
+  type: 'image',
+  file: MountainImage,
+  credit: 'Jashandeep Singh Kaleka',
+  creditLink: 'https://unsplash.com/photos/0i1xlrAXroY',
+  license: 'unsplash',
+}
+
+export const forrestImageAsset: ImageAsset = {
+  type: 'image',
+  file: ForrestImage,
+  credit: 'Ali Kazal',
+  creditLink: 'https://unsplash.com/photos/nvkLOtFC0Wc',
+  license: 'unsplash',
+}
 
 export const campImageAsset: ImageAsset = {
   type: 'image',

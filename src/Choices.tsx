@@ -41,7 +41,10 @@ export const Choices: ComponentType<ChoicesProps> = () => {
           <br />
           <Button
             key={choice.index + choice.text}
-            onClick={() => dispatch(makeChoice(choice))}
+            onClick={() => {
+              setIsHidden(true)
+              dispatch(makeChoice(choice))
+            }}
             autoFocus={choice.index === 0}
           >
             {choice.text}

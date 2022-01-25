@@ -81,6 +81,9 @@ Put a tunnel here to see some animals. Maybe both routes can go to the same tunn
 [] -> ArrivingAtTheSword
 
 === ArrivingAtTheSword ===
+#CLEAR
+#SCENE: atTheSword/camp
+#CHAPTER: Like a Festival
 
 What a festival is going on
 

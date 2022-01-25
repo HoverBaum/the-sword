@@ -38,7 +38,7 @@ npm run ink:compile
 - ~~Support for background music~~
 - ~~Display image credit~~
 - ~~Chapter title~~
-- Nicer reading flow with text appearing
+- ~~Nicer reading flow with text appearing~~
 - Choices in Image
 - Do Tunnels work?
 - Mood or something of protagonist??

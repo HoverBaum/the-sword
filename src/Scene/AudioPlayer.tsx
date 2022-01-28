@@ -3,7 +3,6 @@ import { css } from '@emotion/react'
 import { Text } from '@geist-ui/core'
 import { Volume2, VolumeX } from '@geist-ui/icons'
 import { ComponentType, useState } from 'react'
-import ReactAudioPlayer from 'react-audio-player'
 import { SoundAsset } from '../assetTypes'
 
 export type AudioPlayerProps = {
@@ -31,12 +30,7 @@ export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
         {isMuted ? <VolumeX /> : <Volume2 />}
       </Text>
       {sound && (
-        <ReactAudioPlayer
-          src={sound.file}
-          autoPlay={true}
-          loop={true}
-          muted={isMuted}
-        />
+        <audio src={sound.file} autoPlay={true} loop={true} muted={isMuted} />
       )}
     </div>
   )

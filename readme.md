@@ -41,6 +41,7 @@ npm run ink:compile
 - ~~Nicer reading flow with text appearing~~
 - Settings screen
 - Opening screen for game
+- Save and load
 - Fade storyLines after a while
 - Choices in Image
 - Do Tunnels work?

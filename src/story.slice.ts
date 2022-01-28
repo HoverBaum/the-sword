@@ -25,6 +25,7 @@ export interface StoryState {
   choices: CountedChoice[]
   currentTags: Tag[]
   scene: Scene | undefined
+  mood: string
 }
 
 const initialState: StoryState = {
@@ -35,6 +36,7 @@ const initialState: StoryState = {
   choices: [],
   currentTags: [],
   scene: undefined,
+  mood: '',
 }
 
 export const storySlice = createSlice({
@@ -73,6 +75,9 @@ export const storySlice = createSlice({
     setBackground: (state, action: PayloadAction<Scene>) => {
       state.scene = action.payload
     },
+    setMood: (state, action: PayloadAction<string>) => {
+      state.mood = action.payload
+    },
   },
 })
 
@@ -110,6 +115,18 @@ const continueStory = (dispatch: StoryDispatch) => {
     const currentTags = story.currentTags?.map(parseTag) ?? []
     handleTags(currentTags, dispatch)
     dispatch(addStoryLine({ text: nextLine, type: 'paragraph' }))
+    // //@ts-ignore
+    // const moodSet: Set = story.variablesState['mood']
+    // if (moodSet) {
+    //   try {
+    //     const jsonVariable = moodSet.keys().next().value
+    //     const variableState = JSON.parse(jsonVariable)
+    //     const mood = variableState.itemName
+    //     dispatch(setMood(mood))
+    //   } catch (e) {
+    //     console.error('Error getting mood', e)
+    //   }
+    // }
   }
   dispatch(setChoices(story.currentChoices.map(parseChoice)))
   if (!story.canContinue && story.currentChoices.length === 0) {
@@ -129,10 +146,45 @@ export const makeChoice = (choice: ChoiceType) => (dispatch: StoryDispatch) => {
   continueStory(dispatch)
 }
 
+const valueForVariableSet = (set: Set<any>): string | undefined => {
+  try {
+    const jsonVariable = set.keys().next().value
+    const variableState = JSON.parse(jsonVariable)
+    const value: string = variableState.itemName
+    return value
+  } catch (e) {
+    console.error('Error getting value from variable set', set, e)
+  }
+  return undefined
+}
+
+const watchMood = (story: Story, dispatch: StoryDispatch) => {
+  const initialMood = valueForVariableSet(
+    //@ts-ignore
+    story.variablesState['mood']
+  )
+  dispatch(setMood(initialMood || ''))
+
+  // Watch mood for changes.
+  story.ObserveVariable('mood', (variableName, moodSet) => {
+    try {
+      const jsonVariable = moodSet.keys().next().value
+      const variableState = JSON.parse(jsonVariable)
+      const mood = variableState.itemName
+      dispatch(setMood(mood))
+    } catch (e) {
+      console.error('Error getting mood', e)
+    }
+  })
+}
+
 export const tellStory = (storyJSON: string) => (dispatch: StoryDispatch) => {
   currentStoryJSON = storyJSON
   dispatch(reset())
   story = new ink.Story(storyJSON)
+  //@ts-ignore
+  window.story = story
+  watchMood(story, dispatch)
   if (story.globalTags) {
     const globalTags = story.globalTags.map(parseTag)
     dispatch(setGlobalTags(globalTags))
@@ -155,6 +207,7 @@ const {
   setGlobalTags,
   setCurrentTags,
   setBackground,
+  setMood,
 } = storySlice.actions
 // Actions to be used by the application.
 export const { addCountedStoryLine, setCountedChoices } = storySlice.actions

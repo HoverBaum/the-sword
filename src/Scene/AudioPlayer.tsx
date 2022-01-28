@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react"
-import { Text } from "@geist-ui/core"
-import { Volume2, VolumeX } from "@geist-ui/icons"
-import { ComponentType, useState } from "react"
-import ReactAudioPlayer from "react-audio-player"
-import { Sound } from "../story"
+import { css } from '@emotion/react'
+import { Text } from '@geist-ui/core'
+import { Volume2, VolumeX } from '@geist-ui/icons'
+import { ComponentType, useState } from 'react'
+import ReactAudioPlayer from 'react-audio-player'
+import { SoundAsset } from '../assetTypes'
 
 export type AudioPlayerProps = {
-  sound?: Sound
+  sound?: SoundAsset
 }
 
 export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {

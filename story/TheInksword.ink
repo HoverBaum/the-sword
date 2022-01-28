@@ -1,7 +1,7 @@
 # author: Hendrik Wallbaum
 # title: InkSword
 
-LIST mood = adventurous, (neutral), skeptical 
+LIST mood = Adventurous, (Neutral), Skeptical 
 VAR knows_about_chris_house = false
 VAR encountered_bandits = false
 
@@ -9,14 +9,18 @@ VAR encountered_bandits = false
 
 === function mood_improve ===
 {
-    - mood == neutral: mood = adventurous
-    - mood == skeptical: mood = neutral
+    - mood == Neutral: 
+        ~mood = Adventurous
+    - mood == Skeptical: 
+        ~mood = Neutral
 }
 
 === function mood_worsen ===
 {
-    - mood == neutral: mood = skeptical
-    - mood == adventurous: mood = neutral
+    - mood == Neutral: 
+        ~mood = Skeptical
+    - mood == Adventurous: 
+        ~mood = Neutral
 }
 
 === Library ===
@@ -37,8 +41,6 @@ And now, enjoy 😊
 #SCENE: bonfire
 #CHAPTER: At the bonfire
 
-My story begins one evening in May. We had tended to the fields and our cattle. And most of the village had gathered, as we usually do on a Friday.
-
 It was one of those evenings around the bonfire where stories gush out like water from a spring and grow into cascading streams of adventure like rivers before they reach the sea.
 
 And now, it was Bens turn to stand up...
@@ -53,12 +55,12 @@ And now, it was Bens turn to stand up...
 
     // Should make character adventurous and experience bolder story telling.
     * [I listened intrigued]
-    ~ mood = adventurous
+    ~ mood = Adventurous
     I continued to listen intrigued by this story of long forgotten kings and magic.
 
     // Character is more of a realist and will see things for what they are.
     * "What nonsense" I thought to myself.
-    ~ mood = skeptical
+    ~ mood = Skeptical
     But I never listened to Bens stories for the news they contained. It was the entertainment that bound all of us to his lips.
   
 - Ben continued "rumor has it, the stone was found over in Budshire not long ago."
@@ -68,7 +70,7 @@ And now, it was Bens turn to stand up...
 * [continue]
 
 - Later that night, I went to bed, 
-<> {mood == adventurous:
+<> {mood == Adventurous:
     dreaming of the sword and the glory it promissed.
 - else:
     knowing that a sword could never change anyones fate.
@@ -85,13 +87,13 @@ Little did I know at this point what change Bens story would bring to my life.
 
 * [Wake up]
 
-- Waking up hungover, as most Saturdays seemed to be, I went to meet the lads early next morning{mood == adventurous:, still filled witht he spirit of adventure}.
+- Waking up hungover, as most Saturdays seemed to be, I went to meet the lads early next morning{mood == Adventurous:, still filled witht he spirit of adventure}.
 
 "What do you make of old Bens story then lads" I asked my friends.
 
-Chris gave me a sceprical look, he always had been the down to earth type: "not sure what to tell you, but those stories are fairytales, nothing else.{mood == skeptical: I knew I could count on Chris to bring solid reasoning!}
+Chris gave me a sceprical look, he always had been the down to earth type: "not sure what to tell you, but those stories are fairytales, nothing else.{mood == Skeptical: I knew I could count on Chris to bring solid reasoning!}
 
-"Not so sure about that", interjected James, always the type to jump straight into action: "to me this sounds like a grand adventure to be had!"{mood == adventurous: I couldn't agree more.}
+"Not so sure about that", interjected James, always the type to jump straight into action: "to me this sounds like a grand adventure to be had!"{mood == Adventurous: I couldn't agree more.}
 
 "Well sounds like we should go have a look, doesn't it?" Rick had always been the one to make our small circle move into action and we all admired him for that. "What do you think?" he said looking my way.
 
@@ -138,7 +140,7 @@ It had been a long time since the four of us had been out like this together. "S
     
 - Thus we went on in high spirits for a while.
 
-{mood == skeptical:
+{mood == Skeptical:
     I still didn't belive in magic, but 
 - else:
     I could feel my excitement rising, as we neared our yourneys goal and 
@@ -186,7 +188,7 @@ Do your best mate. Previous choices will dictate wether you can or not.
 
 - One more try!
 
-{mood == adventurous:
+{mood == Adventurous:
     And suddenly I was holding it! Right there in my hand. As if it had always belonged there.
     * [continue] -> YouBecomeKing
 - else:

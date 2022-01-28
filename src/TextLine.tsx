@@ -7,7 +7,12 @@ import { config } from './config'
 import { CountedStoryLine } from './story'
 import { lineToWords } from './story.util'
 
-const { WORD_DELAY_TIME, WORD_FADE_IN_TIME, INITIALLY_DISPLAYED_WORDS } = config
+const {
+  WORD_DELAY_TIME,
+  WORD_FADE_IN_TIME,
+  INITIALLY_DISPLAYED_WORDS,
+  HEADING_FADE_IN_TIME,
+} = config
 
 export type TextLineProps = {
   storyLine: CountedStoryLine
@@ -17,7 +22,18 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
   const { type, text, wordCount } = storyLine
 
   if (type === 'title') return <Text h1>{text}</Text>
-  if (type === 'chapter heading') return <Text h2>{text}</Text>
+  if (type === 'chapter heading')
+    return (
+      <Text
+        h2
+        css={css`
+          opacity: 0;
+          animation: ${fadeIn} ${HEADING_FADE_IN_TIME}s ease-in-out forwards;
+        `}
+      >
+        {text}
+      </Text>
+    )
 
   return (
     <Text p>
@@ -32,7 +48,8 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
               index -
               INITIALLY_DISPLAYED_WORDS +
               1) *
-            WORD_DELAY_TIME}s;
+              WORD_DELAY_TIME +
+            HEADING_FADE_IN_TIME}s;
           `}
         >
           {word + ' '}

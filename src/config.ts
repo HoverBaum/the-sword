@@ -1,6 +1,7 @@
 const baseConfid = {
   wordFadeInTime: 0.5,
   wordDelayTime: 0.1,
+  headingFadeInTime: 1,
 }
 
 const textSpeed = 20
@@ -9,4 +10,5 @@ export const config = {
   INITIALLY_DISPLAYED_WORDS: 3,
   WORD_FADE_IN_TIME: baseConfid.wordFadeInTime / textSpeed,
   WORD_DELAY_TIME: baseConfid.wordDelayTime / textSpeed,
+  HEADING_FADE_IN_TIME: baseConfid.headingFadeInTime / textSpeed,
 }

@@ -1,17 +1,13 @@
-import { CssBaseline, GeistProvider, Themes } from "@geist-ui/core"
-import { ComponentType, useEffect, useMemo, useState } from "react"
-import { useSelector } from "react-redux"
-import { StoryState } from "./store"
-
-const storytellerTheme = Themes.createFromDark({
-  type: "storyteller",
-})
+import { GeistProvider, Themes } from '@geist-ui/core'
+import { ComponentType, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { StoryState } from '../store'
 
 const initialStoryTheme = Themes.createFromDark({
-  type: "story",
+  type: 'story',
 })
 
-export const ThemeProvider: ComponentType = ({ children }) => {
+export const StoryThemeProvider: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: StoryState) => state.story)
   const [storyTheme, setStoryTheme] = useState(initialStoryTheme)
 
@@ -28,8 +24,7 @@ export const ThemeProvider: ComponentType = ({ children }) => {
   }, [scene])
 
   return (
-    <GeistProvider themes={[storytellerTheme, storyTheme]} themeType="story">
-      <CssBaseline />
+    <GeistProvider themes={[storyTheme]} themeType="story">
       {children}
     </GeistProvider>
   )

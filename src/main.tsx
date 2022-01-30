@@ -6,14 +6,19 @@ import 'inter-ui/inter.css'
 import App from './App'
 import { Provider as ReduxProvider } from 'react-redux'
 import { store } from './store'
-import { ThemeProvider } from './ThemeProvider'
+import { CssBaseline, GeistProvider, Themes } from '@geist-ui/core'
+
+const storytellerTheme = Themes.createFromDark({
+  type: 'storyteller',
+})
 
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <ThemeProvider>
+      <GeistProvider themes={[storytellerTheme]} themeType="storyteller">
+        <CssBaseline />
         <App />
-      </ThemeProvider>
+      </GeistProvider>
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root')

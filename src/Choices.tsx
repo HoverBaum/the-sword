@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fadeIn } from './animations'
 import { config } from './config'
 import { StoryState } from './store'
-import { makeChoice } from './story.slice'
+import { makeChoice } from './Story/story.slice'
 
 export type ChoicesProps = {}
 

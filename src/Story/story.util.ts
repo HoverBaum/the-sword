@@ -1,5 +1,5 @@
 import { Choice } from 'inkjs/engine/Choice'
-import { ChoiceType, StoryLine, Tag } from './story'
+import { ChoiceType, Tag } from '../story'
 
 export const parseTag = (tag: string): Tag => {
   const trimmedTag = tag.trim()

@@ -7,11 +7,11 @@ import {
   StoryLine,
   CountedStoryLine,
   CountedChoice,
-} from './story.d'
+} from '../story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
-import { StoryDispatch } from './store'
-import { scenes } from './scenes'
+import { StoryDispatch } from '../store'
+import { scenes } from '../scenes'
 
 //@ts-ignore
 let story: Story
@@ -115,18 +115,6 @@ const continueStory = (dispatch: StoryDispatch) => {
     const currentTags = story.currentTags?.map(parseTag) ?? []
     handleTags(currentTags, dispatch)
     dispatch(addStoryLine({ text: nextLine, type: 'paragraph' }))
-    // //@ts-ignore
-    // const moodSet: Set = story.variablesState['mood']
-    // if (moodSet) {
-    //   try {
-    //     const jsonVariable = moodSet.keys().next().value
-    //     const variableState = JSON.parse(jsonVariable)
-    //     const mood = variableState.itemName
-    //     dispatch(setMood(mood))
-    //   } catch (e) {
-    //     console.error('Error getting mood', e)
-    //   }
-    // }
   }
   dispatch(setChoices(story.currentChoices.map(parseChoice)))
   if (!story.canContinue && story.currentChoices.length === 0) {

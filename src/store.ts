@@ -5,10 +5,10 @@ import storySlice, {
   setChoices,
   setCountedChoices,
   tellStory,
-} from './story.slice'
+} from './Story/story.slice'
 import { storyContent } from '../story/storyContent'
 import { ChoiceType, CountedChoice, CountedStoryLine, StoryLine } from './story'
-import { lineToWords } from './story.util'
+import { lineToWords } from './Story/story.util'
 
 let linesSinceLastChoice = 0
 let wordsSinceLastChoice = 0

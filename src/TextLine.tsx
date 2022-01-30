@@ -5,7 +5,7 @@ import { ComponentType } from 'react'
 import { fadeIn } from './animations'
 import { config } from './config'
 import { CountedStoryLine } from './story'
-import { lineToWords } from './story.util'
+import { lineToWords } from './Story/story.util'
 
 const {
   WORD_DELAY_TIME,

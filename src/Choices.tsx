@@ -4,7 +4,7 @@ import { Button } from '@geist-ui/core'
 import { ComponentType, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fadeIn } from './animations'
-import { config } from './config'
+import { useSettings } from './Settings/useSettings'
 import { RootState } from './store'
 import { makeChoice } from './Story/story.slice'
 
@@ -14,12 +14,13 @@ export const Choices: ComponentType<ChoicesProps> = () => {
   const [isHdden, setIsHidden] = useState(true)
   const { choices } = useSelector((state: RootState) => state.story)
   const dispatch = useDispatch()
+  const { wordDelayTime, wordFadeInTime } = useSettings()
 
   useEffect(() => {
     if (choices.length < 1) return
     setTimeout(
       () => setIsHidden(false),
-      choices[0].wordCount * config.WORD_DELAY_TIME * 1000
+      (choices[0].wordCount * wordDelayTime + wordFadeInTime) * 1000
     )
   }, [choices])
 
@@ -33,7 +34,7 @@ export const Choices: ComponentType<ChoicesProps> = () => {
     <div
       css={css`
         opacity: 0;
-        animation: ${fadeIn} ${config.WORD_FADE_IN_TIME}s ease-in-out forwards;
+        animation: ${fadeIn} ${wordFadeInTime}s ease-in-out forwards;
       `}
     >
       {choices.map((choice) => (

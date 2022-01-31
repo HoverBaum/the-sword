@@ -9,6 +9,7 @@ import storySlice, {
 import { storyContent } from '../story/storyContent'
 import { ChoiceType, CountedChoice, CountedStoryLine, StoryLine } from './story'
 import { lineToWords } from './Story/story.util'
+import settingsSlice from './Settings/settings.slice'
 
 let linesSinceLastChoice = 0
 let wordsSinceLastChoice = 0
@@ -42,6 +43,7 @@ const lineCountAdder: Middleware = (store) => (next) => (action) => {
 export const store = configureStore({
   reducer: {
     story: storySlice,
+    settings: settingsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(lineCountAdder),

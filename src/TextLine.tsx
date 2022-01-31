@@ -3,16 +3,9 @@ import { css, keyframes } from '@emotion/react'
 import { Text } from '@geist-ui/core'
 import { ComponentType } from 'react'
 import { fadeIn } from './animations'
-import { config } from './config'
+import { useSettings } from './Settings/useSettings'
 import { CountedStoryLine } from './story'
 import { lineToWords } from './Story/story.util'
-
-const {
-  WORD_DELAY_TIME,
-  WORD_FADE_IN_TIME,
-  INITIALLY_DISPLAYED_WORDS,
-  HEADING_FADE_IN_TIME,
-} = config
 
 export type TextLineProps = {
   storyLine: CountedStoryLine
@@ -20,6 +13,12 @@ export type TextLineProps = {
 
 export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
   const { type, text, wordCount } = storyLine
+  const {
+    headingFadeInTime,
+    wordDelayTime,
+    wordFadeInTime,
+    initiallyDisplayedWords,
+  } = useSettings()
 
   if (type === 'title') return <Text h1>{text}</Text>
   if (type === 'chapter heading')
@@ -28,7 +27,7 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
         h2
         css={css`
           opacity: 0;
-          animation: ${fadeIn} ${HEADING_FADE_IN_TIME}s ease-in-out forwards;
+          animation: ${fadeIn} ${headingFadeInTime}s ease-in-out forwards;
         `}
       >
         {text}
@@ -42,14 +41,14 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
           key={index + word}
           css={css`
             opacity: 0;
-            animation: ${fadeIn} ${WORD_FADE_IN_TIME}s ease-in-out forwards;
+            animation: ${fadeIn} ${wordFadeInTime}s ease-in-out forwards;
             // 0-indexed array require us to add 1 again so the config does what it says.
             animation-delay: ${(wordCount +
               index -
-              INITIALLY_DISPLAYED_WORDS +
+              initiallyDisplayedWords +
               1) *
-              WORD_DELAY_TIME +
-            HEADING_FADE_IN_TIME}s;
+              wordDelayTime +
+            headingFadeInTime}s;
           `}
         >
           {word + ' '}

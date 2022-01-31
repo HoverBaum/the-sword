@@ -111,11 +111,13 @@ There had always been two ways connecting our village to Budshire. One went stra
 #SCENE: forrest
 #CHAPTER: Into the woods
 
-Meeting Bandids...
+// Meeting Bandids...
 
-You wishfully look at the mountain. View is probably amazing and you can't picture bandits being there.
+// You wishfully look at the mountain. View is probably amazing and you can't picture bandits being there.
 
-*[continue] -> ArrivingAtTheSword
+The route through the forrest was sadly blocked by fallen trees from the last storm.
+
+*[We went up the mountain] -> MountainRoute
 
 === MountainRoute ===
 #CLEAR
@@ -164,7 +166,7 @@ It had been a long time since the four of us had been out like this together. "S
 - 
 // Put a tunnel here to see some animals. Maybe both routes can go to the same tunnel? Could be little button in the image that points out a goat or something.
 
-* [Walk on] -> ArrivingAtTheSword
+* [Walk on] -> AlphaOver
 
 === ArrivingAtTheSword ===
 #CLEAR
@@ -208,6 +210,14 @@ You go home as you were. Someone else becomes king. You think about how nice it 
 
 -> theEnd
 
+=== AlphaOver ===
+#CHAPTER: Alpha End
+
+This concludes the Alpha.
+
+Please do provide feedback 🙂
+
+-> END
 
 === theEnd ===
 

@@ -10,7 +10,7 @@ import {
 } from '../story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
-import { StoryDispatch } from '../store'
+import { RootDispatch } from '../store'
 import { scenes } from '../scenes'
 
 //@ts-ignore
@@ -81,7 +81,7 @@ export const storySlice = createSlice({
   },
 })
 
-const handleTags = (tags: Tag[], dispatch: StoryDispatch) => {
+const handleTags = (tags: Tag[], dispatch: RootDispatch) => {
   dispatch(setCurrentTags(tags))
   tags.forEach((tag) => {
     const tagType = tag.type
@@ -109,7 +109,7 @@ const handleTags = (tags: Tag[], dispatch: StoryDispatch) => {
   })
 }
 
-const continueStory = (dispatch: StoryDispatch) => {
+const continueStory = (dispatch: RootDispatch) => {
   while (story.canContinue) {
     const nextLine = story.Continue() as string
     const currentTags = story.currentTags?.map(parseTag) ?? []
@@ -122,11 +122,11 @@ const continueStory = (dispatch: StoryDispatch) => {
   }
 }
 
-export const resetStory = (dispatch: StoryDispatch) => {
+export const resetStory = (dispatch: RootDispatch) => {
   tellStory(currentStoryJSON)(dispatch)
 }
 
-export const makeChoice = (choice: ChoiceType) => (dispatch: StoryDispatch) => {
+export const makeChoice = (choice: ChoiceType) => (dispatch: RootDispatch) => {
   // Dispatch ana ction to make the choice visible in Redux dev tools.
   dispatch({ type: 'story/makeChoice', payload: choice })
   story.ChooseChoiceIndex(choice.index)
@@ -146,7 +146,7 @@ const valueForVariableSet = (set: Set<any>): string | undefined => {
   return undefined
 }
 
-const watchMood = (story: Story, dispatch: StoryDispatch) => {
+const watchMood = (story: Story, dispatch: RootDispatch) => {
   const initialMood = valueForVariableSet(
     //@ts-ignore
     story.variablesState['mood']
@@ -166,7 +166,7 @@ const watchMood = (story: Story, dispatch: StoryDispatch) => {
   })
 }
 
-export const tellStory = (storyJSON: string) => (dispatch: StoryDispatch) => {
+export const tellStory = (storyJSON: string) => (dispatch: RootDispatch) => {
   currentStoryJSON = storyJSON
   dispatch(reset())
   story = new ink.Story(storyJSON)

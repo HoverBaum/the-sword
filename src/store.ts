@@ -47,8 +47,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(lineCountAdder),
 })
 
-export type StoryState = ReturnType<typeof store.getState>
-export type StoryDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
+export type RootDispatch = typeof store.dispatch
 
 //@ts-ignore
 store.dispatch(tellStory(storyContent))

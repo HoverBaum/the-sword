@@ -4,10 +4,10 @@ import { css } from '@emotion/react'
 import { Text } from '@geist-ui/core'
 import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
-import { StoryState } from '../store'
+import { RootState } from '../store'
 
 export const ProtagonistStatus: ComponentType = () => {
-  const { mood } = useSelector((state: StoryState) => state.story)
+  const { mood } = useSelector((state: RootState) => state.story)
 
   return (
     <div

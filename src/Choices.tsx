@@ -5,14 +5,14 @@ import { ComponentType, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fadeIn } from './animations'
 import { config } from './config'
-import { StoryState } from './store'
+import { RootState } from './store'
 import { makeChoice } from './Story/story.slice'
 
 export type ChoicesProps = {}
 
 export const Choices: ComponentType<ChoicesProps> = () => {
   const [isHdden, setIsHidden] = useState(true)
-  const { choices } = useSelector((state: StoryState) => state.story)
+  const { choices } = useSelector((state: RootState) => state.story)
   const dispatch = useDispatch()
 
   useEffect(() => {

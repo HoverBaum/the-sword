@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { useTheme } from '@geist-ui/core'
 import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
-import { StoryState } from '../store'
+import { RootState } from '../store'
 import { Scene } from '../story'
 import { AudioPlayer } from './AudioPlayer'
 import { Credit } from './Credit'
@@ -14,7 +14,7 @@ export type SceneProps = {
 }
 
 export const SceneDisplay: ComponentType = ({ children }) => {
-  const { scene } = useSelector((state: StoryState) => state.story)
+  const { scene } = useSelector((state: RootState) => state.story)
   const { palette } = useTheme()
 
   if (!scene) return <div>{children}</div>

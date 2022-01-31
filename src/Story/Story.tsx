@@ -4,12 +4,12 @@ import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
 import { Choices } from '../Choices'
 import { SceneDisplay } from '../Scene/SceneDisplay'
-import { StoryState } from '../store'
+import { RootState } from '../store'
 import { TextLine } from '../TextLine'
 import { StoryThemeProvider } from './StoryThemeProvider'
 
 export const Story: ComponentType = () => {
-  const { storyLines } = useSelector((state: StoryState) => state.story)
+  const { storyLines } = useSelector((state: RootState) => state.story)
 
   return (
     <StoryThemeProvider>

@@ -39,11 +39,18 @@ npm run ink:compile
 - ~~Display image credit~~
 - ~~Chapter title~~
 - ~~Nicer reading flow with text appearing~~
-- Settings screen
+- ~~Settings screen~~
+- ~~Protagonists mood~~
 - Opening screen for game
-- Save and load
 - Fade storyLines after a while
+- Finish example story
+- Asset credit screen
+
+## Might do
+
+- Save and load
+- Arrow key navigation
+- Gamepad navigation
 - Choices in Image
 - Do Tunnels work?
-- Mood or something of protagonist??
-- Finish example story
+- More Scene types than just images

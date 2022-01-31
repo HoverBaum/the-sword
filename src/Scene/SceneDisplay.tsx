@@ -1,8 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { useTheme } from '@geist-ui/core'
+import { PauseFill } from '@geist-ui/icons'
 import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { Pause } from '../Pause'
 import { RootState } from '../store'
 import { Scene } from '../story'
 import { AudioPlayer } from './AudioPlayer'
@@ -16,6 +19,7 @@ export type SceneProps = {
 export const SceneDisplay: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: RootState) => state.story)
   const { palette } = useTheme()
+  const navigate = useNavigate()
 
   if (!scene) return <div>{children}</div>
 
@@ -37,7 +41,9 @@ export const SceneDisplay: ComponentType = ({ children }) => {
         color: ${scene.textColor || 'inherit'};
       `}
     >
+      <Pause />
       <AudioPlayer sound={scene?.sound} />
+
       <div
         css={css`
           opacity: 0.8;

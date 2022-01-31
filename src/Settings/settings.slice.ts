@@ -16,28 +16,29 @@ export type SettingsState = {
   headingFadeInTime: number
 }
 
-const calculateSettings = (
-  settings: SettingsState,
-  speed: number
-): SettingsState => ({
-  ...settings,
+const speedRelatedSettings = (speed: number): Partial<SettingsState> => ({
   textSpeed: speed,
-  wordFadeInTime: settings.wordFadeInTime / speed,
-  wordDelayTime: settings.wordDelayTime / speed,
-  headingFadeInTime: settings.headingFadeInTime / speed,
+  wordFadeInTime: baseSettings.wordFadeInTime / speed,
+  wordDelayTime: baseSettings.wordDelayTime / speed,
+  headingFadeInTime: baseSettings.headingFadeInTime / speed,
 })
 
-const initialState = calculateSettings(baseSettings, baseSettings.textSpeed)
+const initialState = {
+  ...baseSettings,
+  ...speedRelatedSettings(baseSettings.textSpeed),
+}
 
 export const settingSlice = createSlice({
   name: 'config',
   initialState,
   reducers: {
-    setTextSpeed: (state, action: PayloadAction<number>) => {},
+    setTextSpeed: (state, action: PayloadAction<number>) => {
+      return { ...state, ...speedRelatedSettings(action.payload) }
+    },
   },
 })
 
 // Actions to be used by the application.
-export const {} = settingSlice.actions
+export const { setTextSpeed } = settingSlice.actions
 
 export default settingSlice.reducer

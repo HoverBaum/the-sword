@@ -36,8 +36,8 @@ function App() {
         type="warning"
       >
         ALPHA:
-        {process.env.VERCEL_GIT_COMMIT_SHA
-          ? process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 5)
+        {import.meta.env.VERCEL_GIT_COMMIT_SHA
+          ? (import.meta.env.VERCEL_GIT_COMMIT_SHA as string).substring(0, 5)
           : 1}
       </Tag>
     </div>

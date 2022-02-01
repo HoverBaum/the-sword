@@ -11,6 +11,7 @@
 interface ImportMetaEnv {
   //@ts-ignore
   readonly VITE_TEXT_SPEED?: number
+  readonly VITE_VERCEL_GIT_COMMIT_SHA?: string
 }
 
 interface ImportMeta {

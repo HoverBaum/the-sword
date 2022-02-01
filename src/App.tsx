@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from '@emotion/react'
+import { Tag } from '@geist-ui/core'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { CreditsPage } from './Credits/CreditsPage'
 import { Home } from './Home'
@@ -24,6 +25,21 @@ function App() {
           <Route path="/credits" element={<CreditsPage />}></Route>
         </Routes>
       </BrowserRouter>
+
+      <Tag
+        css={css`
+          position: fixed;
+          left: 1rem;
+          bottom: 1rem;
+          opacity: 0.8;
+        `}
+        type="warning"
+      >
+        ALPHA:
+        {process.env.VERCEL_GIT_COMMIT_SHA
+          ? process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 5)
+          : 1}
+      </Tag>
     </div>
   )
 }

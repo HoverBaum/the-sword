@@ -6,16 +6,16 @@ if (argv.w || argv.watch) {
   IS_WATCHING = true
 }
 
-const inkFile = path.join(__dirname, "./../story/TheInkSword.ink")
-const jsonFile = path.join(__dirname, "./../story/TheInkSword.ink.json")
-const tsFile = path.join(__dirname, "./../story/storyContent.ts")
+const inkFile = path.join(__dirname, './../story/TheInkSword.ink')
+const jsonFile = path.join(__dirname, './../story/TheInkSword.ink.json')
+const tsFile = path.join(__dirname, './../story/storyContent.ts')
 
 let inklecatePath
-if (process.platform === "darwin") {
-  inklecatePath = path.join(__dirname, "./../inklecate/mac/inklecate")
+if (process.platform === 'darwin') {
+  inklecatePath = path.join(__dirname, './../inklecate/mac/inklecate')
 }
-if (process.platform === "win32") {
-  inklecatePath = path.join(__dirname, "./../inklecate/win32/inklecate.exe")
+if (process.platform === 'win32') {
+  inklecatePath = path.join(__dirname, './../inklecate/win32/inklecate.exe')
 }
 
 if (!inklecatePath || fs.ensureFileSync(inklecatePath)) {
@@ -26,7 +26,7 @@ if (!inklecatePath || fs.ensureFileSync(inklecatePath)) {
 const compileFile = async (filepath) => {
   console.log(`Compiling ${filepath}`)
   await $`${inklecatePath} ${inkFile}`
-  console.log("Compiled to json")
+  console.log('Compiled to json')
   await createTSFile()
 }
 
@@ -34,10 +34,10 @@ const createTSFile = async () => {
   const jsonContent = await fs.readFile(jsonFile)
   const tsContent = `export const storyContent = ${jsonContent}`
   await fs.writeFile(tsFile, tsContent)
-  console.log("TS file updated")
+  console.log('TS file updated')
 }
 
-console.log("Compiling initial json")
+console.log('Compiling initial json')
 await compileFile(inkFile)
 
 if (IS_WATCHING) {
@@ -47,5 +47,5 @@ if (IS_WATCHING) {
     // Compile the story to json using inklecate
     compileFile(inkFile)
   })
-  console.log("\nWaiting for changes")
+  console.log('\nWaiting for changes')
 }

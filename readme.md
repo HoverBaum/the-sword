@@ -42,9 +42,10 @@ npm run ink:compile
 - ~~Settings screen~~
 - ~~Protagonists mood~~
 - ~~Fade storyLines after a while~~
+- ~~Asset credit screen~~
 - Opening screen for game
 - Finish example story
-- Asset credit screen
+
 
 ## Might do
 

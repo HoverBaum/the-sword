@@ -14,7 +14,7 @@ export const ProtagonistStatus: ComponentType = () => {
     <div
       css={css`
         padding-left: 4rem;
-        min-height: 5rem;
+        min-height: 4rem;
         display: flex;
         align-items: center;
       `}

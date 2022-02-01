@@ -1,5 +1,10 @@
 import * as ink from 'inkjs'
-import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {
+  createAction,
+  createSlice,
+  nanoid,
+  PayloadAction,
+} from '@reduxjs/toolkit'
 import {
   Scene,
   ChoiceType,
@@ -7,6 +12,7 @@ import {
   StoryLine,
   CountedStoryLine,
   CountedChoice,
+  StoredStoryLine,
 } from '../story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
@@ -21,11 +27,12 @@ export interface StoryState {
   globalTags: Tag[]
   title: string
   author: string
-  storyLines: CountedStoryLine[]
+  storyLines: StoredStoryLine[]
   choices: CountedChoice[]
   currentTags: Tag[]
   scene: Scene | undefined
   mood: string
+  currentLineId: string
 }
 
 const initialState: StoryState = {
@@ -37,6 +44,7 @@ const initialState: StoryState = {
   currentTags: [],
   scene: undefined,
   mood: '',
+  currentLineId: '',
 }
 
 export const storySlice = createSlice({
@@ -44,7 +52,9 @@ export const storySlice = createSlice({
   initialState,
   reducers: {
     addCountedStoryLine: (state, action: PayloadAction<CountedStoryLine>) => {
-      state.storyLines.push(action.payload)
+      const id = nanoid()
+      state.storyLines.push({ ...action.payload, id })
+      state.currentLineId = id
     },
     clearStoryLines: (state) => {
       state.storyLines = []

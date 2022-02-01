@@ -1,14 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { css, keyframes } from '@emotion/react'
+import { css } from '@emotion/react'
 import { Text } from '@geist-ui/core'
-import { ComponentType } from 'react'
+import { ComponentType, useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { fadeIn } from './animations'
 import { useSettings } from './Settings/useSettings'
-import { CountedStoryLine } from './story'
+import { RootState } from './store'
+import { StoredStoryLine } from './story'
 import { lineToWords } from './Story/story.util'
 
 export type TextLineProps = {
-  storyLine: CountedStoryLine
+  storyLine: StoredStoryLine
 }
 
 export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
@@ -19,6 +21,26 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
     wordFadeInTime,
     initiallyDisplayedWords,
   } = useSettings()
+  const currentLineId = useSelector(
+    (state: RootState) => state.story.currentLineId
+  )
+  const [isFaded, setIsFaded] = useState(false)
+  const { lineFadingTime } = useSettings()
+
+  const words = useMemo(() => lineToWords(text), [text])
+
+  useEffect(() => {
+    // Delay the fading of the text.
+    // Effectively we add the "lineFadeinTime" after all words are displayed.
+    const allWordsDelay =
+      (wordDelayTime * (wordCount + words.length) +
+        wordFadeInTime +
+        headingFadeInTime) *
+      1000
+    const delay = lineFadingTime * 1000 + allWordsDelay
+    const fadingTimer = setTimeout(() => setIsFaded(true), delay)
+    return () => clearTimeout(fadingTimer)
+  }, [])
 
   if (type === 'title') return <Text h1>{text}</Text>
   if (type === 'chapter heading')
@@ -35,8 +57,18 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
     )
 
   return (
-    <Text p>
-      {lineToWords(text).map((word, index) => (
+    <Text
+      p
+      css={css`
+        transition: opacity ${wordFadeInTime * 2}s ease-in-out;
+        ${isFaded && currentLineId !== storyLine.id
+          ? css`
+              opacity: 0.75;
+            `
+          : ''}
+      `}
+    >
+      {words.map((word, index) => (
         <span
           key={index + word}
           css={css`

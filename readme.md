@@ -41,8 +41,8 @@ npm run ink:compile
 - ~~Nicer reading flow with text appearing~~
 - ~~Settings screen~~
 - ~~Protagonists mood~~
+- ~~Fade storyLines after a while~~
 - Opening screen for game
-- Fade storyLines after a while
 - Finish example story
 - Asset credit screen
 

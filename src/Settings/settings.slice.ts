@@ -6,6 +6,7 @@ const baseSettings: SettingsState = {
   wordDelayTime: 0.1,
   headingFadeInTime: 1,
   initiallyDisplayedWords: 3,
+  lineFadingTime: 30,
 }
 
 export type SettingsState = {
@@ -14,6 +15,7 @@ export type SettingsState = {
   wordFadeInTime: number
   wordDelayTime: number
   headingFadeInTime: number
+  lineFadingTime: number
 }
 
 const speedRelatedSettings = (speed: number): Partial<SettingsState> => ({

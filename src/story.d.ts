@@ -18,6 +18,8 @@ export type Counted = {
 export type CountedStoryLine = Counted & StoryLine
 export type CountedChoice = Counted & ChoiceType
 
+export type StoredStoryLine = { id: string } & CountedStoryLine
+
 export type Tag = {
   originalContent: string
   type: string

@@ -1,35 +1,26 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Button, Divider, Link, Page, Spacer, Text } from '@geist-ui/core'
+import { Button, Spacer, Text, Link, Divider } from '@geist-ui/core'
 import { ArrowLeft } from '@geist-ui/icons'
-import * as allAssets from './assets'
-import { Asset, AssetType } from './assetTypes'
+import * as allAssets from '../assets'
+import { Asset, AssetType } from '../assetTypes'
 
 const assets = Object.values(allAssets)
 
 const only = (type: AssetType) => (asset: Asset) => asset.type === type
 
-export const AssetsPage = () => {
+export const AssetsOverview = () => {
   return (
-    <Page>
-      <Text h1>Assets</Text>
+    <>
+      <Text h2>Assets</Text>
       <Text>
         Find here an overview of all the assets used in this game and where they
         are from.
       </Text>
-      <Button type="secondary" ghost onClick={() => window.history.back()}>
-        <ArrowLeft
-          size={16}
-          css={css`
-            margin-right: 0.25rem;
-          `}
-        />
-        Go back
-      </Button>
 
       {/* Images */}
-      <Spacer h={3} />
-      <Text h2>Images</Text>
+      <Spacer h={2} />
+      <Text h3>Images</Text>
       {assets.filter(only('image')).map((asset) => (
         <div key={asset.creditLink}>
           <div
@@ -70,7 +61,7 @@ export const AssetsPage = () => {
 
       {/* Audio Assets */}
       <Spacer h={3} />
-      <Text h2>Audio</Text>
+      <Text h3>Audio</Text>
       {assets.filter(only('sound')).map((asset) => (
         <div key={asset.creditLink}>
           <div
@@ -100,17 +91,6 @@ export const AssetsPage = () => {
           <Divider />
         </div>
       ))}
-
-      <Spacer h={3} />
-      <Button type="secondary" ghost onClick={() => window.history.back()}>
-        <ArrowLeft
-          size={16}
-          css={css`
-            margin-right: 0.25rem;
-          `}
-        />
-        Back
-      </Button>
-    </Page>
+    </>
   )
 }

@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from '@emotion/react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { AssetsPage } from './AssetsPage'
+import { CreditsPage } from './Credits/CreditsPage'
+import { Home } from './Home'
 import { Story } from './Story/Story'
 
 function App() {
@@ -18,8 +19,9 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Story />}></Route>
-          <Route path="/assets" element={<AssetsPage />}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/story" element={<Story />}></Route>
+          <Route path="/credits" element={<CreditsPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { storyContent } from '../story/storyContent'
 import { tellStory } from './Story/story.slice'
+import { TextLine } from './TextLine'
 
 export const Home = () => {
   const navigate = useNavigate()
@@ -26,7 +27,16 @@ export const Home = () => {
       `}
     >
       <Text h1>The Sword 🗡</Text>
-      <Text h4>Adventure awaits</Text>
+
+      <TextLine
+        storyLine={{
+          text: 'There are many stories worth telling, this is but one of them.',
+          id: 'home',
+          lineNumber: 0,
+          wordCount: 0,
+          type: 'paragraph',
+        }}
+      />
 
       <Spacer h={3} />
       <Button onClick={() => navigate('/credits')}>Credits</Button>

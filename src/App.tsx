@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from '@emotion/react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { AssetsPage } from './AssetsPage'
 import { Story } from './Story/Story'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Story />}></Route>
+          <Route path="/assets" element={<AssetsPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

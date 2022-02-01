@@ -6,14 +6,10 @@ import ForrestImage from './images/forrest.jpg'
 import MountainImage from './images/mountain.jpg'
 import MorningImage from './images/morning.jpg'
 import BonfireSound from './sounds/bonfire.wav'
-import {
-  ImageAsset,
-  License,
-  LicenseIdentifier,
-  SoundAsset,
-} from './assetTypes'
+import { ImageAsset, SoundAsset } from './assetTypes'
 
 export const morningImageAsset: ImageAsset = {
+  name: 'Morning sunrise',
   type: 'image',
   file: MorningImage,
   credit: 'Dawid Zawiła',
@@ -22,6 +18,7 @@ export const morningImageAsset: ImageAsset = {
 }
 
 export const mountainImageAsset: ImageAsset = {
+  name: 'Mountain landscape',
   type: 'image',
   file: MountainImage,
   credit: 'Jashandeep Singh Kaleka',
@@ -30,6 +27,7 @@ export const mountainImageAsset: ImageAsset = {
 }
 
 export const forrestImageAsset: ImageAsset = {
+  name: 'Forrest path',
   type: 'image',
   file: ForrestImage,
   credit: 'Ali Kazal',
@@ -38,6 +36,7 @@ export const forrestImageAsset: ImageAsset = {
 }
 
 export const campImageAsset: ImageAsset = {
+  name: 'Medieval camp',
   type: 'image',
   file: CampImage,
   credit: 'Amuljar',
@@ -47,6 +46,7 @@ export const campImageAsset: ImageAsset = {
 }
 
 export const bonfireImageAsset: ImageAsset = {
+  name: 'Bonfire',
   type: 'image',
   file: BonfireImage,
   credit: 'Chirag Nayak',
@@ -55,6 +55,7 @@ export const bonfireImageAsset: ImageAsset = {
 }
 
 export const libraryImageAsset: ImageAsset = {
+  name: 'Library',
   type: 'image',
   file: LibraryImage,
   credit: 'Prateek Katyal',
@@ -63,6 +64,7 @@ export const libraryImageAsset: ImageAsset = {
 }
 
 export const swordImageAsset: ImageAsset = {
+  name: 'Mystic sword',
   type: 'image',
   file: SwordImage,
   credit: 'Ricardo Cruz',
@@ -71,24 +73,10 @@ export const swordImageAsset: ImageAsset = {
 }
 
 export const bonfireSoundAsset: SoundAsset = {
+  name: 'Bonfire',
   type: 'sound',
   file: BonfireSound,
   credit: 'forfie',
   creditLink: 'https://freesound.org/people/forfie/sounds/364992/',
   license: 'CCO 1.0',
-}
-
-export const licenses: { [key in LicenseIdentifier]: License } = {
-  unsplash: {
-    identifier: 'unsplash',
-    link: 'https://unsplash.com/license',
-  },
-  'CCO 1.0': {
-    identifier: 'CCO 1.0',
-    link: 'https://creativecommons.org/publicdomain/zero/1.0/',
-  },
-  pixabay: {
-    identifier: 'pixabay',
-    link: 'https://pixabay.com/de/service/license/',
-  },
 }

@@ -44,6 +44,7 @@ npm run ink:compile
 - ~~Fade storyLines after a while~~
 - ~~Asset credit screen~~
 - ~~Opening screen for game~~
+- Auto scroll to bottom
 - Finish example story
 
 

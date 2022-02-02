@@ -1,19 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Button, Page, Spacer, Text } from '@geist-ui/core'
-import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { storyContent } from '../story/storyContent'
-import { tellStory } from './Story/story.slice'
 import { TextLine } from './TextLine'
 
 export const Home = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const startGame = () => {
-    //@ts-ignore
-    dispatch(tellStory(storyContent))
     navigate('/story')
   }
 

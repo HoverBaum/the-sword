@@ -2,15 +2,16 @@
 import { css } from '@emotion/react'
 import { Text } from '@geist-ui/core'
 import { Volume2, VolumeX } from '@geist-ui/icons'
-import { ComponentType, useState } from 'react'
+import { ComponentType } from 'react'
 import { SoundAsset } from '../assetTypes'
+import { useSettings } from '../Settings/useSettings'
 
 export type AudioPlayerProps = {
   sound?: SoundAsset
 }
 
 export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
-  const [isMuted, setIsMuted] = useState(true)
+  const { isMuted, toggleMute } = useSettings()
 
   return (
     <div
@@ -26,7 +27,7 @@ export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
         }
       `}
     >
-      <Text span onClick={() => setIsMuted((current) => !current)}>
+      <Text span onClick={toggleMute}>
         {isMuted ? <VolumeX /> : <Volume2 />}
       </Text>
       {sound && (

@@ -1,4 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { stringToBoolean } from '../util'
+
+const isMuted = stringToBoolean(import.meta.env.VITE_IS_MUTED)
 
 const baseSettings: SettingsState = {
   textSpeed: import.meta.env.VITE_TEXT_SPEED || 1,
@@ -7,6 +10,7 @@ const baseSettings: SettingsState = {
   headingFadeInTime: 1,
   initiallyDisplayedWords: 3,
   lineFadingTime: 30,
+  isMuted,
 }
 
 export type SettingsState = {
@@ -16,6 +20,7 @@ export type SettingsState = {
   wordDelayTime: number
   headingFadeInTime: number
   lineFadingTime: number
+  isMuted: boolean
 }
 
 const speedRelatedSettings = (speed: number): Partial<SettingsState> => ({
@@ -37,10 +42,13 @@ export const settingSlice = createSlice({
     setTextSpeed: (state, action: PayloadAction<number>) => {
       return { ...state, ...speedRelatedSettings(action.payload) }
     },
+    setIsMuted: (state, action: PayloadAction<boolean>) => {
+      state.isMuted = action.payload
+    },
   },
 })
 
 // Actions to be used by the application.
-export const { setTextSpeed } = settingSlice.actions
+export const { setTextSpeed, setIsMuted } = settingSlice.actions
 
 export default settingSlice.reducer

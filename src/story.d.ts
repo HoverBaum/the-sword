@@ -27,6 +27,7 @@ export type StoredStoryLine = {
   id: string
   // This enables us to navigate back to the same state of the story.
   wasDisplayed: boolean
+  isFaded: boolean
 } & CountedStoryLine
 
 // A parsed tag from the ink story.

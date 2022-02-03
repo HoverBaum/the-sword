@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Text } from '@geist-ui/core'
-import { ComponentType, useEffect, useMemo, useState } from 'react'
+import { ComponentType, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fadeIn } from './animations'
 import { useSettings } from './Settings/useSettings'
 import { RootState } from './store'
 import { StoredStoryLine } from './story'
-import { lineWasDisplayed } from './Story/story.slice'
+import { lineHasFaded, lineWasDisplayed } from './Story/story.slice'
 import { lineToWords } from './Story/story.util'
 
 export type TextLineProps = {
@@ -20,7 +20,7 @@ export type TextLineProps = {
  * StoryLine will fade into less opacity after a while.
  */
 export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
-  const { type, text, wordCount, wasDisplayed } = storyLine
+  const { type, text, wordCount, wasDisplayed, isFaded } = storyLine
   const {
     headingFadeInTime,
     wordDelayTime,
@@ -31,7 +31,6 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
   const currentLineId = useSelector(
     (state: RootState) => state.story.currentLineId
   )
-  const [isFaded, setIsFaded] = useState(false)
   const { lineFadingTime } = useSettings()
 
   const words = useMemo(() => lineToWords(text), [text])
@@ -43,25 +42,28 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
       headingFadeInTime) *
     1000
 
-  // Set this line as displayed after all animations finished.
-  useEffect(() => {
-    const setDisplayed = () => {
-      dispatch(lineWasDisplayed(storyLine.id))
-    }
-    setTimeout(setDisplayed, allWordsDelay)
-  }, [])
-
   // CSS to remove animation from lines that were previously displayed.
   const alreadyDisplayedCSS = css`
     animation: none;
     opacity: 1;
   `
 
+  // Set this line as displayed after all animations finished.
   useEffect(() => {
-    // Delay the fading of the text.
-    // Effectively we add the "lineFadeinTime" after all words are displayed.
+    const setDisplayed = () => {
+      dispatch(lineWasDisplayed(storyLine.id))
+    }
+    const displayedTime = setTimeout(setDisplayed, allWordsDelay)
+    return () => clearTimeout(displayedTime)
+  }, [])
+
+  // Fade the text some time after all words are displayed.
+  useEffect(() => {
     const delay = lineFadingTime * 1000 + allWordsDelay
-    const fadingTimer = setTimeout(() => setIsFaded(true), delay)
+    const setFaded = () => {
+      dispatch(lineHasFaded(storyLine.id))
+    }
+    const fadingTimer = setTimeout(setFaded, delay)
     return () => clearTimeout(fadingTimer)
   }, [])
 

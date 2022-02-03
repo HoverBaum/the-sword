@@ -57,8 +57,19 @@ export const storySlice = createSlice({
   reducers: {
     addCountedStoryLine: (state, action: PayloadAction<CountedStoryLine>) => {
       const id = nanoid()
-      state.storyLines.push({ ...action.payload, id, wasDisplayed: false })
+      state.storyLines.push({
+        ...action.payload,
+        id,
+        wasDisplayed: false,
+        isFaded: false,
+      })
       state.currentLineId = id
+    },
+    lineHasFaded: (state, action: PayloadAction<string>) => {
+      const line = state.storyLines.find((line) => line.id === action.payload)
+      if (line) {
+        line.isFaded = true
+      }
     },
     lineWasDisplayed: (state, action: PayloadAction<string>) => {
       const line = state.storyLines.find((line) => line.id === action.payload)
@@ -242,6 +253,7 @@ export const {
   setCountedChoices,
   setStoryState,
   lineWasDisplayed,
+  lineHasFaded,
 } = storySlice.actions
 
 export default storySlice.reducer

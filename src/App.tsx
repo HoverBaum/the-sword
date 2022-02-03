@@ -26,6 +26,7 @@ function App() {
         </Routes>
       </BrowserRouter>
 
+      {/* While developing we want to let users know this game is not finished. */}
       <Tag
         css={css`
           position: fixed;

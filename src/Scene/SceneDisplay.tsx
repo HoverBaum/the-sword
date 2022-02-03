@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Spacer, useTheme } from '@geist-ui/core'
+import { Spacer } from '@geist-ui/core'
 import { ComponentType, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Pause } from '../Pause'
@@ -14,9 +14,12 @@ export type SceneProps = {
   scene: Scene
 }
 
+/**
+ * Display the scene of the story.
+ * Also adds control elements.
+ */
 export const SceneDisplay: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: RootState) => state.story)
-  const { palette } = useTheme()
 
   useEffect(() => {
     const display = document.querySelector('#sceneDisplay')
@@ -47,20 +50,10 @@ export const SceneDisplay: ComponentType = ({ children }) => {
     >
       <Pause />
       <AudioPlayer sound={scene?.sound} />
+      <ProtagonistStatus />
 
-      <div
-        css={css`
-          opacity: 0.8;
-          position: fixed;
-          top: 0;
-          left: 66%;
-          padding-top: 4rem;
-          border-left: 1px solid ${palette.accents_5};
-        `}
-      >
-        <ProtagonistStatus />
-      </div>
-
+      {/* Text and choices go here. */}
+      {/* TODO refactor the entire Story -> SceneDisplay -> Children structure. */}
       <div
         id="sceneDisplay"
         css={css`

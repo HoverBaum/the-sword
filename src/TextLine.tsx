@@ -13,6 +13,11 @@ export type TextLineProps = {
   storyLine: StoredStoryLine
 }
 
+/**
+ * A single StoryLine.
+ * Takes care of fading in words one after another.
+ * StoryLine will fade into less opacity after a while.
+ */
 export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
   const { type, text, wordCount } = storyLine
   const {
@@ -61,6 +66,7 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
       p
       css={css`
         transition: opacity ${wordFadeInTime * 2}s ease-in-out;
+        /* All but the current line fade out after some time. */
         ${isFaded && currentLineId !== storyLine.id
           ? css`
               opacity: 0.75;

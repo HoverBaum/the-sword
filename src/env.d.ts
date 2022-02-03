@@ -2,10 +2,9 @@
 
 /**
  * NOTE:
- * There is a weird behavior witht eh en typing.
+ * There is a weird behavior with the env typing that only shows up during build.
  * Property 'VITE_TEXT_SPEED' of type 'number | undefined' is not assignable to 'string' index type 'string | boolean | undefined'.
  * Even though we follow: https://vitejs.dev/guide/env-and-mode.html#intellisense-for-typescript
- * I currently don't care to "fix" this.
  */
 
 interface ImportMetaEnv {

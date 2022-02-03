@@ -3,6 +3,7 @@ import { stringToBoolean } from '../util'
 
 const isMuted = stringToBoolean(import.meta.env.VITE_IS_MUTED)
 
+// Here you can configure basic settings.
 const baseSettings: SettingsState = {
   textSpeed: import.meta.env.VITE_TEXT_SPEED || 1,
   wordFadeInTime: 0.5,

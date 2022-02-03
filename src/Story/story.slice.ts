@@ -70,7 +70,7 @@ export const storySlice = createSlice({
     },
     setGlobalTags: (state, action: PayloadAction<Tag[]>) => {
       state.globalTags = action.payload
-      // Handle special tags.
+      // Handle special, global tags.
       action.payload.forEach((tag) => {
         if (tag.type === 'author') {
           state.author = tag.value
@@ -82,7 +82,7 @@ export const storySlice = createSlice({
     setCurrentTags: (state, action: PayloadAction<Tag[]>) => {
       state.currentTags = action.payload
     },
-    setBackground: (state, action: PayloadAction<Scene>) => {
+    setScene: (state, action: PayloadAction<Scene>) => {
       state.scene = action.payload
     },
     setMood: (state, action: PayloadAction<string>) => {
@@ -91,15 +91,18 @@ export const storySlice = createSlice({
   },
 })
 
+/**
+ * Dispatch actions to add the right things for tags.
+ */
 const handleTags = (tags: Tag[], dispatch: RootDispatch) => {
   dispatch(setCurrentTags(tags))
   tags.forEach((tag) => {
     const tagType = tag.type
     switch (tagType) {
       case 'scene':
-        const background = scenes.find((bg) => bg.id === tag.value)
-        if (background) {
-          dispatch(setBackground(background))
+        const scene = scenes.find((bg) => bg.id === tag.value)
+        if (scene) {
+          dispatch(setScene(scene))
         } else {
           console.warn('No background configured for tag', tag)
         }
@@ -119,10 +122,17 @@ const handleTags = (tags: Tag[], dispatch: RootDispatch) => {
   })
 }
 
+/**
+ * Continue story as much as possible and add all StoryLines, tags and Choices.
+ */
 const continueStory = (dispatch: RootDispatch) => {
   while (story.canContinue) {
+    // It is important to continue first to get the tags we expect.
     const nextLine = story.Continue() as string
+    // currentTags are for the last line returned from continue.
     const currentTags = story.currentTags?.map(parseTag) ?? []
+    // We handle the tags first because they might be a heading
+    // or chaning the scene and we want that to happen first.
     handleTags(currentTags, dispatch)
     dispatch(addStoryLine({ text: nextLine, type: 'paragraph' }))
   }
@@ -137,13 +147,17 @@ export const resetStory = (dispatch: RootDispatch) => {
 }
 
 export const makeChoice = (choice: ChoiceType) => (dispatch: RootDispatch) => {
-  // Dispatch ana ction to make the choice visible in Redux dev tools.
+  // Dispatch an action to make the choice visible in Redux dev tools.
   dispatch({ type: 'story/makeChoice', payload: choice })
   story.ChooseChoiceIndex(choice.index)
   dispatch(clearChoices())
   continueStory(dispatch)
 }
 
+/**
+ * Extract the value of a variable from the ink story
+ * represented in a  set.
+ */
 const valueForVariableSet = (set: Set<any>): string | undefined => {
   try {
     const jsonVariable = set.keys().next().value
@@ -176,12 +190,15 @@ const watchMood = (story: Story, dispatch: RootDispatch) => {
   })
 }
 
+/**
+ * Start telling a story.
+ */
 export const tellStory = (storyJSON: string) => (dispatch: RootDispatch) => {
   currentStoryJSON = storyJSON
   dispatch(reset())
   story = new ink.Story(storyJSON)
   //@ts-ignore
-  window.story = story
+  window.story = story // Adding story to the window for debugging.
   watchMood(story, dispatch)
   if (story.globalTags) {
     const globalTags = story.globalTags.map(parseTag)
@@ -193,6 +210,7 @@ export const tellStory = (storyJSON: string) => (dispatch: RootDispatch) => {
   continueStory(dispatch)
 }
 
+// Actions that only ever go into the middleware.
 export const addStoryLine = createAction<StoryLine>('story/addStoryLine')
 export const setChoices = createAction<ChoiceType[]>('story/setChoices')
 
@@ -204,7 +222,7 @@ const {
   clearStoryLines,
   setGlobalTags,
   setCurrentTags,
-  setBackground,
+  setScene,
   setMood,
 } = storySlice.actions
 // Actions to be used by the application.

@@ -7,6 +7,9 @@ const initialStoryTheme = Themes.createFromDark({
   type: 'story',
 })
 
+/**
+ * Provide the geistUI theme for the story based on story state.
+ */
 export const StoryThemeProvider: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: RootState) => state.story)
   const [storyTheme, setStoryTheme] = useState(initialStoryTheme)

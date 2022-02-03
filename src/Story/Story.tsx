@@ -2,7 +2,6 @@
 import { css } from '@emotion/react'
 import { ComponentType, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Outlet } from 'react-router-dom'
 import { storyContent } from '../../story/storyContent'
 import { Choices } from '../Choices'
 import { SceneDisplay } from '../Scene/SceneDisplay'
@@ -22,7 +21,6 @@ export const Story: ComponentType = () => {
 
   return (
     <StoryThemeProvider>
-      <Outlet />
       <SceneDisplay>
         <div
           css={css`
@@ -32,9 +30,8 @@ export const Story: ComponentType = () => {
           {storyLines.map((line) => (
             <TextLine storyLine={line} key={line.text} />
           ))}
-
-          <Choices />
         </div>
+        <Choices />
       </SceneDisplay>
     </StoryThemeProvider>
   )

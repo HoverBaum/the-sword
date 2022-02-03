@@ -5,6 +5,10 @@ import { PauseFill } from '@geist-ui/icons'
 import { useState } from 'react'
 import { useSettings } from './Settings/useSettings'
 
+/**
+ * Pause menu that can be opened to the left.
+ * This renders a button to open a drawer.
+ */
 export const Pause = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { textSpeed, setSpeed } = useSettings()
@@ -50,6 +54,7 @@ export const Pause = () => {
           <Slider value={textSpeed} onChange={setSpeed} max={20} min={1} />
           <div
             css={css`
+              /* Only here to move buttons to the buttom. */
               flex-grow: 1;
             `}
           ></div>

@@ -10,7 +10,11 @@ export type AudioPlayerProps = {
   sound?: SoundAsset
 }
 
+/**
+ * Simple component to play background music.
+ */
 export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
+  // Muted state is linked to the global settings.
   const { isMuted, toggleMute } = useSettings()
 
   return (

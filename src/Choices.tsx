@@ -11,21 +11,24 @@ import { makeChoice } from './Story/story.slice'
 export type ChoicesProps = {}
 
 export const Choices: ComponentType<ChoicesProps> = () => {
+  // We hide choices after users made one and while the story runs.
   const [isHdden, setIsHidden] = useState(true)
   const { choices } = useSelector((state: RootState) => state.story)
   const dispatch = useDispatch()
   const { wordDelayTime, wordFadeInTime } = useSettings()
 
+  // Allways hide new choices.
+  useEffect(() => {
+    setIsHidden(true)
+  }, [choices])
+
+  // Show chocies after all thext faded in.
   useEffect(() => {
     if (choices.length < 1) return
     setTimeout(
       () => setIsHidden(false),
       (choices[0].wordCount * wordDelayTime + wordFadeInTime) * 1000
     )
-  }, [choices])
-
-  useEffect(() => {
-    setIsHidden(true)
   }, [choices])
 
   if (isHdden) return <></>
@@ -43,9 +46,11 @@ export const Choices: ComponentType<ChoicesProps> = () => {
           <Button
             key={choice.index + choice.text}
             onClick={() => {
+              // Hide again
               setIsHidden(true)
               dispatch(makeChoice(choice))
             }}
+            // We focus the first possible choice.
             autoFocus={choice.index === 0}
           >
             {choice.text}

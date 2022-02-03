@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fadeIn } from './animations'
 import { useSettings } from './Settings/useSettings'
 import { RootState } from './store'
-import { makeChoice } from './Story/story.slice'
+import { choicesWereDisplayed, makeChoice } from './Story/story.slice'
 
 export type ChoicesProps = {}
 
@@ -19,16 +19,21 @@ export const Choices: ComponentType<ChoicesProps> = () => {
 
   // Allways hide new choices.
   useEffect(() => {
-    setIsHidden(true)
+    if (choices.length === 0) return setIsHidden(true)
+    if (choices[0].wasDisplayed) {
+      setIsHidden(false)
+    } else {
+      setIsHidden(true)
+    }
   }, [choices])
 
-  // Show chocies after all thext faded in.
+  // Show chocies after all text faded in.
   useEffect(() => {
     if (choices.length < 1) return
-    setTimeout(
-      () => setIsHidden(false),
-      (choices[0].wordCount * wordDelayTime + wordFadeInTime) * 1000
-    )
+    setTimeout(() => {
+      setIsHidden(false)
+      dispatch(choicesWereDisplayed())
+    }, (choices[0].wordCount * wordDelayTime + wordFadeInTime) * 1000)
   }, [choices])
 
   if (isHdden) return <></>
@@ -38,6 +43,12 @@ export const Choices: ComponentType<ChoicesProps> = () => {
       css={css`
         opacity: 0;
         animation: ${fadeIn} ${wordFadeInTime}s ease-in-out forwards;
+        ${choices.length > 0 &&
+        choices[0].wasDisplayed &&
+        css`
+          animation: none;
+          opacity: 1;
+        `}
       `}
     >
       {choices.map((choice) => (

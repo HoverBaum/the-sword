@@ -23,6 +23,17 @@ export const CreditsPage = () => {
         like experiences.
       </Text>
 
+      <Button type="secondary" ghost onClick={() => window.history.back()}>
+        <ArrowLeft
+          size={16}
+          css={css`
+            margin-right: 0.25rem;
+          `}
+        />
+        Back
+      </Button>
+      <Spacer h={1} />
+
       <Divider />
 
       <AssetsOverview />

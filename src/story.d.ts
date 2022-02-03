@@ -23,6 +23,8 @@ export type Counted = {
 export type CountedStoryLine = Counted & StoryLine
 export type CountedChoice = Counted & ChoiceType
 
+export type StoredChoice = { wasDisplayed: boolean } & CountedChoice
+
 export type StoredStoryLine = {
   id: string
   // This enables us to navigate back to the same state of the story.

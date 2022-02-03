@@ -13,11 +13,13 @@ import {
   CountedStoryLine,
   CountedChoice,
   StoredStoryLine,
+  StoredChoice,
 } from '../story.d'
 import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { RootDispatch } from '../store'
 import { scenes } from '../scenes'
+import { Choice } from 'inkjs/engine/Choice'
 
 //@ts-ignore
 let story: Story
@@ -30,7 +32,7 @@ export interface StoryState {
   title: string
   author: string
   storyLines: StoredStoryLine[]
-  choices: CountedChoice[]
+  choices: StoredChoice[]
   currentTags: Tag[]
   scene: Scene | undefined
   mood: string
@@ -79,7 +81,13 @@ export const storySlice = createSlice({
       state.storyLines = []
     },
     setCountedChoices: (state, action: PayloadAction<CountedChoice[]>) => {
-      state.choices = action.payload
+      state.choices = action.payload.map((choice) => ({
+        ...choice,
+        wasDisplayed: false,
+      }))
+    },
+    choicesWereDisplayed: (state) => {
+      state.choices.forEach((choice) => (choice.wasDisplayed = true))
     },
     clearChoices: (state) => {
       state.choices = []
@@ -254,6 +262,7 @@ export const {
   setStoryState,
   lineWasDisplayed,
   lineHasFaded,
+  choicesWereDisplayed,
 } = storySlice.actions
 
 export default storySlice.reducer

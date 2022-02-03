@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { useTheme } from '@geist-ui/core'
-import { ComponentType } from 'react'
+import { Spacer, useTheme } from '@geist-ui/core'
+import { ComponentType, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Pause } from '../Pause'
 import { RootState } from '../store'
@@ -18,6 +18,17 @@ export const SceneDisplay: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: RootState) => state.story)
   const { palette } = useTheme()
 
+  useEffect(() => {
+    const display = document.querySelector('#sceneDisplay')
+    if (!display) return
+    setTimeout(() => {
+      display.scrollTo({
+        top: display.scrollHeight,
+        behavior: 'smooth',
+      })
+    })
+  }, [children])
+
   if (!scene) return <div>{children}</div>
 
   return (
@@ -28,10 +39,6 @@ export const SceneDisplay: ComponentType = ({ children }) => {
         background-position: center right;
         transition: background-image 0.5s ease-in-out;
         height: 100vh;
-        overflow-y: scroll;
-        ::-webkit-scrollbar {
-          display: none;
-        }
         width: 100vw;
         box-sizing: border-box;
         padding: 4rem;
@@ -54,7 +61,19 @@ export const SceneDisplay: ComponentType = ({ children }) => {
         <ProtagonistStatus />
       </div>
 
-      {children}
+      <div
+        id="sceneDisplay"
+        css={css`
+          height: 100%;
+          overflow-y: scroll;
+          ::-webkit-scrollbar {
+            display: none;
+          }
+        `}
+      >
+        {children}
+        <Spacer h={10} />
+      </div>
 
       <Credit
         href={scene.image.creditLink}

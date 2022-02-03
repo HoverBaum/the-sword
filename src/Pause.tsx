@@ -1,24 +1,48 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Button, Drawer, Slider, Text } from '@geist-ui/core'
+import {
+  Button,
+  Divider,
+  Drawer,
+  Link,
+  Slider,
+  Spacer,
+  Text,
+} from '@geist-ui/core'
 import { PauseFill } from '@geist-ui/icons'
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useSettings } from './Settings/useSettings'
+import { RootState } from './store'
+import { setStoryState } from './Story/story.slice'
 
 /**
  * Pause menu that can be opened to the left.
  * This renders a button to open a drawer.
  */
 export const Pause = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const storyState = useSelector((state: RootState) => state.story.storyState)
+  const isOpen = storyState === 'paused'
+  const dispatch = useDispatch()
   const { textSpeed, setSpeed } = useSettings()
+  const navigate = useNavigate()
 
-  const closeDrawer = () => setIsOpen(false)
+  const closeDrawer = () => dispatch(setStoryState('running'))
+  const openDrawer = () => dispatch(setStoryState('paused'))
+
+  // Custom navigation function so that we close the Drawer on navigation.
+  // This prevents a bug where navigation alone doesn't reset overflow:hidden on body.
+  const navigateTo =
+    (path: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      closeDrawer()
+      e.preventDefault()
+      setTimeout(() => navigate(path), 0)
+    }
 
   return (
     <>
       <PauseFill
-        onClick={() => setIsOpen(true)}
+        onClick={openDrawer}
         css={css`
           position: fixed;
           top: 1rem;
@@ -37,7 +61,8 @@ export const Pause = () => {
         placement="left"
         css={css`
           min-width: 20rem;
-          padding: 0 1rem;
+          /* Important overwrite more specific rules from the ui lib. */
+          padding-right: 2rem !important;
         `}
       >
         <Drawer.Title>Paused</Drawer.Title>
@@ -50,15 +75,27 @@ export const Pause = () => {
             height: 100% !important;
           `}
         >
-          <Text p>Text speed</Text>
+          <Text>Text speed</Text>
           <Slider value={textSpeed} onChange={setSpeed} max={20} min={1} />
+
+          <Spacer h={1} />
+          <Divider />
+
+          <Text>
+            View{' '}
+            <Link onClick={navigateTo('/credits')} underline color>
+              credits
+            </Link>
+          </Text>
           <div
             css={css`
               /* Only here to move buttons to the buttom. */
               flex-grow: 1;
             `}
           ></div>
-          <Button onClick={closeDrawer}>Close</Button>
+          <Button onClick={closeDrawer} type="secondary" ghost>
+            Close
+          </Button>
         </Drawer.Content>
       </Drawer>
     </>

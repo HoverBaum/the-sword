@@ -23,6 +23,8 @@ import { scenes } from '../scenes'
 let story: Story
 let currentStoryJSON: string
 
+export type StoryStateType = 'idle' | 'running' | 'paused'
+
 export interface StoryState {
   globalTags: Tag[]
   title: string
@@ -33,6 +35,7 @@ export interface StoryState {
   scene: Scene | undefined
   mood: string
   currentLineId: string
+  storyState: StoryStateType
 }
 
 const initialState: StoryState = {
@@ -45,6 +48,7 @@ const initialState: StoryState = {
   scene: undefined,
   mood: '',
   currentLineId: '',
+  storyState: 'idle',
 }
 
 export const storySlice = createSlice({
@@ -87,6 +91,9 @@ export const storySlice = createSlice({
     },
     setMood: (state, action: PayloadAction<string>) => {
       state.mood = action.payload
+    },
+    setStoryState: (state, action: PayloadAction<StoryStateType>) => {
+      state.storyState = action.payload
     },
   },
 })
@@ -226,6 +233,7 @@ const {
   setMood,
 } = storySlice.actions
 // Actions to be used by the application.
-export const { addCountedStoryLine, setCountedChoices } = storySlice.actions
+export const { addCountedStoryLine, setCountedChoices, setStoryState } =
+  storySlice.actions
 
 export default storySlice.reducer

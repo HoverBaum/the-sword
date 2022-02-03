@@ -2,9 +2,11 @@
 import { css } from '@emotion/react'
 import { Text } from '@geist-ui/core'
 import { Volume2, VolumeX } from '@geist-ui/icons'
-import { ComponentType } from 'react'
+import { ComponentType, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { SoundAsset } from '../assetTypes'
 import { useSettings } from '../Settings/useSettings'
+import { RootState } from '../store'
 
 export type AudioPlayerProps = {
   sound?: SoundAsset
@@ -16,6 +18,19 @@ export type AudioPlayerProps = {
 export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
   // Muted state is linked to the global settings.
   const { isMuted, toggleMute } = useSettings()
+  const storyState = useSelector((state: RootState) => state.story.storyState)
+  const isPaused = storyState === 'paused'
+  const isMutedOrPaused = isMuted || isPaused
+
+  // Stop and start audio when pausing or continuing the game.
+  useEffect(() => {
+    const audio = document.querySelector('#audioPlayer') as HTMLAudioElement
+    if (isMutedOrPaused) {
+      audio.pause()
+    } else {
+      audio.play()
+    }
+  }, [isMutedOrPaused])
 
   return (
     <div
@@ -35,7 +50,12 @@ export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
         {isMuted ? <VolumeX /> : <Volume2 />}
       </Text>
       {sound && (
-        <audio src={sound.file} autoPlay={true} loop={true} muted={isMuted} />
+        <audio
+          id="audioPlayer"
+          src={sound.file}
+          loop={true}
+          muted={isMutedOrPaused}
+        />
       )}
     </div>
   )

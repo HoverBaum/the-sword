@@ -57,8 +57,12 @@ export const storySlice = createSlice({
   reducers: {
     addCountedStoryLine: (state, action: PayloadAction<CountedStoryLine>) => {
       const id = nanoid()
-      state.storyLines.push({ ...action.payload, id })
+      state.storyLines.push({ ...action.payload, id, wasDisplayed: false })
       state.currentLineId = id
+    },
+    lineWasDisplayed: (state, action: PayloadAction<string>) => {
+      const line = state.storyLines.find((line) => line.id === action.payload)
+      if (line) line.wasDisplayed = true
     },
     clearStoryLines: (state) => {
       state.storyLines = []
@@ -233,7 +237,11 @@ const {
   setMood,
 } = storySlice.actions
 // Actions to be used by the application.
-export const { addCountedStoryLine, setCountedChoices, setStoryState } =
-  storySlice.actions
+export const {
+  addCountedStoryLine,
+  setCountedChoices,
+  setStoryState,
+  lineWasDisplayed,
+} = storySlice.actions
 
 export default storySlice.reducer

@@ -11,12 +11,16 @@ import { tellStory } from './story.slice'
 import { StoryThemeProvider } from './StoryThemeProvider'
 
 export const Story: ComponentType = () => {
-  const { storyLines } = useSelector((state: RootState) => state.story)
+  const { storyLines, storyState } = useSelector(
+    (state: RootState) => state.story
+  )
   const dispatch = useDispatch()
 
   useEffect(() => {
-    //@ts-ignore
-    dispatch(tellStory(storyContent))
+    if (storyState === 'idle') {
+      //@ts-ignore
+      dispatch(tellStory(storyContent))
+    }
   }, [])
 
   return (

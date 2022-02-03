@@ -14,14 +14,20 @@ export type StoryLine = {
 
 // Helper to fade things in with the right timing.
 export type Counted = {
+  // The number of this line after the last choices (0 based).
   lineNumber: number
+  // Word in all lines previous to this since last choice.
   wordCount: number
 }
 
 export type CountedStoryLine = Counted & StoryLine
 export type CountedChoice = Counted & ChoiceType
 
-export type StoredStoryLine = { id: string } & CountedStoryLine
+export type StoredStoryLine = {
+  id: string
+  // This enables us to navigate back to the same state of the story.
+  wasDisplayed: boolean
+} & CountedStoryLine
 
 // A parsed tag from the ink story.
 export type Tag = {

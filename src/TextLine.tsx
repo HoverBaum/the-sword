@@ -2,11 +2,12 @@
 import { css } from '@emotion/react'
 import { Text } from '@geist-ui/core'
 import { ComponentType, useEffect, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fadeIn } from './animations'
 import { useSettings } from './Settings/useSettings'
 import { RootState } from './store'
 import { StoredStoryLine } from './story'
+import { lineWasDisplayed } from './Story/story.slice'
 import { lineToWords } from './Story/story.util'
 
 export type TextLineProps = {
@@ -19,13 +20,14 @@ export type TextLineProps = {
  * StoryLine will fade into less opacity after a while.
  */
 export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
-  const { type, text, wordCount } = storyLine
+  const { type, text, wordCount, wasDisplayed } = storyLine
   const {
     headingFadeInTime,
     wordDelayTime,
     wordFadeInTime,
     initiallyDisplayedWords,
   } = useSettings()
+  const dispatch = useDispatch()
   const currentLineId = useSelector(
     (state: RootState) => state.story.currentLineId
   )
@@ -34,14 +36,30 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
 
   const words = useMemo(() => lineToWords(text), [text])
 
+  // How lon in ms it will take to display everything.
+  const allWordsDelay =
+    (wordDelayTime * (wordCount + words.length) +
+      wordFadeInTime +
+      headingFadeInTime) *
+    1000
+
+  // Set this line as displayed after all animations finished.
+  useEffect(() => {
+    const setDisplayed = () => {
+      dispatch(lineWasDisplayed(storyLine.id))
+    }
+    setTimeout(setDisplayed, allWordsDelay)
+  }, [])
+
+  // CSS to remove animation from lines that were previously displayed.
+  const alreadyDisplayedCSS = css`
+    animation: none;
+    opacity: 1;
+  `
+
   useEffect(() => {
     // Delay the fading of the text.
     // Effectively we add the "lineFadeinTime" after all words are displayed.
-    const allWordsDelay =
-      (wordDelayTime * (wordCount + words.length) +
-        wordFadeInTime +
-        headingFadeInTime) *
-      1000
     const delay = lineFadingTime * 1000 + allWordsDelay
     const fadingTimer = setTimeout(() => setIsFaded(true), delay)
     return () => clearTimeout(fadingTimer)
@@ -55,6 +73,7 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
         css={css`
           opacity: 0;
           animation: ${fadeIn} ${headingFadeInTime}s ease-in-out forwards;
+          ${wasDisplayed && alreadyDisplayedCSS}
         `}
       >
         {text}
@@ -87,6 +106,7 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
               1) *
               wordDelayTime +
             headingFadeInTime}s;
+            ${wasDisplayed && alreadyDisplayedCSS}
           `}
         >
           {word + ' '}

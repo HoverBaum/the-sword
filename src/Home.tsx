@@ -29,6 +29,8 @@ export const Home = () => {
           lineNumber: 0,
           wordCount: 0,
           type: 'paragraph',
+          wasDisplayed: false,
+          isFaded: false,
         }}
       />
 

@@ -72,3 +72,13 @@ npm run ink:compile
 - Do Tunnels work?
 - More Scene types than just images
 - Crossfade audio
+
+## Achievement ideas
+
+- Pennyless
+- Defeat the bandits
+- Have a boring trip
+- Buy Lisa a house
+- Die
+- Saw the mountains
+- Saw the forrest

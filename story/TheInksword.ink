@@ -1,9 +1,9 @@
 # author: Hendrik Wallbaum
 # title: InkSword
 
-LIST mood = Adventurous, (Neutral), Skeptical 
+LIST mood = Adventurous, (Neutral), Skeptical, Dishearted 
 VAR knows_about_chris_house = false
-VAR encountered_bandits = false
+VAR won_against_bandits = false
 
 -> Beginning
 
@@ -34,7 +34,7 @@ You can use "tab" to select an option and "enter" to confirm. Or simply click on
 
 And now, enjoy 😊
 
-* [Read story] -> Beginning
+    * [Read story] -> Beginning
 
 === Beginning ===
 #CLEAR
@@ -45,7 +45,7 @@ It was one of those evenings around the bonfire where stories gush out like wate
 
 And now, it was Bens turn to stand up...
 
-* [listen] -> BensStory
+    * [listen] -> BensStory
 
 === BensStory ===
 
@@ -67,7 +67,7 @@ And now, it was Bens turn to stand up...
 
 "Some lads immediately tried pulling it out. Obviously with no success! Had to run back to their mommies, tails between their lags. And serves them right for thinking they could be king!" He spat in the fire, making it sizzle.
 
-* [continue]
+    * [continue]
 
 - Later that night, I went to bed, 
 <> {mood == Adventurous:
@@ -78,14 +78,14 @@ And now, it was Bens turn to stand up...
 
 Little did I know at this point what change Bens story would bring to my life.
 
-* [Sleep] -> SettingOut
+    * [Sleep] -> SettingOut
 
 === SettingOut ===
 #CLEAR
 #SCENE: morning
 #CHAPTER: The next morning
 
-* [Wake up]
+    * [Wake up]
 
 - Waking up hungover, as most Saturdays seemed to be, I went to meet the lads early next morning{mood == Adventurous:, still filled witht he spirit of adventure}.
 
@@ -97,14 +97,14 @@ Chris gave me a sceprical look, he always had been the down to earth type: "not 
 
 "Well sounds like we should go have a look, doesn't it?" Rick had always been the one to make our small circle move into action and we all admired him for that. "What do you think?" he said looking my way.
 
-*"Let's do it!"
+    *"Let's do it!"
 
 - <> I said. And soon we were prepared.
 
 There had always been two ways connecting our village to Budshire. One went straight through the forrest. A fast but dangerous road for bandits often lurked in the woods. The other took a bit longer to complete but rewarded you with quite the view, as it went over the mountain.
 
-*[We took the straight path] -> ForrestRoute
-*[The mountain it was] -> MountainRoute
+    *[We took the straight path] -> ForrestRoute
+    *[The mountain it was] -> MountainRoute
 
 === ForrestRoute ===
 #CLEAR
@@ -113,27 +113,117 @@ There had always been two ways connecting our village to Budshire. One went stra
 
 The Hillwood forrest had been one of our favorite places to play in as kids.
 
-Back then it had been a bright place full of wonders to discover and adventures to be had. But, over time, the it had started to become darker and darker until it became what it is today. 
+Back then it had been a bright place full of wonders to discover and adventures to be had. But, over time, it had started to become darker and darker until it became what it is today. 
 
-{
-    - mood == Adventurous:
-        <> A trove of adventure only fit for the bravest. 
-        * Time to take it head on! -> TheWoodsContinue
-    - else:
-        <> A dark place where shadows lurk and bandits hide.
-        * Let's hope we don't meet them. -> TheWoodsContinue
-}
+{mood == Adventurous: <>A trove of adventure only fit for the bravest. | <>A dark place where shadows lurk and bandits hide.}
+* {mood == Adventurous} Time to take it head on!
+* {mood != Adventurous} Let's hope we don't meet them.
+- And we went into the woods.
 
-=== TheWoodsContinue ===
+    * [continue]
 
-And we went into the woods.
+- After walking for a while I started to wonder whether my {mood == Adventurous: excitement | fears} had been for naught.
 
-// Meeting Bandids...
+// Twice as likely to meet bandits than to have a boring but fast walk through the forrest.
+//{~ -> BoringForrestWalk | -> MeetBanditsInForrest | -> MeetBanditsInForrest}
+-> MeetBanditsInForrest
 
-// You wishfully look at the mountain. View is probably amazing and you can't picture bandits being there.
+=== BoringForrestWalk ===
 
+And nothing happened for all the time that we walked through the woods. Except all of us wishfully glancing up at the mountain, there we would at least have had a good view. {mood == Skeptical: Though secretly I was happy about my fears being unfounded.}
 
-* [continue] -> ArrivingAtTheSword
+* Soon, we arrived -> AlphaOver
+
+=== MeetBanditsInForrest ===
+
+It was only when we arrived at a log barring the road that my suspiciouns arose again. That was exactly what the crimson Bandits used to do when they terrorized the Hillwoods two years again.
+
+"Their hideout used to be around these parts, didn't it?" asked Rick, cautiously looking around.
+
+"You are right!" said James excitedly. The whole affair two years ago had all been a great adventure to him. {mood == Adventurous: And I could totally see why!}
+
+"What should we do?" that was Chris, practical as ever.
+
+    * {mood== Adventurous} "Let's look for the bandits!"[]
+        I said, eager for an adventure and started climbing over the trunk.
+    
+    * [I was hoping for no bandits]
+        {mood_worsen()}
+        "We should move carefully from here on" I said, looking left and right as I climed over the trunk.
+    
+    * {mood == Skeptical}"This looks like bandits[!]", I said while cautiously climbing over the trunk.
+    
+    * ["Probably just fell over"]
+        {mood_improve()}
+        "Probably just fall over during the last storm", I said while starting to climb over.
+    
+- And while we were still busy crossing the obstacle it happened, suddenly multiple, ragged looking and foul grinning thugs jumped out of the brushes. With Chris and Rick still climbing the trunk and James getting his bearing after enthusiastically jumping down, it fell to me to respond.
+
+-> BanditEncounterFight
+
+= BanditEncounterFight
+~temp hasFought = false
+
+    * {mood == Skeptical} [We were prepared!]
+        Knowing this path to be trecherous we had come prepared! And my first response was a quick strike at the chap next to me who fell down screaming.
+        Now the boys joined in, drawing the swords we had prepared for just this occasion. The forrest was filled with the sound of sword striking each other.
+            * [Press on] -> BanditEncounterWin
+    * "We have nothing!"[] <>I shouted, hoping that we could talk our way out of this.
+        "wuahaha, think us stupid enough to believe that now, do you?", spat a particular fould looking one. -> BanditEncounterFight
+    * "Please don't hurt us!"[] <>I begged for there was nothing else to do. -> BanditsCaptureUs
+    * {mood == Adventurous}[Fight!]
+        ~ hasFought = true
+        There was nothing like a good fight to start your Adventure with! After all this was our tripp to become kings, some bandits weren't going to stop us. 
+        They sure put on a good fight, I have to give them that.
+            ** [Push on] -> BanditEncounterWin
+            ** [Fight bravely] -> BanditEncounterWin
+            ** [We were stronger] -> LooseToBanditsAndDie
+    * ->
+    
+- Fighting was all we could do! -> BanditEncounterWin
+    
+    
+    * [continue] -> AlphaOver
+    
+= BanditEncounterWin
+~won_against_bandits = true
+
+Soon we managed to push the bandits back into the woods where they belonged.
+
+    * "Heureka!"[] I shouted, turning to my friends in celebration who wore {mood == Adventurous bright | exhaused} smiles.
+    
+- We took a rest before moving on through the woods.
+
+    * [Soon after, we arrived] -> AlphaOver
+    
+= LooseToBanditsAndDie
+
+"We were stronger", was the lat thing I thought before a thugs dagger hit me in the back.
+
+    * [continue]
+
+- It was the last thing I ever remembered. Now only my ghost, a mere fraction of my former self remains to tell the story.
+
+-> theEnd
+
+= BanditsCaptureUs
+~mood = Dishearted
+
+But the bandits wouldn't have any of it. They took all we had, tied us up and hurled us to their hideout.
+
+We had last been in this place when the Crimson Bandits had been subjugated two years ago. And it looked even more run down than back then.
+
+    * [continue]
+
+- And this time we only left the place after our tormentors were sure they had really taken everythign from us and extorted a good sum of ransom from our village.
+
+    * [continue]
+
+- Almost a week later we trotted back into the village square, heads held low and hearing Ben tell tales of how he had seen a yount lad named Arthur pull the Sword from teh stone and claim the throne.
+
+It just wasn't ment to be our adventure.
+
+-> theEnd
 
 === MountainRoute ===
 #CLEAR
@@ -169,7 +259,7 @@ It had been a long time since the four of us had been out like this together. "S
 
 - As we moved on, the forrest came into view. From above it looked not much different from a meadow. One, giant sea of green moving back and forth tot he rithm of the wind.
 
-"Uhh, whats that?" shouted James "looks like the old bandit hideout has new residents!" And in deed there was smoke rising up from the cave you had to know was there. But it had been the hideout for a notorious group of bandits two years aga and all of us knew it only too well.
+"Uhh, whats that?" shouted James "looks like the old bandit hideout has new residents!" And in deed there was smoke rising up from the cave you had to know was there. But it had been the hideout of the Crimson Bandits a notorious group of thiefs only two years ago and all of us knew it only too well.
 
 "Best we let old Ben know once we get back, so they can do something about that" Suggested Rick.
 
@@ -182,14 +272,14 @@ It had been a long time since the four of us had been out like this together. "S
 - 
 // Put a tunnel here to see some animals. Maybe both routes can go to the same tunnel? Could be little button in the image that points out a goat or something.
 
-* [Walk on] -> AlphaOver
+    * [Walk on] -> AlphaOver
 
 === ArrivingAtTheSword ===
 #CLEAR
 #SCENE: camp
 #CHAPTER: Like a Festival
 
-Finally we arrived at Budshire{encountered_bandits == true:, exhausted from our fight but happy to have made it}.
+Finally we arrived at Budshire{won_against_bandits == true:, exhausted from our fight but happy to have made it}.
 
 ->TryPuLlingTheSwordOut
 
@@ -198,11 +288,11 @@ Finally we arrived at Budshire{encountered_bandits == true:, exhausted from our 
 
 Do your best mate. Previous choices will dictate wether you can or not.
 
-* [Pull at the sword]
+    * [Pull at the sword]
 
 - I pulled... but nothing happened.
 
-* [Try again]
+    * [Try again]
 
 - One more try!
 
@@ -236,7 +326,5 @@ Please do provide feedback 🙂
 -> END
 
 === theEnd ===
-
-Thank you for playing.
 
     -> END

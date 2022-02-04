@@ -8,7 +8,21 @@ We use [geist-ui](https://geist-ui.dev/) as a component library. The Redux store
 
 Within the ink file we use a `SCENE` tag that can specify a scene. Scenes can change the background, update the music and set styles. They are stored in a configuration file at `src/scenes.ts`.
 
-### Commands
+## INK special token
+
+### Tags
+
+These tags are supported within the ink file. Use them as `TAG: value fo tag`.
+
+- **SCENE** Identifying a scene to be used.
+- **CHAPTER** Name of chapter. Will use name as heading and clear all text.
+- **CLEAR** Clears all text.
+
+### Continue choices
+
+Any choice that is a simple "continue" will be rendered not as text but a "continue button" (Chevron down inside a button).
+
+## Commands
 
 Run game locally.
 
@@ -45,7 +59,7 @@ npm run ink:compile
 - ~~Asset credit screen~~
 - ~~Opening screen for game~~
 - ~~Auto scroll to bottom~~
-- Render "continue"-choice special
+- ~~Render "continue"-choice special~~
 - Finish example story
 
 
@@ -57,3 +71,4 @@ npm run ink:compile
 - Choices in Image
 - Do Tunnels work?
 - More Scene types than just images
+- Crossfade audio

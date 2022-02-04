@@ -19,7 +19,6 @@ import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { RootDispatch } from '../store'
 import { scenes } from '../scenes'
-import { Choice } from 'inkjs/engine/Choice'
 
 //@ts-ignore
 let story: Story

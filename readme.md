@@ -45,12 +45,13 @@ npm run ink:compile
 - ~~Asset credit screen~~
 - ~~Opening screen for game~~
 - ~~Auto scroll to bottom~~
+- Render "continue"-choice special
 - Finish example story
 
 
 ## Might do
 
-- Save and load
+- Save and load (index DB?)
 - Arrow key navigation
 - Gamepad navigation
 - Choices in Image

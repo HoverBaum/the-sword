@@ -111,13 +111,29 @@ There had always been two ways connecting our village to Budshire. One went stra
 #SCENE: forrest
 #CHAPTER: Into the woods
 
+The Hillwood forrest had been one of our favorite places to play in as kids.
+
+Back then it had been a bright place full of wonders to discover and adventures to be had. But, over time, the it had started to become darker and darker until it became what it is today. 
+
+{
+    - mood == Adventurous:
+        <> A trove of adventure only fit for the bravest. 
+        * Time to take it head on! -> TheWoodsContinue
+    - else:
+        <> A dark place where shadows lurk and bandits hide.
+        * Let's hope we don't meet them. -> TheWoodsContinue
+}
+
+=== TheWoodsContinue ===
+
+And we went into the woods.
+
 // Meeting Bandids...
 
 // You wishfully look at the mountain. View is probably amazing and you can't picture bandits being there.
 
-The route through the forrest was sadly blocked by fallen trees from the last storm.
 
-*[We went up the mountain] -> MountainRoute
+* [continue] -> ArrivingAtTheSword
 
 === MountainRoute ===
 #CLEAR

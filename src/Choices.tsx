@@ -15,7 +15,7 @@ export const Choices: ComponentType<ChoicesProps> = () => {
   const [isHdden, setIsHidden] = useState(true)
   const { choices } = useSelector((state: RootState) => state.story)
   const dispatch = useDispatch()
-  const { wordDelayTime, wordFadeInTime } = useSettings()
+  const { wordDelayTime, wordFadeInTime, headingFadeInTime } = useSettings()
 
   // Allways hide new choices.
   useEffect(() => {
@@ -30,10 +30,13 @@ export const Choices: ComponentType<ChoicesProps> = () => {
   // Show chocies after all text faded in.
   useEffect(() => {
     if (choices.length < 1) return
-    setTimeout(() => {
+    const delay =
+      choices[0].wordCount * wordDelayTime + wordFadeInTime + headingFadeInTime
+    const showTimer = setTimeout(() => {
       setIsHidden(false)
       dispatch(choicesWereDisplayed())
-    }, (choices[0].wordCount * wordDelayTime + wordFadeInTime) * 1000)
+    }, delay * 1000)
+    return () => window.clearTimeout(showTimer)
   }, [choices])
 
   if (isHdden) return <></>
@@ -42,7 +45,7 @@ export const Choices: ComponentType<ChoicesProps> = () => {
     <div
       css={css`
         opacity: 0;
-        animation: ${fadeIn} ${wordFadeInTime}s ease-in-out forwards;
+        animation: ${fadeIn} ${wordFadeInTime * 2}s ease-in-out forwards;
         ${choices.length > 0 &&
         choices[0].wasDisplayed &&
         css`

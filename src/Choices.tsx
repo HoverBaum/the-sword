@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Button } from '@geist-ui/core'
 import { ComponentType, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fadeIn } from './animations'
+import { ChoiceButton } from './ChoiceButton'
 import { useSettings } from './Settings/useSettings'
 import { RootState } from './store'
 import { choicesWereDisplayed, makeChoice } from './Story/story.slice'
@@ -52,22 +52,16 @@ export const Choices: ComponentType<ChoicesProps> = () => {
       `}
     >
       {choices.map((choice) => (
-        <div key={choice.index + choice.text}>
-          <br />
-          <Button
-            key={choice.index + choice.text}
-            onClick={() => {
-              // Hide again
-              setIsHidden(true)
-              dispatch(makeChoice(choice))
-            }}
-            // We focus the first possible choice.
-            autoFocus={choice.index === 0}
-          >
-            {choice.text}
-          </Button>
-          <br />
-        </div>
+        <ChoiceButton
+          key={choice.index + choice.text}
+          text={choice.text}
+          onClick={() => {
+            // Hide again
+            setIsHidden(true)
+            dispatch(makeChoice(choice))
+          }}
+          autoFocus={choice.index === 0}
+        />
       ))}
     </div>
   )

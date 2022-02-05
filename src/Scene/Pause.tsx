@@ -5,16 +5,16 @@ import {
   Divider,
   Drawer,
   Link,
-  Slider,
+  Select,
   Spacer,
   Text,
 } from '@geist-ui/core'
 import { PauseFill } from '@geist-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useSettings } from './Settings/useSettings'
-import { RootState } from './store'
-import { setStoryState } from './Story/story.slice'
+import { useSettings } from '../Settings/useSettings'
+import { RootState } from '../store'
+import { setStoryState } from '../Story/story.slice'
 
 /**
  * Pause menu that can be opened to the left.
@@ -38,6 +38,12 @@ export const Pause = () => {
       e.preventDefault()
       setTimeout(() => navigate(path), 0)
     }
+
+  const selectSpeed = (value: string | string[]) => {
+    const speedValue = Array.isArray(value) ? value[0] : value
+    const speed = parseInt(speedValue, 10)
+    setSpeed(speed)
+  }
 
   return (
     <>
@@ -76,7 +82,19 @@ export const Pause = () => {
           `}
         >
           <Text>Text speed</Text>
-          <Slider value={textSpeed} onChange={setSpeed} max={20} min={1} />
+          {/* A slider would be nicer but there is a bug where dragging the slider
+              always closes the drawer... */}
+          <Select
+            placeholder="Set text speed"
+            onChange={selectSpeed}
+            value={textSpeed.toString()}
+          >
+            <Select.Option value="1">1 (default)</Select.Option>
+            <Select.Option value="2">2</Select.Option>
+            <Select.Option value="5">5</Select.Option>
+            <Select.Option value="10">10</Select.Option>
+            <Select.Option value="20">20</Select.Option>
+          </Select>
 
           <Spacer h={1} />
           <Divider />

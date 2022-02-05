@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Spacer } from '@geist-ui/core'
-import { ComponentType, useEffect } from 'react'
+import { Spacer, useMediaQuery } from '@geist-ui/core'
+import { ComponentType, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Pause } from './Pause'
 import { RootState } from '../store'
@@ -20,6 +20,10 @@ export type SceneProps = {
  */
 export const SceneDisplay: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: RootState) => state.story)
+  const isSM = useMediaQuery('sm')
+  const isXS = useMediaQuery('xs')
+
+  const isMobile = useMemo(() => isXS || isSM, [isXS, isSM])
 
   useEffect(() => {
     const display = document.querySelector('#sceneDisplay')
@@ -37,14 +41,19 @@ export const SceneDisplay: ComponentType = ({ children }) => {
   return (
     <div
       css={css`
+        background-color: ${scene.backgroundColor};
         background-image: url(${scene?.image.file});
+        ${isMobile &&
+        css`
+          background-image: none;
+        `}
         background-size: cover;
         background-position: center right;
         transition: background-image 0.5s ease-in-out;
         height: 100vh;
         width: 100vw;
         box-sizing: border-box;
-        padding: 4rem;
+        padding: ${isMobile ? 2 : 4}rem;
         color: ${scene.textColor || 'inherit'};
       `}
     >
@@ -64,6 +73,7 @@ export const SceneDisplay: ComponentType = ({ children }) => {
           }
         `}
       >
+        {isMobile && <img src={scene.image.file} />}
         {children}
         <Spacer h={10} />
       </div>

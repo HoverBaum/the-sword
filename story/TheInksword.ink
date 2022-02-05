@@ -51,7 +51,7 @@ And now, it was Bens turn to stand up...
 
 "Once there was a sword signifying the rule over this land" he began.
 
-"But soon after the king died it vanished into the realms of myth... Until one day, a mighty wizard appeared who struck it into a stone! So that it may rest there until the next true king of our great country come and find it."
+"But soon after the king died it vanished into the realm of myth... Until one day, a mighty wizard appeared who struck it into a stone! So that it may rest there until the next true king of our great country come and find it."
 
     // Should make character adventurous and experience bolder story telling.
     * [I listened intrigued]
@@ -61,7 +61,7 @@ And now, it was Bens turn to stand up...
     // Character is more of a realist and will see things for what they are.
     * "What nonsense" I thought to myself.
     ~ mood = Skeptical
-    But I never listened to Bens stories for the news they contained. It was the entertainment that bound all of us to his lips.
+    But I never listened to Bens stories for their credibility. It was the entertainment that bound all of us to his lips.
   
 - Ben continued "rumor has it, the stone was found over in Budshire not long ago."
 
@@ -157,7 +157,7 @@ It was only when we arrived at a log barring the road that my suspiciouns arose 
         {mood_improve()}
         "Probably just fall over during the last storm", I said while starting to climb over.
     
-- And while we were still busy crossing the obstacle it happened, suddenly multiple, ragged looking and foul grinning thugs jumped out of the brushes. With Chris and Rick still climbing the trunk and James getting his bearing after enthusiastically jumping down, it fell to me to respond.
+- And while we were still busy crossing the obstacle it happened. Suddenly multiple, ragged looking and foul grinning thugs jumped out of the brushes. With Chris and Rick still climbing the trunk and James getting his bearing after enthusiastically jumping down, it fell to me to respond.
 
 -> BanditEncounterFight
 
@@ -166,10 +166,10 @@ It was only when we arrived at a log barring the road that my suspiciouns arose 
 
     * {mood == Skeptical} [We were prepared!]
         Knowing this path to be trecherous we had come prepared! And my first response was a quick strike at the chap next to me who fell down screaming.
-        Now the boys joined in, drawing the swords we had prepared for just this occasion. The forrest was filled with the sound of sword striking each other.
+        Now the boys joined in, drawing their swords, prepared for just this occasion. The forrest was filled with the sound of swords striking each other.
             * [Press on] -> BanditEncounterWin
     * "We have nothing!"[] <>I shouted, hoping that we could talk our way out of this.
-        "wuahaha, think us stupid enough to believe that now, do you?", spat a particular fould looking one. -> BanditEncounterFight
+        "wuahaha, think us stupid enough to believe that now, do you?", spat a particularly fould looking bandit. -> BanditEncounterFight
     * "Please don't hurt us!"[] <>I begged for there was nothing else to do. -> BanditsCaptureUs
     * {mood == Adventurous}[Fight!]
         ~ hasFought = true
@@ -198,13 +198,13 @@ Soon we managed to push the bandits back into the woods where they belonged.
     
 = LooseToBanditsAndDie
 
-"We were stronger", was the lat thing I thought before a thugs dagger hit me in the back.
+"We were stronger", was the last thing I thought before a thugs dagger hit me in the back.
 
     * [continue]
 
 - It was the last thing I ever remembered. Now only my ghost, a mere fraction of my former self remains to tell the story.
 
--> theEnd
+-> AlphaOver
 
 = BanditsCaptureUs
 ~mood = Dishearted
@@ -215,26 +215,26 @@ We had last been in this place when the Crimson Bandits had been subjugated two 
 
     * [continue]
 
-- And this time we only left the place after our tormentors were sure they had really taken everythign from us and extorted a good sum of ransom from our village.
+- And this time we only left the place after our tormentors were sure they had really taken everythign from us, including extorting a good sum of ransom from our frineds back in the village.
 
     * [continue]
 
-- Almost a week later we trotted back into the village square, heads held low and hearing Ben tell tales of how he had seen a yount lad named Arthur pull the Sword from teh stone and claim the throne.
+- Almost a week later we trotted back into the village square, heads held low and hearing Ben tell tales of how he had seen a yountg lad named Arthur pull the Sword out of the stone and claim the throne.
 
 It just wasn't ment to be our adventure.
 
--> theEnd
+-> AlphaOver
 
 === MountainRoute ===
 #CLEAR
 #SCENE: mountain
 #CHAPTER: The high ground
 
-The view from atop the mountain was spectacular, as ever! The sun was shining, and flowers blooming on the side of the mountain.
+The view from atop the mountain was spectacular, as ever! The sun was shining, and flowers bloomed on the side of the mountain.
 
 It had been a long time since the four of us had been out like this together. "So, Chris, how is the family?" asked James, who really seemed to be enjoying this adventure. But much like the rest of us he hadn't managed to find a partner for the adventure of family, yet. Chris had suddenly matured two year ago when he married Lisa and their son Eithan was born not long after.
 
-"Ahh, you know how it is" grinned Chris, his family being the only thing that got his spirits up. "Eithan is still exploring the world, it's a joy to watch!" his eyes sparkled: "you wouldn't believe all he is looking at is a simple butterfly when you see how much his eyes sparkle". Eithans reported sparkle seemed to be contagious, we all looked at the world around us with renewed interest.
+"Ahh, you know how it is" grinned Chris, his family being the only thing that got his spirits up. "Eithan is still exploring the world, it's a joy to watch!" his eyes sparkled: "you wouldn't believe all he is looking at is a simple butterfly when you see his eyes glissening with excitement". Eithans reported sparkle seemed to be contagious, we all looked at the world around us with renewed interest.
 
     *"What about Lisa, though?"[] I inquired.
     ~ knows_about_chris_house = true
@@ -249,17 +249,17 @@ It had been a long time since the four of us had been out like this together. "S
 - Thus we went on in high spirits for a while.
 
 {mood == Skeptical:
-    I still didn't belive in magic, but 
+    I still didn't belive in magic swords, but 
 - else:
-    I could feel my excitement rising, as we neared our yourneys goal and 
+    I could feel my excitement rising, as we neared our journeys goal and 
 }
 <> it was fun spending time with everyone.
 
     * [continue]
 
-- As we moved on, the forrest came into view. From above it looked not much different from a meadow. One, giant sea of green moving back and forth tot he rithm of the wind.
+- As we moved on, the forrest came into view. From above it looked not much different from a meadow. One, giant sea of green moving back and forth to the rythm of the wind.
 
-"Uhh, whats that?" shouted James "looks like the old bandit hideout has new residents!" And in deed there was smoke rising up from the cave you had to know was there. But it had been the hideout of the Crimson Bandits a notorious group of thiefs only two years ago and all of us knew it only too well.
+"Uhh, whats that?" shouted James pointing at a glade in the forrest "looks like the old bandit hideout has new residents!" And in deed there was smoke rising up from the cave you had to know was there. But it had been the hideout of the Crimson Bandits a notorious group of thiefs only two years ago and all of us knew that only too well!
 
 "Best we let old Ben know once we get back, so they can do something about that" Suggested Rick.
 

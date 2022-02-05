@@ -73,6 +73,10 @@ npm run ink:compile
 - More Scene types than just images
 - Crossfade audio
 
+## Consider
+
+- Is the start screen good or should it start off as a story format?
+
 ## Achievement ideas
 
 - Pennyless

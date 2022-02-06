@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Button, Spacer } from '@geist-ui/core'
+import { Button, ButtonProps, Spacer } from '@geist-ui/core'
 import { ChevronDown } from '@geist-ui/icons'
 import { ComponentType } from 'react'
 import { pageTurnSoundAsset } from '../assets'
@@ -23,26 +23,20 @@ export const ChoiceButton: ComponentType<ChoiceButtonProps> = ({
     play(pageTurnSoundAsset, 0.3)
   }
 
+  // We sadly need two buttons here to make display of continue buttons work properly.
+  // That is why we gather shared props here.
+  const buttonProps: ButtonProps = {
+    onFocus: playFocusSound,
+    onClick,
+    autoFocus,
+  }
+
   return (
     <div>
       <Spacer h={2} />
-      {!isContinue && (
-        <Button
-          onFocus={playFocusSound}
-          onClick={onClick}
-          autoFocus={autoFocus}
-        >
-          {text}
-        </Button>
-      )}
+      {!isContinue && <Button {...buttonProps}>{text}</Button>}
       {isContinue && (
-        <Button
-          onFocus={playFocusSound}
-          onClick={onClick}
-          autoFocus={autoFocus}
-          icon={<ChevronDown />}
-          auto
-        ></Button>
+        <Button {...buttonProps} icon={<ChevronDown />} auto></Button>
       )}
     </div>
   )

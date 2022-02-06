@@ -17,10 +17,10 @@ export const ChoiceButton: ComponentType<ChoiceButtonProps> = ({
   onClick,
 }) => {
   const isContinue = /continue/i.test(text)
-  const { play } = useSound()
+  const { playSoundEffect } = useSound()
 
   const playFocusSound = () => {
-    play(pageTurnSoundAsset, 0.3)
+    playSoundEffect(pageTurnSoundAsset, 0.3)
   }
 
   // We sadly need two buttons here to make display of continue buttons work properly.

@@ -2,7 +2,6 @@ import { GeistProvider, Themes } from '@geist-ui/core'
 import { ComponentType, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
-import * as Color from 'color'
 
 const initialStoryTheme = Themes.createFromDark({
   type: 'story',
@@ -22,7 +21,7 @@ export const StoryThemeProvider: ComponentType = ({ children }) => {
       palette: {
         background: scene.backgroundColor,
         foreground: scene.textColor,
-        border: Color(scene.textColor).alpha(0.5).string(),
+        border: 'red',
       },
     })
     setStoryTheme(theme)

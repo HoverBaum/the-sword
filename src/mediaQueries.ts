@@ -10,3 +10,13 @@ export const useIsMobile = () => {
 
   return isMobile
 }
+
+export const useIsMediumDown = () => {
+  const isSM = useMediaQuery('sm')
+  const isXS = useMediaQuery('xs')
+  const isMD = useMediaQuery('md')
+
+  const isMediumDown = useMemo(() => isXS || isSM || isMD, [isXS, isSM, isMD])
+
+  return isMediumDown
+}

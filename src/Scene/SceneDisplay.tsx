@@ -9,7 +9,7 @@ import { Scene } from '../story'
 import { AudioPlayer } from './AudioPlayer'
 import { Credit } from './Credit'
 import { ProtagonistStatus } from './ProtagonistStatus'
-import { useIsMobile } from '../useIsMobile'
+import { useIsMediumDown, useIsMobile } from '../mediaQueries'
 
 export type SceneProps = {
   scene: Scene
@@ -22,6 +22,7 @@ export type SceneProps = {
 export const SceneDisplay: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: RootState) => state.story)
   const isMobile = useIsMobile()
+  const isMediumDown = useIsMediumDown()
 
   useEffect(() => {
     const display = document.querySelector('#sceneDisplay')
@@ -86,7 +87,7 @@ export const SceneDisplay: ComponentType = ({ children }) => {
       >
         {isMobile && <img src={scene.image.file} />}
         {children}
-        <Spacer h={10} />
+        <Spacer h={isMediumDown ? 4 : 10} />
       </div>
 
       <Credit

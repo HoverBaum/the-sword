@@ -6,7 +6,7 @@ import { User } from '@geist-ui/icons'
 import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { useIsMobile } from '../useIsMobile'
+import { useIsMobile } from '../mediaQueries'
 
 export const ProtagonistStatus: ComponentType = () => {
   const { mood } = useSelector((state: RootState) => state.story)

@@ -25,6 +25,7 @@ export const SceneDisplay: ComponentType = ({ children }) => {
   const isMediumDown = useIsMediumDown()
 
   useEffect(() => {
+    if (isMobile) return
     const display = document.querySelector('#sceneDisplay')
     if (!display) return
     setTimeout(() => {
@@ -33,7 +34,7 @@ export const SceneDisplay: ComponentType = ({ children }) => {
         behavior: 'smooth',
       })
     })
-  }, [children])
+  }, [children, isMobile])
 
   if (!scene) return <div>{children}</div>
 

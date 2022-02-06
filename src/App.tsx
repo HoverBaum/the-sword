@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from '@emotion/react'
 import { Tag } from '@geist-ui/core'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import { CreditsPage } from './Credits/CreditsPage'
 import { Home } from './Home'
 import { Story } from './Story/Story'
@@ -18,13 +18,15 @@ function App() {
           }
         `}
       />
-      <BrowserRouter>
+
+      {/* We use Hashrouter to run on Itch. */}
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/story" element={<Story />}></Route>
           <Route path="/credits" element={<CreditsPage />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
 
       {/* While developing we want to let users know this game is not finished. */}
       <Tag

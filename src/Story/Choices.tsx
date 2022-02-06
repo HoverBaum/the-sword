@@ -2,11 +2,11 @@
 import { css } from '@emotion/react'
 import { ComponentType, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fadeIn } from './animations'
+import { fadeIn } from '../animations'
 import { ChoiceButton } from './ChoiceButton'
-import { useSettings } from './Settings/useSettings'
-import { RootState } from './store'
-import { choicesWereDisplayed, makeChoice } from './Story/story.slice'
+import { useSettings } from '../Settings/useSettings'
+import { RootState } from '../store'
+import { choicesWereDisplayed, makeChoice } from './story.slice'
 
 export type ChoicesProps = {}
 
@@ -63,7 +63,8 @@ export const Choices: ComponentType<ChoicesProps> = () => {
             setIsHidden(true)
             dispatch(makeChoice(choice))
           }}
-          autoFocus={choice.index === 0}
+          // autoFocus={choice.index === 0}
+          autoFocus={false}
         />
       ))}
     </div>

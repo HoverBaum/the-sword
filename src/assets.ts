@@ -6,6 +6,7 @@ import ForrestImage from './images/forrest.jpg'
 import MountainImage from './images/mountain.jpg'
 import MorningImage from './images/morning.jpg'
 import BonfireSound from './sounds/bonfire.wav'
+import PageTurnSound from './sounds/page_turn.mp3'
 import { ImageAsset, SoundAsset } from './assetTypes'
 
 export const morningImageAsset: ImageAsset = {
@@ -78,5 +79,14 @@ export const bonfireSoundAsset: SoundAsset = {
   file: BonfireSound,
   credit: 'forfie',
   creditLink: 'https://freesound.org/people/forfie/sounds/364992/',
+  license: 'CCO 1.0',
+}
+
+export const pageTurnSoundAsset: SoundAsset = {
+  name: 'Page turn',
+  type: 'sound',
+  file: PageTurnSound,
+  credit: 'parteeban',
+  creditLink: 'https://freesound.org/people/partheeban/sounds/457767/',
   license: 'CCO 1.0',
 }

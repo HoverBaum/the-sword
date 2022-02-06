@@ -35,9 +35,11 @@ export const Home = () => {
       />
 
       <Spacer h={3} />
-      <Button onClick={() => navigate('/credits')}>Credits</Button>
+      <Button onClick={() => navigate('/credits')} type="secondary" ghost>
+        Credits
+      </Button>
       <Spacer h={2} />
-      <Button onClick={startGame} autoFocus={true}>
+      <Button onClick={startGame} autoFocus={true} type="secondary" ghost>
         Start game
       </Button>
     </Page>

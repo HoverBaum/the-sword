@@ -6,10 +6,12 @@ import { User } from '@geist-ui/icons'
 import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
+import { useIsMobile } from '../useIsMobile'
 
 export const ProtagonistStatus: ComponentType = () => {
   const { mood } = useSelector((state: RootState) => state.story)
   const { palette } = useTheme()
+  const isMobile = useIsMobile()
 
   return (
     <div
@@ -25,6 +27,14 @@ export const ProtagonistStatus: ComponentType = () => {
         min-height: 4rem;
         display: flex;
         align-items: center;
+
+        ${isMobile &&
+        css`
+          padding: 0rem;
+          border-left: none;
+          left: 50%;
+          transform: translateX(-50%);
+        `}
       `}
     >
       <User size={20} />

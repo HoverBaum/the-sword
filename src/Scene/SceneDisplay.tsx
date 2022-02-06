@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Spacer, useMediaQuery } from '@geist-ui/core'
-import { ComponentType, useEffect, useMemo } from 'react'
+import { Divider, Spacer } from '@geist-ui/core'
+import { ComponentType, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Pause } from './Pause'
 import { RootState } from '../store'
@@ -9,6 +9,7 @@ import { Scene } from '../story'
 import { AudioPlayer } from './AudioPlayer'
 import { Credit } from './Credit'
 import { ProtagonistStatus } from './ProtagonistStatus'
+import { useIsMobile } from '../useIsMobile'
 
 export type SceneProps = {
   scene: Scene
@@ -20,10 +21,7 @@ export type SceneProps = {
  */
 export const SceneDisplay: ComponentType = ({ children }) => {
   const { scene } = useSelector((state: RootState) => state.story)
-  const isSM = useMediaQuery('sm')
-  const isXS = useMediaQuery('xs')
-
-  const isMobile = useMemo(() => isXS || isSM, [isXS, isSM])
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const display = document.querySelector('#sceneDisplay')
@@ -50,16 +48,29 @@ export const SceneDisplay: ComponentType = ({ children }) => {
         background-size: cover;
         background-position: center right;
         transition: background-image 0.5s ease-in-out;
+        color: ${scene.textColor || 'inherit'};
         height: 100vh;
         width: 100vw;
         box-sizing: border-box;
         padding: ${isMobile ? 2 : 4}rem;
-        color: ${scene.textColor || 'inherit'};
+        ${isMobile &&
+        css`
+          padding-top: 3rem;
+        `}
       `}
     >
       <Pause />
       <AudioPlayer sound={scene?.sound} />
       <ProtagonistStatus />
+
+      {isMobile && (
+        <Divider
+          css={css`
+            // Once again overruling geist ui.
+            margin-bottom: 0 !important;
+          `}
+        />
+      )}
 
       {/* Text and choices go here. */}
       {/* TODO refactor the entire Story -> SceneDisplay -> Children structure. */}

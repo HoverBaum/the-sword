@@ -22,7 +22,7 @@ export const ProtagonistStatus: ComponentType = () => {
         left: 66%;
         padding-top: 4rem;
         padding-bottom: 1rem;
-        border-left: 1px solid ${palette.accents_5};
+        border-left: 1px solid ${palette.border};
         padding-left: 4rem;
         min-height: 4rem;
         display: flex;

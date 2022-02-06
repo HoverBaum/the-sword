@@ -12,6 +12,7 @@
     "@geist-ui/core": "^2.2.4",
     "@geist-ui/icons": "^1.0.1",
     "@reduxjs/toolkit": "^1.7.1",
+    "color": "^4.2.0",
     "inkjs": "^2.0.0",
     "inter-ui": "^3.19.3",
     "nanoid": "^3.2.0",
@@ -21,6 +22,7 @@
     "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
+    "@types/color": "^3.0.3",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",

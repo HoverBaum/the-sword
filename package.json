@@ -7,7 +7,7 @@
     "preview": "vite preview",
     "viute:clearcache": "rm -rf node_modules/.vite",
     "ink:compile": "zx ./scripts/compile.mjs",
-    "itch": "npm run build && zip -r the-sword.zip dist"
+    "itch": "zx ./scripts/itch.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",

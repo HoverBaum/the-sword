@@ -20,26 +20,26 @@ export const scenes: Scene[] = [
   {
     id: 'bonfire',
     textColor: 'white',
-    backgroundColor: '#2d1a06',
+    backgroundColor: '#010101',
     sound: bonfireSoundAsset,
     image: bonfireImageAsset,
   },
   {
     id: 'morning',
     textColor: 'white',
-    backgroundColor: '#261606',
+    backgroundColor: '#4e2d0e',
     image: morningImageAsset,
   },
   {
     id: 'forrest',
     textColor: 'white',
-    backgroundColor: '#001a17',
+    backgroundColor: '#151f1e',
     image: forrestImageAsset,
   },
   {
     id: 'mountain',
     textColor: 'white',
-    backgroundColor: '#00091a',
+    backgroundColor: '#0f1a33',
     image: mountainImageAsset,
   },
   {

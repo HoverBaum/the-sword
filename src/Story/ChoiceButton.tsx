@@ -7,7 +7,7 @@ import { useSound } from '../useSound'
 
 export type ChoiceButtonProps = {
   text: string
-  autoFocus: boolean
+  autoFocus?: boolean
   onClick: () => void
 }
 
@@ -29,6 +29,8 @@ export const ChoiceButton: ComponentType<ChoiceButtonProps> = ({
     onFocus: playFocusSound,
     onClick,
     autoFocus,
+    type: 'secondary',
+    ghost: true,
   }
 
   return (

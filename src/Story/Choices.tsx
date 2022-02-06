@@ -63,8 +63,6 @@ export const Choices: ComponentType<ChoicesProps> = () => {
             setIsHidden(true)
             dispatch(makeChoice(choice))
           }}
-          // autoFocus={choice.index === 0}
-          autoFocus={false}
         />
       ))}
     </div>

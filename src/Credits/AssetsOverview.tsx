@@ -1,13 +1,45 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Button, Spacer, Text, Link, Divider } from '@geist-ui/core'
-import { ArrowLeft } from '@geist-ui/icons'
+import { Spacer, Text, Link, Divider } from '@geist-ui/core'
+import { ComponentType } from 'react'
 import * as allAssets from '../assets'
-import { Asset, AssetType } from '../assetTypes'
+import { Asset, AssetType, ImageAsset, SoundAsset } from '../assetTypes'
+import { licenses } from '../licenses'
 
 const assets = Object.values(allAssets)
 
 const only = (type: AssetType) => (asset: Asset) => asset.type === type
+
+// Let's keep things simple here and have two components in one file as we always use them together.
+// This component only centralizes change.
+const AssetLicenceLink: ComponentType<{ asset: ImageAsset | SoundAsset }> = ({
+  asset,
+}) => {
+  return (
+    <Text>
+      License:{' '}
+      <Link
+        href={licenses[asset.license].link}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon
+        underline
+      >
+        {asset.license}
+      </Link>
+      |{' '}
+      <Link
+        href={asset.creditLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon
+        underline
+      >
+        Source
+      </Link>
+    </Text>
+  )
+}
 
 export const AssetsOverview = () => {
   return (
@@ -41,18 +73,7 @@ export const AssetsOverview = () => {
                 {asset.name} by {asset.credit}
               </Text>
 
-              <Text>
-                {asset.license} -{' '}
-                <Link
-                  href={asset.creditLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  icon
-                  underline
-                >
-                  Original Link
-                </Link>
-              </Text>
+              <AssetLicenceLink asset={asset} />
             </div>
           </div>
           <Divider />
@@ -73,18 +94,7 @@ export const AssetsOverview = () => {
               {asset.name} by {asset.credit}
             </Text>
 
-            <Text>
-              {asset.license} -{' '}
-              <Link
-                href={asset.creditLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                icon
-                underline
-              >
-                Source
-              </Link>
-            </Text>
+            <AssetLicenceLink asset={asset} />
 
             <audio src={asset.file} controls />
           </div>

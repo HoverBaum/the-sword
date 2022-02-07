@@ -1,5 +1,5 @@
 export type AssetType = 'image' | 'sound'
-export type LicenseIdentifier = 'unsplash' | 'pixabay' | 'CCO 1.0'
+export type LicenseIdentifier = 'unsplash' | 'pixabay' | 'CCO 1.0' | 'CC BY 4.0'
 
 export type Asset = {
   name: string

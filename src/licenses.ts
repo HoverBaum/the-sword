@@ -13,4 +13,8 @@ export const licenses: { [key in LicenseIdentifier]: License } = {
     identifier: 'pixabay',
     link: 'https://pixabay.com/de/service/license/',
   },
+  'CC BY 4.0': {
+    identifier: 'CC BY 4.0',
+    link: 'https://creativecommons.org/licenses/by/4.0/',
+  },
 }

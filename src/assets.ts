@@ -5,9 +5,19 @@ import CampImage from './images/camp.jpg'
 import ForrestImage from './images/forrest.jpg'
 import MountainImage from './images/mountain.jpg'
 import MorningImage from './images/morning.jpg'
+import SwordFavicon from './images/favicon.png'
 import BonfireSound from './sounds/bonfire.wav'
 import PageTurnSound from './sounds/page_turn.mp3'
 import { ImageAsset, SoundAsset } from './assetTypes'
+
+export const FaviconImageAsset: ImageAsset = {
+  name: 'Sword Favicon',
+  type: 'image',
+  file: SwordFavicon,
+  credit: 'Twemoji - Twitter, Inc and other contributors',
+  creditLink: 'https://twemoji.twitter.com/',
+  license: 'CC BY 4.0',
+}
 
 export const morningImageAsset: ImageAsset = {
   name: 'Morning sunrise',

@@ -3,6 +3,7 @@ import {
   bonfireImageAsset,
   bonfireSoundAsset,
   campImageAsset,
+  forrestAmbienceSoundAsset,
   forrestImageAsset,
   libraryImageAsset,
   morningBirdsSoundAsset,
@@ -36,6 +37,7 @@ export const scenes: Scene[] = [
     id: 'forrest',
     textColor: 'white',
     backgroundColor: '#151f1e',
+    sound: forrestAmbienceSoundAsset,
     image: forrestImageAsset,
   },
   {

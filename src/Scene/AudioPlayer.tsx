@@ -36,7 +36,8 @@ export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
   // Make sure new sounds auto play.
   useEffect(() => {
     const audio = document.querySelector('#audioPlayer') as HTMLAudioElement
-    if (!audio) return
+    if (!audio || !sound) return
+    audio.volume = sound.volume || 1
     audio.play()
   }, [sound])
 

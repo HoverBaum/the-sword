@@ -11,7 +11,10 @@ export type Asset = {
 }
 
 export type ImageAsset = Asset & { type: 'image' }
-export type SoundAsset = Asset & { type: 'backgroundMusic' | 'soundEffect' }
+export type SoundAsset = Asset & {
+  type: 'backgroundMusic' | 'soundEffect'
+  volume?: number
+}
 
 export type License = {
   identifier: LicenseIdentifier

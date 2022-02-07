@@ -8,6 +8,7 @@ import MorningImage from './images/morning.jpg'
 import SwordFavicon from './images/favicon.png'
 import BonfireSound from './sounds/bonfire.wav'
 import PageTurnSound from './sounds/page_turn.mp3'
+import MorgningBirts from './sounds/birds.mp3'
 import { ImageAsset, SoundAsset } from './assetTypes'
 
 export const FaviconImageAsset: ImageAsset = {
@@ -85,7 +86,7 @@ export const swordImageAsset: ImageAsset = {
 
 export const bonfireSoundAsset: SoundAsset = {
   name: 'Bonfire',
-  type: 'sound',
+  type: 'backgroundMusic',
   file: BonfireSound,
   credit: 'forfie',
   creditLink: 'https://freesound.org/people/forfie/sounds/364992/',
@@ -94,9 +95,18 @@ export const bonfireSoundAsset: SoundAsset = {
 
 export const pageTurnSoundAsset: SoundAsset = {
   name: 'Page turn',
-  type: 'sound',
+  type: 'soundEffect',
   file: PageTurnSound,
   credit: 'parteeban',
   creditLink: 'https://freesound.org/people/partheeban/sounds/457767/',
+  license: 'CCO 1.0',
+}
+
+export const morningBirdsSoundAsset: SoundAsset = {
+  name: 'Birds in the morning',
+  type: 'backgroundMusic',
+  file: MorgningBirts,
+  credit: 'BurghRecords',
+  creditLink: 'https://freesound.org/people/BurghRecords/sounds/554513/',
   license: 'CCO 1.0',
 }

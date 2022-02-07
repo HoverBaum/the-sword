@@ -5,6 +5,7 @@ import {
   campImageAsset,
   forrestImageAsset,
   libraryImageAsset,
+  morningBirdsSoundAsset,
   morningImageAsset,
   mountainImageAsset,
   swordImageAsset,
@@ -28,6 +29,7 @@ export const scenes: Scene[] = [
     id: 'morning',
     textColor: 'white',
     backgroundColor: '#4e2d0e',
+    sound: morningBirdsSoundAsset,
     image: morningImageAsset,
   },
   {

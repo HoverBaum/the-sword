@@ -19,8 +19,8 @@ export const CreditsPage = () => {
         >
           Hendrik Wallbaum
         </Link>{' '}
-        as a technical demonstration of using ink and React to create Wanderlust
-        like experiences.
+        as a technical demonstration of using Ink and React to create a
+        "Wanderlust - Travel stories" like experiences.
       </Text>
 
       <Button type="secondary" ghost onClick={() => window.history.back()}>

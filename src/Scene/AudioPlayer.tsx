@@ -25,12 +25,20 @@ export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
   // Stop and start audio when pausing or continuing the game.
   useEffect(() => {
     const audio = document.querySelector('#audioPlayer') as HTMLAudioElement
+    if (!audio) return
     if (isMutedOrPaused) {
       audio.pause()
     } else {
       audio.play()
     }
   }, [isMutedOrPaused])
+
+  // Make sure new sounds auto play.
+  useEffect(() => {
+    const audio = document.querySelector('#audioPlayer') as HTMLAudioElement
+    if (!audio) return
+    audio.play()
+  }, [sound])
 
   return (
     <div

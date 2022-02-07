@@ -8,7 +8,10 @@ import { licenses } from '../licenses'
 
 const assets = Object.values(allAssets)
 
-const only = (type: AssetType) => (asset: Asset) => asset.type === type
+const only =
+  (...types: AssetType[]) =>
+  (asset: Asset) =>
+    types.some((type) => asset.type === type)
 
 // Let's keep things simple here and have two components in one file as we always use them together.
 // This component only centralizes change.
@@ -83,7 +86,7 @@ export const AssetsOverview = () => {
       {/* Audio Assets */}
       <Spacer h={3} />
       <Text h3>Audio</Text>
-      {assets.filter(only('sound')).map((asset) => (
+      {assets.filter(only('soundEffect', 'backgroundMusic')).map((asset) => (
         <div key={asset.creditLink}>
           <div
             css={css`

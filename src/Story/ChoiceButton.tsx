@@ -20,7 +20,7 @@ export const ChoiceButton: ComponentType<ChoiceButtonProps> = ({
   const { playSoundEffect } = useSound()
 
   const playFocusSound = () => {
-    playSoundEffect(pageTurnSoundAsset, 0.3)
+    playSoundEffect(pageTurnSoundAsset)
   }
 
   // We sadly need two buttons here to make display of continue buttons work properly.

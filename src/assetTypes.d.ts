@@ -1,4 +1,4 @@
-export type AssetType = 'image' | 'sound'
+export type AssetType = 'image' | 'backgroundMusic' | 'soundEffect'
 export type LicenseIdentifier = 'unsplash' | 'pixabay' | 'CCO 1.0' | 'CC BY 4.0'
 
 export type Asset = {
@@ -11,7 +11,7 @@ export type Asset = {
 }
 
 export type ImageAsset = Asset & { type: 'image' }
-export type SoundAsset = Asset & { type: 'sound' }
+export type SoundAsset = Asset & { type: 'backgroundMusic' | 'soundEffect' }
 
 export type License = {
   identifier: LicenseIdentifier

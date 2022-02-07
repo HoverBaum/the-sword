@@ -9,6 +9,7 @@ import {
   morningBirdsSoundAsset,
   morningImageAsset,
   mountainImageAsset,
+  mountainMeadowSoundAsset,
   swordImageAsset,
 } from './assets'
 
@@ -44,6 +45,7 @@ export const scenes: Scene[] = [
     id: 'mountain',
     textColor: 'white',
     backgroundColor: '#0f1a33',
+    sound: mountainMeadowSoundAsset,
     image: mountainImageAsset,
   },
   {

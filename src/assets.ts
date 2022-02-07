@@ -10,6 +10,7 @@ import BonfireSound from './sounds/bonfire.wav'
 import PageTurnSound from './sounds/page_turn.mp3'
 import MorgningBirtsSound from './sounds/birds.mp3'
 import ForrestAmbienceSound from './sounds/forrest.mp3'
+import MountainMeadowSound from './sounds/mountain.mp3'
 import { ImageAsset, SoundAsset } from './assetTypes'
 
 export const FaviconImageAsset: ImageAsset = {
@@ -120,4 +121,13 @@ export const forrestAmbienceSoundAsset: SoundAsset = {
   creditLink: 'https://freesound.org/people/tbrenneche/sounds/475566/',
   license: 'CCO 1.0',
   volume: 0.5,
+}
+
+export const mountainMeadowSoundAsset: SoundAsset = {
+  name: 'Mountain Meadow',
+  type: 'backgroundMusic',
+  file: MountainMeadowSound,
+  credit: 'Tonmeister',
+  creditLink: 'https://freesound.org/people/Tonmeister88/sounds/454841/',
+  license: 'CCO 1.0',
 }

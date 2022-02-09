@@ -16,6 +16,7 @@ export const Choices: ComponentType<ChoicesProps> = () => {
   const { choices } = useSelector((state: RootState) => state.story)
   const dispatch = useDispatch()
   const { wordDelayTime, wordFadeInTime, headingFadeInTime } = useSettings()
+  const hasNotAnimation = choices.length > 0 && choices[0].wasDisplayed
 
   // Allways hide new choices.
   useEffect(() => {
@@ -30,12 +31,16 @@ export const Choices: ComponentType<ChoicesProps> = () => {
   // Show chocies after all text faded in.
   useEffect(() => {
     if (choices.length < 1) return
-    const delay =
-      choices[0].wordCount * wordDelayTime + wordFadeInTime + headingFadeInTime
-    const showTimer = setTimeout(() => {
+    const displayChoices = () => {
       setIsHidden(false)
       dispatch(choicesWereDisplayed())
-    }, delay * 1000)
+    }
+
+    let delay =
+      choices[0].wordCount * wordDelayTime + wordFadeInTime + headingFadeInTime
+    if (hasNotAnimation) delay = 0
+
+    const showTimer = setTimeout(displayChoices, delay * 1000)
     return () => window.clearTimeout(showTimer)
   }, [choices])
 
@@ -44,10 +49,9 @@ export const Choices: ComponentType<ChoicesProps> = () => {
   return (
     <div
       css={css`
-        opacity: 0;
+        opacity: ${hasNotAnimation ? 1 : 0};
         animation: ${fadeIn} ${wordFadeInTime * 2}s ease-in-out forwards;
-        ${choices.length > 0 &&
-        choices[0].wasDisplayed &&
+        ${hasNotAnimation &&
         css`
           animation: none;
           opacity: 1;

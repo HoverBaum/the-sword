@@ -2,10 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { stringToBoolean } from '../util'
 
 const isMuted = stringToBoolean(import.meta.env.VITE_IS_MUTED)
+const initialTextSpeed =
+  (import.meta.env.VITE_TEXT_SPEED &&
+    parseInt(import.meta.env.VITE_TEXT_SPEED, 10)) ||
+  1
 
 // Here you can configure basic settings.
 const baseSettings: SettingsState = {
-  textSpeed: import.meta.env.VITE_TEXT_SPEED || 1,
+  textSpeed: initialTextSpeed,
   wordFadeInTime: 0.5,
   wordDelayTime: 0.1,
   headingFadeInTime: 1,

@@ -89,11 +89,9 @@ export const Pause = () => {
             onChange={selectSpeed}
             value={textSpeed.toString()}
           >
-            <Select.Option value="1">1 (default)</Select.Option>
-            <Select.Option value="2">2</Select.Option>
-            <Select.Option value="5">5</Select.Option>
-            <Select.Option value="10">10</Select.Option>
-            <Select.Option value="20">20</Select.Option>
+            <Select.Option value="1">default</Select.Option>
+            <Select.Option value="2">faster</Select.Option>
+            <Select.Option value="10000">instant</Select.Option>
           </Select>
 
           <Spacer h={1} />

@@ -9,7 +9,7 @@
 
 interface ImportMetaEnv {
   //@ts-ignore
-  readonly VITE_TEXT_SPEED?: number
+  readonly VITE_TEXT_SPEED?: string
   readonly VITE_IS_MUTED?: string
 }
 

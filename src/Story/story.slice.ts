@@ -19,6 +19,7 @@ import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { RootDispatch } from '../store'
 import { scenes } from '../scenes'
+import { saveGame } from '../game.middleware'
 
 //@ts-ignore
 let story: Story
@@ -181,6 +182,7 @@ export const makeChoice = (choice: ChoiceType) => (dispatch: RootDispatch) => {
   story.ChooseChoiceIndex(choice.index)
   dispatch(clearChoices())
   continueStory(dispatch)
+  dispatch(saveGame())
 }
 
 /**

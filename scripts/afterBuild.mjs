@@ -17,7 +17,7 @@ if (!isVercel) {
 
 await $`curl \
   -H "Content-Type: application/json" \
-  -d '{"content": "${process.env.VERCEL_URL}"}' \
+  -d '{"content": "https://${process.env.VERCEL_URL}"}' \
   $DISCROD_WEBHOOK_URL`
 
 console.log('🎮 check Discord.')

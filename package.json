@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && zx ./scripts/afterBuild.mjs",
     "preview": "vite preview",
     "viute:clearcache": "rm -rf node_modules/.vite",
     "ink:compile": "zx ./scripts/compile.mjs",

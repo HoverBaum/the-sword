@@ -1,3 +1,4 @@
+#!/usr/bin/env zx
 const isVercel = (process.env.VERCEL && process.env.VERCEL === '1') || false
 
 console.log('isVercel', isVercel)
@@ -15,9 +16,30 @@ if (!isVercel) {
   process.exit()
 }
 
+const authorName = process.env.VERCEL_GIT_COMMIT_AUTHOR_NAME
+const authoProfileUrl = `https://github.com/${process.env.VERCEL_GIT_COMMIT_AUTHOR_LOGIN}.png`
+const url = process.env.VERCEL_URL
+const description = process.env.VERCEL_GIT_COMMIT_MESSAGE
+const vercelId = '' // TODO Extract from URL
+const title = `The Sword ${vervelId}`
+
+const payload = {
+  embeds: [
+    {
+      author: {
+        name: authorName,
+        icon_url: authorProfileUrl,
+      },
+      title,
+      url,
+      description,
+    },
+  ],
+}
+
 await $`curl \
   -H "Content-Type: application/json" \
-  -d '{"content": "https://${process.env.VERCEL_URL}"}' \
+  -d ${JSON.stringify(payload)} \
   $DISCROD_WEBHOOK_URL`
 
 console.log('🎮 check Discord.')

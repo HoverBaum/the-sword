@@ -20,8 +20,10 @@ const authorName = process.env.VERCEL_GIT_COMMIT_AUTHOR_NAME
 const authoProfileUrl = `https://github.com/${process.env.VERCEL_GIT_COMMIT_AUTHOR_LOGIN}.png`
 const url = process.env.VERCEL_URL
 const description = process.env.VERCEL_GIT_COMMIT_MESSAGE
-const vercelId = '' // TODO Extract from URL
-const title = `The Sword ${vervelId}`
+const idRegex = /(\w+)-hoverbaum\.vercel\.app/
+const matches = idRegex.exec(url)
+const vercelId = matches.length >= 2 ? matches[1] : ''
+const title = `The Sword ${vercelId}`
 
 const payload = {
   embeds: [

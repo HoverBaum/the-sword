@@ -17,7 +17,7 @@ if (!isVercel) {
 }
 
 const authorName = process.env.VERCEL_GIT_COMMIT_AUTHOR_NAME
-const authoProfileUrl = `https://github.com/${process.env.VERCEL_GIT_COMMIT_AUTHOR_LOGIN}.png`
+const authorProfileUrl = `https://github.com/${process.env.VERCEL_GIT_COMMIT_AUTHOR_LOGIN}.png`
 const url = process.env.VERCEL_URL
 const description = process.env.VERCEL_GIT_COMMIT_MESSAGE
 const idRegex = /(\w+)-hoverbaum\.vercel\.app/

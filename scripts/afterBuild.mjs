@@ -18,7 +18,7 @@ if (!isVercel) {
 
 const authorName = process.env.VERCEL_GIT_COMMIT_AUTHOR_NAME
 const authorProfileUrl = `https://github.com/${process.env.VERCEL_GIT_COMMIT_AUTHOR_LOGIN}.png`
-const url = process.env.VERCEL_URL
+const url = `https://${process.env.VERCEL_URL}`
 const description = process.env.VERCEL_GIT_COMMIT_MESSAGE
 const idRegex = /(\w+)-hoverbaum\.vercel\.app/
 const matches = idRegex.exec(url)
@@ -39,9 +39,6 @@ const payload = {
   ],
 }
 
-await $`curl \
-  -H "Content-Type: application/json" \
-  -d ${JSON.stringify(payload)} \
-  $DISCROD_WEBHOOK_URL`
+await $`curl -H "Content-Type: application/json" -d ${JSON.stringify(payload)} $DISCROD_WEBHOOK_URL`
 
 console.log('🎮 check Discord.')

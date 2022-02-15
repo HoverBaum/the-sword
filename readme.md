@@ -60,12 +60,16 @@ npm run ink:compile
 - ~~Opening screen for game~~
 - ~~Auto scroll to bottom~~
 - ~~Render "continue"-choice special~~
+- Save and load
 - Finish example story
 
+## Steam version
+
+- Achievement system
+- Win / Mac / Linux build using Tauri https://tauri.studio/
 
 ## Might do
 
-- Save and load (index DB?)
 - Arrow key navigation
 - Gamepad navigation
 - Choices in Image

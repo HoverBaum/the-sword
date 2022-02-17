@@ -12,6 +12,7 @@ import {
 import { PauseFill } from '@geist-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Monetization } from '../Monetization/Monetization'
 import { useSettings } from '../Settings/useSettings'
 import { RootState } from '../store'
 import { setStoryState } from '../Story/story.slice'
@@ -97,6 +98,7 @@ export const Pause = () => {
           <Spacer h={1} />
           <Divider />
 
+          <Monetization />
           <Text>
             View{' '}
             <Link onClick={navigateTo('/credits')} underline color>

@@ -1,17 +1,23 @@
-export type AssetType = 'image' | 'backgroundMusic' | 'soundEffect'
-export type LicenseIdentifier = 'unsplash' | 'pixabay' | 'CCO 1.0' | 'CC BY 4.0'
+import { IconComponentType } from './Icons/IconTypes'
+
+export type AssetType = 'image' | 'backgroundMusic' | 'soundEffect' | 'icon'
+export type LicenseIdentifier = 'unsplash' | 'pixabay' | 'CC0 1.0' | 'CC BY 4.0'
 
 export type Asset = {
   name: string
   type: AssetType
-  file: string
   credit: string
   creditLink: string
   license: LicenseIdentifier
 }
 
-export type ImageAsset = Asset & { type: 'image' }
-export type SoundAsset = Asset & {
+export type FileAsset = {
+  file: string
+} & Asset
+
+export type IconAsset = Asset & { type: 'icon'; icon: IconComponentType }
+export type ImageAsset = FileAsset & { type: 'image' }
+export type SoundAsset = FileAsset & {
   type: 'backgroundMusic' | 'soundEffect'
   volume?: number
 }

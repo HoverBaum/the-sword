@@ -5,8 +5,8 @@ export const licenses: { [key in LicenseIdentifier]: License } = {
     identifier: 'unsplash',
     link: 'https://unsplash.com/license',
   },
-  'CCO 1.0': {
-    identifier: 'CCO 1.0',
+  'CC0 1.0': {
+    identifier: 'CC0 1.0',
     link: 'https://creativecommons.org/publicdomain/zero/1.0/',
   },
   pixabay: {

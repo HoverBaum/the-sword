@@ -36,6 +36,11 @@ Compile ink file to TypeScript. (current win and mac supported)
 npm run ink:compile
 ```
 
+## SVG Tools
+
+https://www.janvas.com/create-draw-edit/en/svg-online-editor.html
+https://editor.method.ac/ 
+
 ## Trivia
 
 - Focussing a button scrolls the content to that button. Thus we do not need to implement scrolling logic. We simply focus the first choice button.

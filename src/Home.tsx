@@ -2,6 +2,7 @@
 import { css } from '@emotion/react'
 import { Button, Page, Spacer, Text } from '@geist-ui/core'
 import { useNavigate } from 'react-router-dom'
+import { SwordIcon } from './Icons/SwordIcon'
 import { TextLine } from './TextLine'
 import { useSave } from './useSave'
 
@@ -27,7 +28,9 @@ export const Home = () => {
         justify-content: center;
       `}
     >
-      <Text h1>The Sword 🗡</Text>
+      <Text h1>
+        The Sword <SwordIcon />
+      </Text>
 
       <TextLine
         storyLine={{

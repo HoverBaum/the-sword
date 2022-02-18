@@ -3,7 +3,13 @@ import { css } from '@emotion/react'
 import { Spacer, Text, Link, Divider } from '@geist-ui/core'
 import { ComponentType } from 'react'
 import * as allAssets from '../assets'
-import { Asset, AssetType, ImageAsset, SoundAsset } from '../assetTypes'
+import {
+  Asset,
+  AssetType,
+  IconAsset,
+  ImageAsset,
+  SoundAsset,
+} from '../assetTypes'
 import { licenses } from '../licenses'
 
 const assets = Object.values(allAssets)
@@ -15,9 +21,7 @@ const only =
 
 // Let's keep things simple here and have two components in one file as we always use them together.
 // This component only centralizes change.
-const AssetLicenceLink: ComponentType<{ asset: ImageAsset | SoundAsset }> = ({
-  asset,
-}) => {
+const AssetLicenceLink: ComponentType<{ asset: Asset }> = ({ asset }) => {
   return (
     <Text>
       License:{' '}
@@ -29,7 +33,7 @@ const AssetLicenceLink: ComponentType<{ asset: ImageAsset | SoundAsset }> = ({
         underline
       >
         {asset.license}
-      </Link>
+      </Link>{' '}
       |{' '}
       <Link
         href={asset.creditLink}
@@ -56,6 +60,7 @@ export const AssetsOverview = () => {
       {/* Images */}
       <Spacer h={2} />
       <Text h3>Images</Text>
+
       {assets.filter(only('image')).map((asset) => (
         <div key={asset.creditLink}>
           <div
@@ -69,7 +74,7 @@ export const AssetsOverview = () => {
                 width: 200px;
               `}
             >
-              <img height="100px" src={asset.file} />
+              <img height="100px" src={(asset as ImageAsset).file} />
             </div>
             <div>
               <Text>
@@ -82,6 +87,35 @@ export const AssetsOverview = () => {
           <Divider />
         </div>
       ))}
+      {assets.filter(only('icon')).map((filteredAsset) => {
+        const asset = filteredAsset as IconAsset
+        return (
+          <div key={asset.creditLink}>
+            <div
+              css={css`
+                padding: 1rem 0;
+                display: flex;
+              `}
+            >
+              <div
+                css={css`
+                  width: 200px;
+                `}
+              >
+                <asset.icon width="100" height="100" />
+              </div>
+              <div>
+                <Text>
+                  {asset.name} by {asset.credit}
+                </Text>
+
+                <AssetLicenceLink asset={asset} />
+              </div>
+            </div>
+            <Divider />
+          </div>
+        )
+      })}
 
       {/* Audio Assets */}
       <Spacer h={3} />
@@ -99,7 +133,7 @@ export const AssetsOverview = () => {
 
             <AssetLicenceLink asset={asset} />
 
-            <audio src={asset.file} controls />
+            <audio src={(asset as SoundAsset).file} controls />
           </div>
           <Divider />
         </div>

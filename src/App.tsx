@@ -2,7 +2,7 @@
 import { css, Global } from '@emotion/react'
 import { Tag } from '@geist-ui/core'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { CreditsPage } from './Credits/CreditsPage'
+import { AboutPage } from './About/AboutPage'
 import { Home } from './Home'
 import { Story } from './Story/Story'
 
@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/story" element={<Story />}></Route>
-          <Route path="/credits" element={<CreditsPage />}></Route>
+          <Route path="/about" element={<AboutPage />}></Route>
         </Routes>
       </HashRouter>
 

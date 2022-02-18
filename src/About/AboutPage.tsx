@@ -6,11 +6,11 @@ import { Monetization } from '../Monetization/Monetization'
 import { useWebMonetization } from '../Monetization/useWebMonetization'
 import { AssetsOverview } from './AssetsOverview'
 
-export const CreditsPage = () => {
+export const AboutPage = () => {
   const monitizationState = useWebMonetization()
   return (
     <Page>
-      <Text h1>Credits</Text>
+      <Text h1>About</Text>
       <Text>
         <b>The Sword</b> is created by{' '}
         <Link
@@ -24,6 +24,20 @@ export const CreditsPage = () => {
         </Link>{' '}
         as a technical demonstration of using Ink and React to create a
         "Wanderlust - Travel stories" like experiences.
+      </Text>
+
+      <Text>
+        This Project is Open Source and available on{' '}
+        <Link
+          href="https://github.com/HoverBaum/the-sword"
+          icon
+          underline
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </Link>
+        .
       </Text>
 
       {monitizationState !== 'deactivated' && (

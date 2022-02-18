@@ -101,8 +101,8 @@ export const Pause = () => {
           <Monetization />
           <Text>
             View{' '}
-            <Link onClick={navigateTo('/credits')} underline color>
-              credits
+            <Link onClick={navigateTo('/about')} underline color>
+              About
             </Link>
           </Text>
           <div

@@ -65,7 +65,7 @@ https://editor.method.ac/
 - ~~Opening screen for game~~
 - ~~Auto scroll to bottom~~
 - ~~Render "continue"-choice special~~
-- Save and load
+- ~~Save and load~~
 - Finish example story
 
 ## Steam version

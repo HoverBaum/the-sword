@@ -111,6 +111,8 @@ export const Pause = () => {
               flex-grow: 1;
             `}
           ></div>
+          <Button onClick={navigateTo('/')}>Main Menu</Button>
+          <Spacer h={1} />
           <Button onClick={closeDrawer} type="secondary" ghost>
             Close
           </Button>

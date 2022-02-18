@@ -8,7 +8,7 @@ const initialTextSpeed =
   1
 
 // Here you can configure basic settings.
-const baseSettings: SettingsState = {
+const baseSettings = {
   textSpeed: initialTextSpeed,
   wordFadeInTime: 0.5,
   wordDelayTime: 0.1,
@@ -16,17 +16,10 @@ const baseSettings: SettingsState = {
   initiallyDisplayedWords: 3,
   lineFadingTime: 30,
   isMuted,
+  savegameKey: 'TheSwordSave',
 }
 
-export type SettingsState = {
-  textSpeed: number
-  initiallyDisplayedWords: number
-  wordFadeInTime: number
-  wordDelayTime: number
-  headingFadeInTime: number
-  lineFadingTime: number
-  isMuted: boolean
-}
+export type SettingsState = typeof baseSettings
 
 const speedRelatedSettings = (speed: number): Partial<SettingsState> => ({
   textSpeed: speed,

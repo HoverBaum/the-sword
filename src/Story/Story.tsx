@@ -7,19 +7,26 @@ import { Choices } from './Choices'
 import { SceneDisplay } from '../Scene/SceneDisplay'
 import { RootState } from '../store'
 import { TextLine } from '../TextLine'
-import { tellStory } from './story.slice'
+import { loadStory, tellStory } from './story.slice'
 import { StoryThemeProvider } from './StoryThemeProvider'
+import { useSave } from '../useSave'
 
 export const Story: ComponentType = () => {
   const { storyLines, storyState } = useSelector(
     (state: RootState) => state.story
   )
   const dispatch = useDispatch()
+  const { hasSaveGame, saveGame } = useSave()
 
   useEffect(() => {
     if (storyState === 'idle') {
-      //@ts-ignore
-      dispatch(tellStory(storyContent))
+      if (hasSaveGame && !!saveGame) {
+        //@ts-ignore
+        dispatch(loadStory(storyContent, saveGame))
+      } else {
+        //@ts-ignore
+        dispatch(tellStory(storyContent))
+      }
     }
   }, [])
 

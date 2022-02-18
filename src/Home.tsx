@@ -3,11 +3,18 @@ import { css } from '@emotion/react'
 import { Button, Page, Spacer, Text } from '@geist-ui/core'
 import { useNavigate } from 'react-router-dom'
 import { TextLine } from './TextLine'
+import { useSave } from './useSave'
 
 export const Home = () => {
   const navigate = useNavigate()
+  const { hasSaveGame, removeSaveGame } = useSave()
 
-  const startGame = () => {
+  const newGame = () => {
+    removeSaveGame()
+    navigate('/story')
+  }
+
+  const continueGame = () => {
     navigate('/story')
   }
 
@@ -39,9 +46,15 @@ export const Home = () => {
         About
       </Button>
       <Spacer h={2} />
-      <Button onClick={startGame} autoFocus={true} type="secondary" ghost>
-        Start game
+      <Button onClick={newGame} autoFocus={!hasSaveGame} type="secondary" ghost>
+        New game
       </Button>
+      <Spacer h={2} />
+      {hasSaveGame && (
+        <Button onClick={continueGame} autoFocus={true} type="secondary" ghost>
+          Continue
+        </Button>
+      )}
     </Page>
   )
 }

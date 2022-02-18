@@ -19,7 +19,7 @@ import { Story } from 'inkjs/engine/Story'
 import { parseChoice, parseTag } from './story.util'
 import { RootDispatch } from '../store'
 import { scenes } from '../scenes'
-import { saveGame } from '../game.middleware'
+import { saveGame, SaveGameType } from '../game.middleware'
 
 //@ts-ignore
 let story: Story
@@ -117,6 +117,9 @@ export const storySlice = createSlice({
     },
     setStoryState: (state, action: PayloadAction<StoryStateType>) => {
       state.storyState = action.payload
+    },
+    loadState: (state, action: PayloadAction<StoryState>) => {
+      return action.payload
     },
   },
 })
@@ -241,6 +244,25 @@ export const tellStory = (storyJSON: string) => (dispatch: RootDispatch) => {
   continueStory(dispatch)
 }
 
+export const loadStory =
+  (storyJSON: string, saveGame: SaveGameType | undefined) =>
+  (dispatch: RootDispatch) => {
+    if (!saveGame) {
+      console.error(
+        'Trying to load without saveGame. Restarting story instead!'
+      )
+      return tellStory(storyJSON)(dispatch)
+    }
+    dispatch(loadState(saveGame.store))
+    story = new ink.Story(storyJSON)
+    //@ts-ignore
+    window.story = story // Adding story to the window for debugging.
+    watchMood(story, dispatch)
+
+    // Load the save game.
+    story.state.LoadJson(saveGame.storyState)
+  }
+
 // Actions that only ever go into the middleware.
 export const addStoryLine = createAction<StoryLine>('story/addStoryLine')
 export const setChoices = createAction<ChoiceType[]>('story/setChoices')
@@ -255,6 +277,7 @@ const {
   setCurrentTags,
   setScene,
   setMood,
+  loadState,
 } = storySlice.actions
 // Actions to be used by the application.
 export const {

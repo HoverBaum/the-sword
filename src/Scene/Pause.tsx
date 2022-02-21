@@ -12,6 +12,7 @@ import {
 import { PauseFill } from '@geist-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { IconButton } from '../IconButton'
 import { Monetization } from '../Monetization/Monetization'
 import { useSettings } from '../Settings/useSettings'
 import { RootState } from '../store'
@@ -48,20 +49,23 @@ export const Pause = () => {
 
   return (
     <>
-      <PauseFill
+      <IconButton
+        icon={<PauseFill />}
         onClick={openDrawer}
-        css={css`
-          position: fixed;
+        styling={css`
+          position: fixed !important;
           top: 1rem;
           left: 1rem;
           opacity: 0.3;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
-          &:hover {
+          &:hover,
+          &:focus {
             opacity: 1;
           }
         `}
       />
+
       <Drawer
         visible={isOpen}
         onClose={closeDrawer}

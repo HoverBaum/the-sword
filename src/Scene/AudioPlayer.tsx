@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Text } from '@geist-ui/core'
 import { Volume2, VolumeX } from '@geist-ui/icons'
 import { ComponentType, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { SoundAsset } from '../assetTypes'
+import { IconButton } from '../IconButton'
 import { useSettings } from '../Settings/useSettings'
 import { RootState } from '../store'
 
@@ -55,9 +55,12 @@ export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
         }
       `}
     >
-      <Text span onClick={toggleMute}>
-        {isMuted ? <VolumeX /> : <Volume2 />}
-      </Text>
+      <IconButton
+        tabIndex={-1}
+        icon={isMuted ? <VolumeX /> : <Volume2 />}
+        onClick={toggleMute}
+      />
+
       {sound && (
         <audio
           id="audioPlayer"

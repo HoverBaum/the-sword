@@ -7,12 +7,14 @@ type IconButtonProps = {
   icon: ReactNode
   onClick: React.MouseEventHandler<HTMLButtonElement>
   styling?: SerializedStyles
+  tabIndex?: number
 }
 
 export const IconButton: ComponentType<IconButtonProps> = ({
   icon,
   styling,
   onClick,
+  tabIndex,
 }) => {
   const [isFocussed, setIsFocussed] = useState(false)
 
@@ -36,6 +38,7 @@ export const IconButton: ComponentType<IconButtonProps> = ({
       onMouseEnter={onFocus}
       onBlur={onBlur}
       onMouseLeave={onBlur}
+      tabIndex={tabIndex || 0}
     ></Button>
   )
 }

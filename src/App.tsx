@@ -38,7 +38,7 @@ function App() {
         `}
         type="warning"
       >
-        ALPHA:2
+        ALPHA:3
       </Tag>
     </div>
   )

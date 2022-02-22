@@ -5,6 +5,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import { AboutPage } from './About/AboutPage'
 import { Home } from './Home'
 import { Story } from './Story/Story'
+import packageData from '../package.json'
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
         `}
         type="warning"
       >
-        ALPHA:3
+        {packageData.version}
       </Tag>
     </div>
   )

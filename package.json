@@ -1,6 +1,6 @@
 {
   "name": "ink-react",
-  "version": "0.0.0",
+  "version": "Alpha:3",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && zx ./scripts/afterBuild.mjs",

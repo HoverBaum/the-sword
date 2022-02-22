@@ -8,6 +8,9 @@ await $`tsc`
 await $`vite build --base=./`
 
 // Zip files.
-await $`zip -r the-sword.zip dist`
+const packageJSON = await fs.readFile('./package.json')
+const packageData = JSON.parse(packageJSON)
+const version = packageData.version.replace(':', '-')
+await $`zip -r the-sword-${version}.zip dist`
 
 console.log('All done 🚀')

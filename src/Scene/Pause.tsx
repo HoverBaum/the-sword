@@ -5,7 +5,7 @@ import {
   Divider,
   Drawer,
   Link,
-  Select,
+  Radio,
   Spacer,
   Text,
 } from '@geist-ui/core'
@@ -41,10 +41,9 @@ export const Pause = () => {
       setTimeout(() => navigate(path), 0)
     }
 
-  const selectSpeed = (value: string | string[]) => {
-    const speedValue = Array.isArray(value) ? value[0] : value
-    const speed = parseInt(speedValue, 10)
-    setSpeed(speed)
+  const selectSpeed = (value: string | number) => {
+    if (typeof value !== 'number') return
+    setSpeed(value)
   }
 
   return (
@@ -87,17 +86,21 @@ export const Pause = () => {
           `}
         >
           <Text>Text speed</Text>
-          {/* A slider would be nicer but there is a bug where dragging the slider
-              always closes the drawer... */}
-          <Select
-            placeholder="Set text speed"
+
+          <Radio.Group
+            css={css`
+              & span {
+                /* Else radio labels are bold. */
+                font-weight: normal !important;
+              }
+            `}
+            value={textSpeed}
             onChange={selectSpeed}
-            value={textSpeed.toString()}
           >
-            <Select.Option value="1">default</Select.Option>
-            <Select.Option value="2">faster</Select.Option>
-            <Select.Option value="10000">instant</Select.Option>
-          </Select>
+            <Radio value={1}>Default</Radio>
+            <Radio value={2}>Faster</Radio>
+            <Radio value={10000}>Instant</Radio>
+          </Radio.Group>
 
           <Spacer h={1} />
           <Divider />

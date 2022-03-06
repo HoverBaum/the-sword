@@ -1,45 +1,30 @@
+INCLUDE theCamp.ink
+
 # author: Hendrik Wallbaum
 # title: InkSword
 
-LIST mood = Adventurous, (Neutral), Skeptical, Dishearted 
+LIST mood = Adventurous, Curious, Prudent, Dishearted, Energetic, Rested, Fearful
 VAR knows_about_chris_house = false
 VAR won_against_bandits = false
 
 -> Beginning
 
-=== function mood_improve ===
+=== function mood_event(event) ===
+>>> Mood event, initial mood: {mood}, event: {event}
 {
-    - mood == Neutral: 
-        ~mood = Adventurous
-    - mood == Skeptical: 
-        ~mood = Neutral
+    - mood == Adventurous && event == "sleep":
+        ~ mood = Energetic
+    - mood == Prudent && event == "sleep":
+        ~ mood = Rested
 }
-
-=== function mood_worsen ===
-{
-    - mood == Neutral: 
-        ~mood = Skeptical
-    - mood == Adventurous: 
-        ~mood = Neutral
-}
-
-=== Library ===
-#SCENE: library
-
-Welcome to Storytellers demo story "Ink Sword".
-
-Please open this tab in full screen for the best experience (optimized for desktop).
-
-You can use "tab" to select an option and "enter" to confirm. Or simply click on your choice.
-
-And now, enjoy 😊
-
-    * [Read story] -> Beginning
+>>> New mood: {mood}
 
 === Beginning ===
 #CLEAR
 #SCENE: bonfire
 #CHAPTER: At the bonfire
+
+Mood: {mood}
 
 It was one of those evenings around the bonfire where stories gush out like water from a spring and grow into cascading streams of adventure like rivers before they reach the sea.
 
@@ -48,6 +33,8 @@ And now, it was Bens turn to stand up...
     * [listen] -> BensStory
 
 === BensStory ===
+
+~ mood = Curious
 
 "Once there was a sword signifying the rule over this land" he began.
 
@@ -60,7 +47,7 @@ And now, it was Bens turn to stand up...
 
     // Character is more of a realist and will see things for what they are.
     * "What nonsense" I thought to myself.
-    ~ mood = Skeptical
+    ~ mood = Prudent
     But I never listened to Bens stories for their credibility. It was the entertainment that bound all of us to his lips.
   
 - Ben continued "rumor has it, the stone was found over in Budshire not long ago."
@@ -85,13 +72,15 @@ Little did I know at this point what change Bens story would bring to my life.
 #SCENE: morning
 #CHAPTER: The next morning
 
+{mood_event("sleep")}
+
     * [Wake up]
 
 - Waking up hungover, as most Saturdays seemed to be, I went to meet the lads early next morning{mood == Adventurous:, still filled witht he spirit of adventure}.
 
 "What do you make of old Bens story then lads" I asked my friends.
 
-Chris gave me a sceprical look, he always had been the down to earth type: "not sure what to tell you, but those stories are fairytales, nothing else.{mood == Skeptical: I knew I could count on Chris to bring solid reasoning!}
+Chris gave me a sceprical look, he always had been the down to earth type: "not sure what to tell you, but those stories are fairytales, nothing else.{mood == Prudent: I knew I could count on Chris to bring solid reasoning!}
 
 "Not so sure about that", interjected James, always the type to jump straight into action: "to me this sounds like a grand adventure to be had!"{mood == Adventurous: I couldn't agree more.}
 
@@ -130,7 +119,7 @@ Back then it had been a bright place full of wonders to discover and adventures 
 
 === BoringForrestWalk ===
 
-And nothing happened for all the time that we walked through the woods. Except all of us wishfully glancing up at the mountain, there we would at least have had a good view. {mood == Skeptical: Though secretly I was happy about my fears being unfounded.}
+And nothing happened for all the time that we walked through the woods. Except all of us wishfully glancing up at the mountain, there we would at least have had a good view. {mood == Prudent: Though secretly I was happy about my fears being unfounded.}
 
 * Soon, we arrived -> AlphaOver
 
@@ -148,13 +137,13 @@ It was only when we arrived at a log barring the road that my suspiciouns arose 
         I said, eager for an adventure and started climbing over the trunk.
     
     * [I was hoping for no bandits]
-        {mood_worsen()}
+        ~ mood = Fearful
         "We should move carefully from here on" I said, looking left and right as I climed over the trunk.
     
-    * {mood == Skeptical}"This looks like bandits[!]", I said while cautiously climbing over the trunk.
+    * {mood == Prudent}"This looks like bandits[!]", I said while cautiously climbing over the trunk.
     
     * ["Probably just fell over"]
-        {mood_improve()}
+        ~ mood = Energetic
         "Probably just fall over during the last storm", I said while starting to climb over.
     
 - And while we were still busy crossing the obstacle it happened. Suddenly multiple, ragged looking and foul grinning thugs jumped out of the brushes. With Chris and Rick still climbing the trunk and James getting his bearing after enthusiastically jumping down, it fell to me to respond.
@@ -164,14 +153,14 @@ It was only when we arrived at a log barring the road that my suspiciouns arose 
 = BanditEncounterFight
 ~temp hasFought = false
 
-    * {mood == Skeptical} [We were prepared!]
+    * {mood == Prudent || mood == Fearful} [We were prepared!]
         Knowing this path to be trecherous we had come prepared! And my first response was a quick strike at the chap next to me who fell down screaming.
         Now the boys joined in, drawing their swords, prepared for just this occasion. The forrest was filled with the sound of swords striking each other.
             * [Press on] -> BanditEncounterWin
     * "We have nothing!"[] <>I shouted, hoping that we could talk our way out of this.
         "wuahaha, think us stupid enough to believe that now, do you?", spat a particularly fould looking bandit. -> BanditEncounterFight
     * "Please don't hurt us!"[] <>I begged for there was nothing else to do. -> BanditsCaptureUs
-    * {mood == Adventurous}[Fight!]
+    * {mood == Adventurous || mood == Energetic}[Fight!]
         ~ hasFought = true
         There was nothing like a good fight to start your Adventure with! After all this was our tripp to become kings, some bandits weren't going to stop us. 
         They sure put on a good fight, I have to give them that.
@@ -248,7 +237,7 @@ It had been a long time since the four of us had been out like this together. "S
     
 - Thus we went on in high spirits for a while.
 
-{mood == Skeptical:
+{mood == Prudent:
     I still didn't belive in magic swords, but 
 - else:
     I could feel my excitement rising, as we neared our journeys goal and 
@@ -263,27 +252,19 @@ It had been a long time since the four of us had been out like this together. "S
 
 "Best we let old Ben know once we get back, so they can do something about that" Suggested Rick.
 
-    * Looks like me missed that adventure[]. I would for sure have been a grand fight.
-    {mood_improve()}
+    * Looks like me missed that adventure[]. It would for sure have been a grand fight.
+        ~ mood = Adventurous
 
     * I was glad we didn't go that way[]. Just goes to show that we made the right decision.
-    {mood_worsen()}
+        ~ mood = Prudent
 
 - 
 // Put a tunnel here to see some animals. Maybe both routes can go to the same tunnel? Could be little button in the image that points out a goat or something.
 
     * [Walk on] -> AlphaOver
 
-=== ArrivingAtTheSword ===
-#CLEAR
-#SCENE: camp
-#CHAPTER: Like a Festival
 
-Finally we arrived at Budshire{won_against_bandits == true:, exhausted from our fight but happy to have made it}.
-
-->TryPuLlingTheSwordOut
-
-=== TryPuLlingTheSwordOut ===
+=== AtTheSword ===
 #SCENE: sword
 
 Do your best mate. Previous choices will dictate wether you can or not.

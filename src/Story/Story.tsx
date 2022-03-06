@@ -19,7 +19,7 @@ export const Story: ComponentType = () => {
   const dispatch = useDispatch()
   const { hasSaveGame, saveGame } = useSave()
   const storyDivRef = useRef<HTMLDivElement>(null)
-  useArrowNavigation(storyDivRef)
+  useArrowNavigation(storyDivRef, 1)
 
   useEffect(() => {
     if (storyState === 'idle') {

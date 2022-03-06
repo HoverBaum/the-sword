@@ -2,7 +2,16 @@ import { KeyCode, useKeyboard } from '@geist-ui/core'
 
 type nextIndexFunction = (activeIndex: number, totalElements: number) => number
 
-export const useArrowNavigation = (ref: React.RefObject<HTMLElement>) => {
+/**
+ * Enable navigation between "tabbable" buttons using arrows keys.
+ * Buttons are "tabbable" if they "tabindex" !== -1.
+ * @param ref React ref on which to use arrow navigation.
+ * @param offset Number of elements to skip navigation for.
+ */
+export const useArrowNavigation = (
+  ref: React.RefObject<HTMLElement>,
+  offset = 0
+) => {
   const moveFocus = (nextIndex: nextIndexFunction) => (root: HTMLElement) => {
     const buttons = [...root.querySelectorAll('button')]
     const tabableButtons = buttons.filter(
@@ -11,19 +20,19 @@ export const useArrowNavigation = (ref: React.RefObject<HTMLElement>) => {
     const activeIndex = tabableButtons.reduce((foundIndex, button, index) => {
       if (button === document.activeElement) return index
       return foundIndex
-    }, -1)
+    }, -1 + offset)
     tabableButtons[nextIndex(activeIndex, tabableButtons.length)].focus()
   }
 
   const nextElement: nextIndexFunction = (
     activeIndex: number,
     totalElements: number
-  ) => (activeIndex >= totalElements - 1 ? 0 : activeIndex + 1)
+  ) => (activeIndex >= totalElements - 1 ? activeIndex : activeIndex + 1)
 
   const previousElement: nextIndexFunction = (
     activeIndex: number,
     totalElements: number
-  ) => (activeIndex <= 0 ? totalElements - 1 : activeIndex - 1)
+  ) => (activeIndex <= 0 ? activeIndex : activeIndex - 1)
 
   const focusNextButton = moveFocus(nextElement)
 

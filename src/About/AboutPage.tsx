@@ -20,10 +20,10 @@ export const AboutPage = () => {
           icon
           underline
         >
-          Hendrik Wallbaum
+          Hendrik Wallbaum.
         </Link>{' '}
-        as a technical demonstration of using Ink and React to create a
-        "Wanderlust - Travel stories" like experiences.
+        The game is highly inspired by "Wanderlust - Travel stories" and build
+        upon React, using ink as it's story engine.
       </Text>
 
       <Text>

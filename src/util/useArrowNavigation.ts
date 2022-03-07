@@ -29,10 +29,8 @@ export const useArrowNavigation = (
     totalElements: number
   ) => (activeIndex >= totalElements - 1 ? activeIndex : activeIndex + 1)
 
-  const previousElement: nextIndexFunction = (
-    activeIndex: number,
-    totalElements: number
-  ) => (activeIndex <= 0 ? activeIndex : activeIndex - 1)
+  const previousElement: nextIndexFunction = (activeIndex: number) =>
+    activeIndex <= 0 ? activeIndex : activeIndex - 1
 
   const focusNextButton = moveFocus(nextElement)
 
@@ -42,9 +40,11 @@ export const useArrowNavigation = (
     (event) => {
       const storyDiv = ref.current
       if (!storyDiv) return
-      if (event.key === 'ArrowDown') focusNextButton(storyDiv)
-      if (event.key === 'ArrowUp') focusPreviousButton(storyDiv)
+      if (event.key === 'ArrowDown' || event.key === 's')
+        focusNextButton(storyDiv)
+      if (event.key === 'ArrowUp' || event.key === 'w')
+        focusPreviousButton(storyDiv)
     },
-    [KeyCode.DownArrow, KeyCode.UpArrow]
+    [KeyCode.DownArrow, KeyCode.UpArrow, KeyCode.KEY_W, KeyCode.KEY_S]
   )
 }

@@ -21,13 +21,33 @@ export const ChoiceButton: ComponentType<ChoiceButtonProps> = ({
   const { playSoundEffect } = useSound()
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
+  const onHover = () => {
+    if (!buttonRef.current) return
+    const element = buttonRef.current
+    element.focus()
+  }
+  const onLeave = () => {
+    if (!buttonRef.current) return
+    const element = buttonRef.current
+    element.blur()
+  }
+
   // For readability we make text bold on focus and hover.
   // To reduce motion we figure out the bold width and force
   // buttons to use that.
   const [width, setWidth] = useState(0)
   useEffect(() => {
     if (!buttonRef.current) return
-    setWidth(buttonRef.current.clientWidth)
+    const element = buttonRef.current
+    setWidth(element.clientWidth)
+
+    // We also add listeners for "hover" events.
+    element.addEventListener('mouseover', onHover)
+    element.addEventListener('mouseout', onLeave)
+    return () => {
+      element.removeEventListener('mouseover', onHover)
+      element.removeEventListener('mouseout', onLeave)
+    }
   }, [buttonRef.current])
 
   const playFocusSound = () => {
@@ -43,8 +63,6 @@ export const ChoiceButton: ComponentType<ChoiceButtonProps> = ({
     type: 'secondary',
     ghost: true,
   }
-
-  console.log('Width', width)
 
   return (
     <div

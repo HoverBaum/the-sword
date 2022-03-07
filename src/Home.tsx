@@ -1,17 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Button, Page, Spacer, Text } from '@geist-ui/core'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { SwordIcon } from './Icons/SwordIcon'
+import { reset } from './Story/story.slice'
 import { TextLine } from './TextLine'
 import { useSave } from './useSave'
 
 export const Home = () => {
   const navigate = useNavigate()
   const { hasSaveGame, removeSaveGame } = useSave()
+  const dispatch = useDispatch()
 
   const newGame = () => {
     removeSaveGame()
+    dispatch(reset())
     navigate('/story')
   }
 

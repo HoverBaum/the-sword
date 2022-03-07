@@ -270,7 +270,6 @@ export const setChoices = createAction<ChoiceType[]>('story/setChoices')
 // Action creators are generated for each case reducer function
 // Action for internal usage.
 const {
-  reset,
   clearChoices,
   clearStoryLines,
   setGlobalTags,
@@ -281,6 +280,7 @@ const {
 } = storySlice.actions
 // Actions to be used by the application.
 export const {
+  reset,
   addCountedStoryLine,
   setCountedChoices,
   setStoryState,

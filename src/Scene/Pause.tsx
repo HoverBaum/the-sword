@@ -55,7 +55,7 @@ export const Pause = () => {
           position: fixed !important;
           top: 1rem;
           left: 1rem;
-          opacity: 0.3;
+          opacity: 0.8;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
           &:hover,

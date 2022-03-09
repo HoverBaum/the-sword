@@ -48,7 +48,7 @@ export const AudioPlayer: ComponentType<AudioPlayerProps> = ({ sound }) => {
         top: 1rem;
         right: 1rem;
         cursor: pointer;
-        opacity: 0.3;
+        opacity: 0.8;
         transition: all 0.3s ease-out;
         &:hover {
           opacity: 1;

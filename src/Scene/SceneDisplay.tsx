@@ -42,7 +42,19 @@ export const SceneDisplay: ComponentType = ({ children }) => {
     <div
       css={css`
         background-color: ${scene.backgroundColor};
-        background-image: url(${scene?.image.file});
+        background-image: linear-gradient(
+            to right,
+            ${scene.backgroundColor} 0%,
+            ${scene.backgroundColor} 40%,
+            rgba(0, 0, 0, 0) 70%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0) 20%,
+            ${scene.backgroundColor} 60%
+          ),
+          url(${scene?.image.file});
         ${isMobile &&
         css`
           background-image: none;

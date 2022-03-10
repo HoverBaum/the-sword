@@ -71,10 +71,15 @@ export const AssetsOverview = () => {
           >
             <div
               css={css`
-                width: 200px;
+                width: 220px;
               `}
             >
-              <img height="100px" src={(asset as ImageAsset).file} />
+              <img
+                width="200px"
+                src={
+                  (asset as ImageAsset).original || (asset as ImageAsset).file
+                }
+              />
             </div>
             <div>
               <Text>

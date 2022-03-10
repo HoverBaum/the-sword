@@ -16,7 +16,7 @@ export type FileAsset = {
 } & Asset
 
 export type IconAsset = Asset & { type: 'icon'; icon: IconComponentType }
-export type ImageAsset = FileAsset & { type: 'image' }
+export type ImageAsset = FileAsset & { type: 'image'; original?: string }
 export type SoundAsset = FileAsset & {
   type: 'backgroundMusic' | 'soundEffect'
   volume?: number

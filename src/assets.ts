@@ -1,9 +1,12 @@
-import LibraryImage from './images/library.jpg'
-import BonfireImage from './images/beginning-bonfire.jpg'
-import SwordImage from './images/beginning-sword.jpg'
+import BonfireImage from './images/bonfire.jpg'
+import SwordImage from './images/sword.jpg'
+import SwordOriginalImage from './images/sword-original.jpg'
 import CampImage from './images/camp.jpg'
+import CampOriginalImage from './images/camp-original.jpg'
 import ForrestImage from './images/forrest.jpg'
+import ForrestOriginalImage from './images/forrest-original.jpg'
 import MountainImage from './images/mountain.jpg'
+import MountainOriginalImage from './images/mountain-original.jpg'
 import MorningImage from './images/morning.jpg'
 import BonfireSound from './sounds/bonfire.wav'
 import PageTurnSound from './sounds/page_turn.mp3'
@@ -35,6 +38,7 @@ export const mountainImageAsset: ImageAsset = {
   name: 'Mountain landscape',
   type: 'image',
   file: MountainImage,
+  original: MountainOriginalImage,
   credit: 'Jashandeep Singh Kaleka',
   creditLink: 'https://unsplash.com/photos/0i1xlrAXroY',
   license: 'unsplash',
@@ -44,6 +48,7 @@ export const forrestImageAsset: ImageAsset = {
   name: 'Forrest path',
   type: 'image',
   file: ForrestImage,
+  original: ForrestOriginalImage,
   credit: 'Ali Kazal',
   creditLink: 'https://unsplash.com/photos/nvkLOtFC0Wc',
   license: 'unsplash',
@@ -53,6 +58,7 @@ export const campImageAsset: ImageAsset = {
   name: 'Medieval camp',
   type: 'image',
   file: CampImage,
+  original: CampOriginalImage,
   credit: 'Amuljar',
   creditLink:
     'https://pixabay.com/de/photos/mittelalter-zelte-veranstaltung-2111885/',
@@ -68,19 +74,11 @@ export const bonfireImageAsset: ImageAsset = {
   license: 'pixabay',
 }
 
-export const libraryImageAsset: ImageAsset = {
-  name: 'Library',
-  type: 'image',
-  file: LibraryImage,
-  credit: 'Prateek Katyal',
-  creditLink: 'https://unsplash.com/photos/Tl0lYXcyT-A',
-  license: 'unsplash',
-}
-
 export const swordImageAsset: ImageAsset = {
   name: 'Mystic sword',
   type: 'image',
   file: SwordImage,
+  original: SwordOriginalImage,
   credit: 'Ricardo Cruz',
   creditLink: 'https://unsplash.com/photos/DCqvWkXF74Q',
   license: 'unsplash',

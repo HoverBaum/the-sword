@@ -1,4 +1,5 @@
-INCLUDE theCamp.ink
+INCLUDE TheCamp.ink
+INCLUDE AtTheSword
 
 # author: Hendrik Wallbaum
 # title: InkSword
@@ -6,8 +7,9 @@ INCLUDE theCamp.ink
 LIST mood = Adventurous, Curious, Prudent, Dishearted, Energetic, Rested, Fearful
 VAR knows_about_chris_house = false
 VAR won_against_bandits = false
+VAR has_money = false
 
--> Beginning
+-> TheCamp
 
 === function mood_event(event) ===
 >>> Mood event, initial mood: {mood}, event: {event}
@@ -263,39 +265,6 @@ It had been a long time since the four of us had been out like this together. "S
 
     * [Walk on] -> AlphaOver
 
-
-=== AtTheSword ===
-#SCENE: sword
-
-Do your best mate. Previous choices will dictate wether you can or not.
-
-    * [Pull at the sword]
-
-- I pulled... but nothing happened.
-
-    * [Try again]
-
-- One more try!
-
-{mood == Adventurous:
-    And suddenly I was holding it! Right there in my hand. As if it had always belonged there.
-    * [continue] -> YouBecomeKing
-- else:
-    But the sword was an immovable object.
-    * [continue] -> YouFailed
-}
-
-=== YouBecomeKing ===
-
-You become the king. Maybe lamet how nice it would be to not shoulder all the responsibility.
-
--> theEnd
-
-=== YouFailed ===
-
-You go home as you were. Someone else becomes king. You think about how nice it would be to be that person.
-
--> theEnd
 
 === AlphaOver ===
 #CHAPTER: Alpha End

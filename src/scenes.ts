@@ -5,7 +5,6 @@ import {
   campImageAsset,
   forrestAmbienceSoundAsset,
   forrestImageAsset,
-  libraryImageAsset,
   morningBirdsSoundAsset,
   morningImageAsset,
   mountainImageAsset,
@@ -14,12 +13,6 @@ import {
 } from './assets'
 
 export const scenes: Scene[] = [
-  {
-    id: 'library',
-    textColor: 'white',
-    backgroundColor: '#1b0a0e',
-    image: libraryImageAsset,
-  },
   {
     id: 'bonfire',
     textColor: 'white',

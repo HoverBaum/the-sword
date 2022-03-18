@@ -7,6 +7,7 @@ import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 import { useIsMobile } from '../mediaQueries'
+import { fadeIn } from '../animations'
 
 export const ProtagonistStatus: ComponentType = () => {
   const { mood } = useSelector((state: RootState) => state.story)
@@ -39,9 +40,16 @@ export const ProtagonistStatus: ComponentType = () => {
     >
       <User size={20} />
       <Spacer w={0.33} />
-      <Text span font="1.25rem">
-        {mood}
-      </Text>
+      <div
+        key={mood}
+        css={css`
+          animation: ${fadeIn} 0.5s ease-in-out forwards;
+        `}
+      >
+        <Text span font="1.25rem">
+          {mood}
+        </Text>
+      </div>
     </div>
   )
 }

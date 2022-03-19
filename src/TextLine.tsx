@@ -82,6 +82,21 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
       </Text>
     )
 
+  if (type === 'section heading')
+    return (
+      <Text
+        h3
+        css={css`
+          margin-top: 2rem;
+          opacity: 0;
+          animation: ${fadeIn} ${headingFadeInTime}s ease-in-out forwards;
+          ${wasDisplayed && alreadyDisplayedCSS}
+        `}
+      >
+        {text}
+      </Text>
+    )
+
   return (
     <Text
       p

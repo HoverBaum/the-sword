@@ -149,6 +149,8 @@ const handleTags = (tags: Tag[], dispatch: RootDispatch) => {
       case 'title':
         dispatch(addStoryLine({ text: tag.value, type: 'title' }))
         break
+      case 'section':
+        dispatch(addStoryLine({ text: tag.value, type: 'section heading' }))
       default:
         break
     }

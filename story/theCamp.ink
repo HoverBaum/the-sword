@@ -39,6 +39,7 @@ We all nodded in agreement.
 -> CampOverview
 
 = CampOverview
+#SECTION: At the camp
 #SCENE: camp
 
 Looking around the camp there seemed to be a couple of options{| still open}.
@@ -52,6 +53,7 @@ Looking around the camp there seemed to be a couple of options{| still open}.
     + [The Sword] -> AtTheSword
 
 = FortuneTeller
+#CLEAR
 #SECTION: The fortune teller
 #SCENE: fortune
 

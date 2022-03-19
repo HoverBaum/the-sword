@@ -9,7 +9,7 @@ export type ChoiceType = {
 // A single line returned from the ink story.
 export type StoryLine = {
   text: string
-  type: 'paragraph' | 'chapter heading' | 'title'
+  type: 'paragraph' | 'chapter heading' | 'title' | 'section heading'
 }
 
 // Helper to fade things in with the right timing.

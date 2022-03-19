@@ -4,12 +4,17 @@ INCLUDE AtTheSword
 # author: Hendrik Wallbaum
 # title: InkSword
 
-LIST mood = Adventurous, Curious, Prudent, Dishearted, Energetic, Rested, Fearful
+LIST mood = Adventurous, Curious, Energetic, Chearful, Rested, Prudent, Fearful, Dishearted
 VAR knows_about_chris_house = false
 VAR won_against_bandits = false
 VAR has_money = false
+VAR can_visit_tavern = false
 
 -> TheCamp
+
+=== function can_pull_the_sword() ===
+
+~return won_against_bandits && mood < Rested || knows_about_chris_house && mood < Rested
 
 === function mood_event(event) ===
 >>> Mood event, initial mood: {mood}, event: {event}

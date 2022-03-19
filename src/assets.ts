@@ -8,6 +8,7 @@ import ForrestOriginalImage from './images/forrest-original.jpg'
 import MountainImage from './images/mountain.jpg'
 import MountainOriginalImage from './images/mountain-original.jpg'
 import MorningImage from './images/morning.jpg'
+import FortuneImage from './images/fortune.jpg'
 import BonfireSound from './sounds/bonfire.wav'
 import PageTurnSound from './sounds/page_turn.mp3'
 import MorgningBirtsSound from './sounds/birds.mp3'
@@ -23,6 +24,15 @@ export const SwordIconImageAsset: IconAsset = {
   credit: 'SVG Repo',
   license: 'CC0 1.0',
   creditLink: 'https://www.svgrepo.com/svg/99557/sword',
+}
+
+export const fortuneImageAsset: ImageAsset = {
+  name: 'Fortune teller',
+  type: 'image',
+  file: FortuneImage,
+  credit: 'Damir Spanic',
+  creditLink: 'https://unsplash.com/photos/NZuRKh8hiRA',
+  license: 'unsplash',
 }
 
 export const morningImageAsset: ImageAsset = {

@@ -5,6 +5,7 @@ import {
   campImageAsset,
   forrestAmbienceSoundAsset,
   forrestImageAsset,
+  fortuneImageAsset,
   morningBirdsSoundAsset,
   morningImageAsset,
   mountainImageAsset,
@@ -52,5 +53,11 @@ export const scenes: Scene[] = [
     textColor: 'white',
     backgroundColor: '#033300',
     image: campImageAsset,
+  },
+  {
+    id: 'fortune',
+    textColor: 'white',
+    backgroundColor: '#2d3126',
+    image: fortuneImageAsset,
   },
 ]

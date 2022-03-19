@@ -8,7 +8,7 @@
 
 Finally we arrived at Budshire{won_against_bandits == true:, exhausted from our fight but happy to have made it}.
 
-    * Look around
+    * [Look around]
     
 - A big camp had sprawled up, houndreds of tents and busting people filled the wide meadow. Looking over the sea of tents we could see the sword glistening on a small hill. It looked like it was only waiting for someone to reach for the stars together with.
 
@@ -30,7 +30,7 @@ We looked at each other{won_against_bandits == true: grinning brightly}.
 = noCash
 
     * "I didn't bring much cash"[] I said. And by the looks in their faces, neither did they.
-    * [Stay silent]
+    * [I stayed silent]
 
 - After a long moment Rick spoke "There's gotta' be a way to get us a chance. There just gotta' be!"
 
@@ -39,20 +39,128 @@ We all nodded in agreement.
 -> CampOverview
 
 = CampOverview
+#SCENE: camp
 
-Looking around the camp there seemed to be a couple of options to explore.
+Looking around the camp there seemed to be a couple of options{| still open}.
+
+// Maybe there needs to be a path here that fails the game. User could lose all money and be unable to reach the sword.
 
     * [A fortune teller] -> FortuneTeller
     * [Some folk playing dice] -> DiceGame
+    * [Explore the camp further] -> CampExploration
+    * {can_visit_tavern}[A makeshift tavern] -> CampTavern
     + [The Sword] -> AtTheSword
 
 = FortuneTeller
+#SECTION: The fortune teller
+#SCENE: fortune
 
-She will tell you how likely you are to pull out the sword. You can change your chances.
+// If the protagonist takes her up, Madame Lyzette will give hints on how to win the game.
+
+Fog drifts out of the round, purple tent right at the camps edge. Big letters above the entrance read: "Madame Lyzette - fortune telling".
+
+    * [continue]
+
+- {
+    -mood <= Rested:
+        "Looks promissing, aye?" was Ricks comment, as he pushed us through the curtain.
+    -else:
+        "Not sure if that kind of place can be trusted," note Chris, as James was already pushing us through the curtain.
+}
+
+Insight the tent the fog turned into thick smoke, rising from counteless incense sticks around the room. They filled the air with a thousand smells of exotic herbs, deep forrests and cozy cottages. It made me want to stay here.
+
+"Hello dears", said a smokey voice from teh shadows, "how can I help you?"
+
+    * "Sorry, wrong tent[!"]," was all I could think off, eager to leave this place.
+        ** [continue] -> CampOverview
+    * "Madam Lyzette?"
+        I asked cautiously.
+
+- "The very same," she replied.
+
+"Come, have a seat and let me gaze into your future."
+
+    * I sat down.
+    * "I am not here for that!"
+        "Ohh, aren't you?" She asked. "But I am sure that you can discover more about yourself by listening to what I have to say."
+            ** Intrigued, I sat down.
+            ** "No, I don't think so["]," I said and left her tent. -> CampOverview
+
+- She looked at me over her crystal ball and frowned. "The ball reveals all there is to see, my dearest."
+
+"And your fate is particularly facettet!"
+
+    * I leaned forwrad[.], intent on catching her every word.
+
+- {
+    -can_pull_the_sword():
+        "As you are right now, all doors are open to you!" She said in a hushed voice, "but that can change, it might be best to not waste the opportunity you are given."
+
+    -else:
+        -> DarkFortune
+        
+}
+
+= DarkFortune
+
+// This stitch informes the protagonist where they are on their journey to get the sword.
+
+"Your fate is interesting, but you are yet far from realizing your dream!" 
+"In fact," she continued, "there might never be a chance to make them real."
+
+    * [continue]
+
+- I sat there, stunned by her refelation, as she finally gave some advice.
+
+{
+    -(won_against_bandits || knows_about_chris_house) && mood > Rested:
+        "Your path should lead you, where every weary traveller goes." She said and then prophecised, "often in live it is more about our spirit than anything else."
+    -else:
+        "Your mind is, where it should be!" She started.
+}
+
+{
+    -not won_against_bandits && not knows_about_chris_house:
+        "What keeps you from growing, is your lack of the unknown," she continued. "Try finding it first."
+    -else:
+        "Your life so far lives up to your ambitions," she continued.
+}
+
+{
+    -not has_money:
+        "And finally," she concluded, "you lack in it, that makes the world turn. But fear not, for the reckless will always find it."
+    -else:
+        "At least it doesn't look like you need to worry about money," she finished.
+}
+
+    * [continue]
+
+- "And now, out of my shop! There are more customers waiting."
+
+With that, she shued us out of her tent.
+
+    *[We left] -> CampOverview
+
+-> END
+
+= CampExploration
+
+// Here the protagonist can gather enough merrit to be worthy of the sword. Needed if didn't defeat bandits and doesn't know about Chirs' house wish. Else just aditional fun.
+
+-> END
+
+= CampTavern
+#SECTION: The Drunken Hilt
+
+// Here the protagonists mood can be lifted if they are not bright enough to be king yet.
 
 -> END
 
 = DiceGame
+#SECTION: All or nothing
+
+// Here the protagonist will aquire money. Maybe they can lose it, if they already have some?
 
 You can play for money. The players actions will ultimately decide whether they succeed. 
 

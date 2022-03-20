@@ -22,21 +22,17 @@ VAR has_money = false
 ~return mood < Rested && (won_against_bandits || knows_about_chris_house || saved_the_cat)
 
 === function mood_event(event) ===
->>> Mood event, initial mood: {mood}, event: {event}
 {
     - mood == Adventurous && event == "sleep":
         ~ mood = Energetic
     - mood == Prudent && event == "sleep":
         ~ mood = Rested
 }
->>> New mood: {mood}
 
 === Beginning ===
 #CLEAR
 #SCENE: bonfire
 #CHAPTER: At the bonfire
-
-Mood: {mood}
 
 It was one of those evenings around the bonfire where stories gush out like water from a spring and grow into cascading streams of adventure like rivers before they reach the sea.
 

@@ -26,8 +26,6 @@ export const ProtagonistStatus: ComponentType = () => {
         border-left: 1px solid ${palette.border};
         padding-left: 4rem;
         min-height: 4rem;
-        display: flex;
-        align-items: center;
 
         ${isMobile &&
         css`
@@ -38,17 +36,29 @@ export const ProtagonistStatus: ComponentType = () => {
         `}
       `}
     >
-      <User size={20} />
-      <Spacer w={0.33} />
       <div
-        key={mood}
         css={css`
-          animation: ${fadeIn} 0.5s ease-in-out forwards;
+          display: flex;
+          align-items: center;
+          transition: all 0.3s ease-in-out;
+          ${!mood &&
+          css`
+            opacity: 0;
+          `}
         `}
       >
-        <Text span font="1.25rem">
-          {mood}
-        </Text>
+        <User size={20} />
+        <Spacer w={0.33} />
+        <div
+          key={mood}
+          css={css`
+            animation: ${fadeIn} 0.5s ease-in-out forwards;
+          `}
+        >
+          <Text span font="1.25rem">
+            {mood}
+          </Text>
+        </div>
       </div>
     </div>
   )

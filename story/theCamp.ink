@@ -139,10 +139,5 @@ With that, she shued us out of her tent.
 
 -> END
 
-= CampExploration
-
-// Here the protagonist can gather enough merrit to be worthy of the sword. Needed if didn't defeat bandits and doesn't know about Chirs' house wish. Else just aditional fun.
-
--> END
 
 

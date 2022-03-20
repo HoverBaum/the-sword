@@ -2,7 +2,13 @@
 #CLEAR
 #SCENE: sword
 
-We approcahed the sword, clistening auspiciously on top of a hill. It was a magnificent sight to behold.
+~ temp entry = "{-> SwordIntro|-> ByTheSword}"
+
+{entry}
+
+= SwordIntro
+
+We approcahed the sword, glistening auspiciously on top of a hill. It was a magnificent sight to behold.
 
 Or at least it would have been, if not for the roped railing that had been setup around it. At one side a grumpy looking Sherif had setup a queque for people to go and have a try.
 
@@ -11,29 +17,33 @@ And, of cause he was charging 1 Coin per try.
 {has_money:
     Luckily we managed to come by enough cash for all four of us to have a go.
 - else:
-    Sadly we lacked the coins.
+    Sadly we lacked the coins to try.
 }
+
+-> ByTheSword
 
 = GoBackOption
 
-    + "Let's go back["]," I said, wanting to prepare more. -> TheCamp.CampOverview
+    * "Let's go back["]," I said, wanting to prepare more. -> TheCamp.CampOverview
 
 -> DONE
 
 = WatchOptions
 
-    * [We approched the Sherif] -> Sherif
     <- GoBackOption
+    * [We approched the Sherif] -> Sherif
+    
 
 -> DONE
 
-= SwordOptions
+= ByTheSword
 
 {|There was still a line and the Sherif charging 1 coin per try.}
 
+    <- GoBackOption 
     + We approched the Sherif{not has_money: anyway}. -> Sherif
     * We observed -> Observe
-    <- GoBackOption
+   
 
 = Observe
 
@@ -43,8 +53,8 @@ One after another they walked up the hill, closed there hands on the swords hilt
 
 But the sword never budged.
 
-    * [We kept watching]
     <- WatchOptions
+    * [We kept watching]
 
 -
 Soon, a broad shouldered fellow staggered towards the sword. Cheered on by his crowed of drunkard friends.
@@ -53,8 +63,8 @@ Soon, a broad shouldered fellow staggered towards the sword. Cheered on by his c
 
 And sure enough, the sword didn't budge for him. His friends cheered anyway and greated him with a new keg of ale.
 
-    * [We kept watching]
     <- WatchOptions
+    * [We kept watching]
 
 -
 Next up was a lass, no older than 20, with a sparkle in her bright, blue eyes.
@@ -81,6 +91,8 @@ Sporting bright grin he told us, "I don't know abou the sword friends, but this 
 And as far, as he was concerned, that seemed to be a bigger win than drawing out the sword itself.
 
     <- WatchOptions
+
+-> DONE
 
 = Sherif
 

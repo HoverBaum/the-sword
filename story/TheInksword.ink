@@ -14,7 +14,7 @@ VAR won_against_bandits = false
 VAR saved_the_cat = false
 VAR has_money = false
 
--> TheCamp
+-> Beginning
 
 === function can_pull_the_sword() ===
 

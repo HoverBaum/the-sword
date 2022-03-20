@@ -265,10 +265,10 @@ export const loadStory =
     story = new ink.Story(storyJSON)
     //@ts-ignore
     window.story = story // Adding story to the window for debugging.
-    watchMood(story, dispatch)
 
     // Load the save game.
     story.state.LoadJson(saveGame.storyState)
+    watchMood(story, dispatch)
   }
 
 // Actions that only ever go into the middleware.

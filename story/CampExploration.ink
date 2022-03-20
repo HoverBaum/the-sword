@@ -9,20 +9,20 @@ The sea of white tents stretched on for what seemed like miles, forming somethig
 One of these marketplaces had sprung up around an old wallnut tree. It's majestic canopy cast a cooling shadow unto the merchants trying to best each other in convincing their customers that yes, their bread was in fact better than the one next door.
 
   * [Keep exploring]
-  * [Check the stalls] -> TheStall
+  * [Check the stalls]
 
-= TheStall
-
-The first stall we arrived at was one of said street cries, offering the "finest bread this close to the sword."
-
-  * "The bread did look tempting."
-    But we had brought our own provisions and no money to waste.
-  * {has_money} "We will take three, please."
-    I said, happier than ever that we had come by some money.
+    The first stall we arrived at was one of said street cries, offering the "finest bread this close to the sword."
+    
+      ** "The bread did look tempting."
+        But we had brought our own provisions and no money to waste.
+      ** {has_money} "We will take three, please."
+        I said, happier than ever that we had come by some money.
 
 - Moving on, we walked around the tree.
 
 On the other side a small girl was looking up the branches, seemingly close to tears.
+
+// Maybe we can tempt the player into ignoring the girl by teaching them abuot ignoring folks in an ealier encounter. Someone could try to scam them or something.
 
   * "Hey, whats wrong?["]" I asked, squatting down to her height. -> rescueCat ->
   * We moved along.
@@ -81,6 +81,8 @@ On solid ground again Rachel was overjoyed to be reunited with her cat.
   * "Don't mention it[."]," I said. "Just make sure he learns how to get down."
 
 - We all shared a laugh, before Rachel disappeared with Leo into the alley behind the next tent.
+
+~ saved_the_cat = true
 
 And we started moving again.
 

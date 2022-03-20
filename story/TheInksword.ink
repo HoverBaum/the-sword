@@ -3,21 +3,23 @@ INCLUDE AtTheSword
 INCLUDE DiceGame.ink
 INCLUDE CampExploration.ink
 
-
-
 # author: Hendrik Wallbaum
 # title: InkSword
 
-LIST mood = Adventurous, Curious, Energetic, Chearful, Excited, Rested, Prudent, Fearful, Dishearted
+LIST mood = Adventurous, Curious, Energetic, Cheerful, Excited, Rested, Prudent, Fearful, Dishearted
 VAR knows_about_chris_house = false
+VAR took_mountain_route = false
 VAR won_against_bandits = false
+VAR saved_the_cat = false
 VAR has_money = false
 
--> CampExploration
+~won_against_bandits = true
+
+-> Beginning
 
 === function can_pull_the_sword() ===
 
-~return mood < Rested && (won_against_bandits || knows_about_chris_house )
+~return mood < Rested && (won_against_bandits || knows_about_chris_house || saved_the_cat)
 
 === function mood_event(event) ===
 >>> Mood event, initial mood: {mood}, event: {event}
@@ -143,7 +145,7 @@ It was only when we arrived at a log barring the road that my suspiciouns arose 
 
 "What should we do?" that was Chris, practical as ever.
 
-    * {mood== Adventurous} "Let's look for the bandits!"[]
+    * {mood == Adventurous} "Let's look for the bandits!"[]
         I said, eager for an adventure and started climbing over the trunk.
     
     * [I was hoping for no bandits]
@@ -189,9 +191,10 @@ It was only when we arrived at a log barring the road that my suspiciouns arose 
 
 Soon we managed to push the bandits back into the woods where they belonged.
 
-    * "Heureka!"[] I shouted, turning to my friends in celebration who wore {mood == Adventurous bright | exhaused} smiles.
+    * "Heureka!"[] I shouted, turning to my friends in celebration who wore {mood < Rested bright | exhaused} smiles.
     
-- We took a rest before moving on through the woods.
+~ has_money = true
+- All through the clearing lay remains of the fight. We gathered up the coins dropped by the fleeing bandits and took a rest before moving on through the woods.
 
     * [Soon after, we arrived] -> AlphaOver
     
@@ -228,6 +231,8 @@ It just wasn't ment to be our adventure.
 #CLEAR
 #SCENE: mountain
 #CHAPTER: The high ground
+
+~ took_mountain_route = true
 
 The view from atop the mountain was spectacular, as ever! The sun was shining, and flowers bloomed on the side of the mountain.
 

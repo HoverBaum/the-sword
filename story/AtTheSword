@@ -11,7 +11,7 @@ Do your best mate. Previous choices will dictate wether you can or not.
 
 - One more try!
 
-{mood == Adventurous:
+{can_pull_the_sword():
     And suddenly I was holding it! Right there in my hand. As if it had always belonged there.
     * [continue] -> YouBecomeKing
 - else:
@@ -27,6 +27,22 @@ You become the king. Maybe lamet how nice it would be to not shoulder all the re
 
 === YouFailed ===
 
-You go home as you were. Someone else becomes king. You think about how nice it would be to be that person.
+Devastated I stepped away from the sword...
+
+When we sat out on this journey I hadn' been sure about all of this. But now, standing here, I wanted nothing more than for this sword to move. And it hadn't. It simply didn't move for me.
+
+    * The otheres tried in turn.
+    
+- But with the same result. And finally, we had to admit...
+
+It was time to go home.
+
+At least we had seen something of the world that was more than some back home could say about their lifes. We had crossed the{took_mountain_route: mountain, enjoyed the views| forrest}{won_against_bandits: and even won again the bandits}. And here at the camp our adventure hadn't stopped but only really started.
+
+    * [continue]
+    
+- 
+~ mood = Cheerful
+Thinking back on it now, it had been a good adventure!
 
 -> theEnd

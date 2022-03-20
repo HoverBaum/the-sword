@@ -1,0 +1,83 @@
+=== winningDice
+
+// Winning dice are always above 9.
+
+<>{~four, six and two|five, four and four|five, five and six|three, five and four|one, six and three|six and two threes|six, one and five}.
+
+->->
+
+=== loosingDice
+
+// Loosing dice are always below or equal to 9.
+
+<>  {~two, three and one|one, one and three|two, four and two|two, one and four|three and two twos|one and two threes|one, six and two}.
+
+->->
+
+=== watchDiceGame
+
+// You can watch the men play dice for as long, as you want.
+// Maybe we should limit this to like 5 games?
+
+~temp player1Wins = RANDOM(1,2) == 1
+~temp player1 = "{&Piet|Bryan}"
+~temp player2 = "{&Bryan|Piet}"
+
+Your turn {player1} said the red feathered man.
+
+{player1} picked up the dice and threw them.
+
+They landed on {player1Wins:
+    -> winningDice ->
+    - else:
+    -> loosingDice ->
+}
+
+<> "Not bad mate," said {player2}, picking up the dice to beat it.
+
+And again the dice rolled, this time landing on {player1Wins:
+    -> loosingDice ->
+    - else:
+    -> winningDice ->
+}
+
+{~"Ha, my win!"|"Got you this time!"|"Luck was on my side!"} {~exclaimed|celebrated|shouted} {player1Wins:
+    <>{player1}
+    - else:
+    <>{player2}
+}
+<>, taking the wagered money.
+
+    + We stayed for another round. 
+        -> watchDiceGame
+    * We left them to it.
+        -> END
+    * "Let us join" 
+        -> playDice
+
+=== playDice
+
+"Well then, sit down." Said the man witht the red feather in my direction. "I am Clark and these here," he points at his companions in turn, "are Piet and Bryan."
+
+A curt nod is all Piet and Bryan give us.
+
+    * I sat down.
+    
+- "The rules are quite simple," explained Clark, "there are three dice. Both of you throw them. Whoever gets the most eyes to show up wins."
+
+"Since we already have a price pool, the first game is on us." Said the one identified as Piet, smiling in my direction.
+
+"I will go first." said Bryan, grabbing the dice.
+
+    * [watch]
+    
+- He threw the dice, rolling a solid -> loosingDice -> 
+
+    * "My turn."
+    
+Grabbing the dice, I could feel the excitement rising in my cest.
+
+And they landed on -> winningDice ->
+
+
+-> END

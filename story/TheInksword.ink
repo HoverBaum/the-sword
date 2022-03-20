@@ -1,16 +1,18 @@
 INCLUDE TheCamp.ink
 INCLUDE AtTheSword
+INCLUDE DiceGame.ink
+
 
 # author: Hendrik Wallbaum
 # title: InkSword
 
-LIST mood = Adventurous, Curious, Energetic, Chearful, Rested, Prudent, Fearful, Dishearted
+LIST mood = Adventurous, Curious, Energetic, Chearful, Excited, Rested, Prudent, Fearful, Dishearted
 VAR knows_about_chris_house = false
 VAR won_against_bandits = false
 VAR has_money = false
 VAR can_visit_tavern = false
 
--> TheCamp
+-> DiceGame
 
 === function can_pull_the_sword() ===
 

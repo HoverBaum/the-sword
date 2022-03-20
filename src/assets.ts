@@ -9,6 +9,9 @@ import MountainImage from './images/mountain.jpg'
 import MountainOriginalImage from './images/mountain-original.jpg'
 import MorningImage from './images/morning.jpg'
 import FortuneImage from './images/fortune.jpg'
+import FortuneOriginalImage from './images/fortune-original.jpg'
+import DiceImage from './images/dice.jpg'
+import DiceOriginalImage from './images/dice-original.jpg'
 import BonfireSound from './sounds/bonfire.wav'
 import PageTurnSound from './sounds/page_turn.mp3'
 import MorgningBirtsSound from './sounds/birds.mp3'
@@ -26,10 +29,21 @@ export const SwordIconImageAsset: IconAsset = {
   creditLink: 'https://www.svgrepo.com/svg/99557/sword',
 }
 
+export const diceImageAsset: ImageAsset = {
+  name: 'Dice game',
+  type: 'image',
+  file: DiceImage,
+  original: DiceOriginalImage,
+  credit: 'Alois Komenda',
+  creditLink: 'https://unsplash.com/photos/hAdfTKFXmwM',
+  license: 'unsplash',
+}
+
 export const fortuneImageAsset: ImageAsset = {
   name: 'Fortune teller',
   type: 'image',
   file: FortuneImage,
+  original: FortuneOriginalImage,
   credit: 'Damir Spanic',
   creditLink: 'https://unsplash.com/photos/NZuRKh8hiRA',
   license: 'unsplash',

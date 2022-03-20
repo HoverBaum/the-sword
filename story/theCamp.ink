@@ -3,7 +3,6 @@
 #SCENE: camp
 #CHAPTER: Like a Festival
 
-~ won_against_bandits=false
 ~ has_money = won_against_bandits
 
 Finally we arrived at Budshire{won_against_bandits == true:, exhausted from our fight but happy to have made it}.
@@ -58,6 +57,8 @@ Looking around the camp there seemed to be a couple of options{| still open}.
 #SCENE: fortune
 
 // If the protagonist takes her up, Madame Lyzette will give hints on how to win the game.
+
+~ mood = Curious
 
 Fog drifts out of the round, purple tent right at the camps edge. Big letters above the entrance read: "Madame Lyzette - fortune telling".
 
@@ -159,11 +160,3 @@ With that, she shued us out of her tent.
 
 -> END
 
-= DiceGame
-#SECTION: All or nothing
-
-// Here the protagonist will aquire money. Maybe they can lose it, if they already have some?
-
-You can play for money. The players actions will ultimately decide whether they succeed. 
-
--> END

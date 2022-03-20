@@ -48,7 +48,6 @@ Looking around the camp there seemed to be a couple of options{| still open}.
     * [A fortune teller] -> FortuneTeller
     * [Some folk playing dice] -> DiceGame
     * [Explore the camp further] -> CampExploration
-    * {can_visit_tavern}[A makeshift tavern] -> CampTavern
     + [The Sword] -> AtTheSword
 
 = FortuneTeller
@@ -117,13 +116,6 @@ Insight the tent the fog turned into thick smoke, rising from counteless incense
 - I sat there, stunned by her refelation, as she finally gave some advice.
 
 {
-    -(won_against_bandits || knows_about_chris_house) && mood > Rested:
-        "Your path should lead you, where every weary traveller goes." She said and then prophecised, "often in live it is more about our spirit than anything else."
-    -else:
-        "Your mind is, where it should be!" She started.
-}
-
-{
     -not won_against_bandits && not knows_about_chris_house:
         "What keeps you from growing, is your lack of the unknown," she continued. "Try finding it first."
     -else:
@@ -153,10 +145,4 @@ With that, she shued us out of her tent.
 
 -> END
 
-= CampTavern
-#SECTION: The Drunken Hilt
-
-// Here the protagonists mood can be lifted if they are not bright enough to be king yet.
-
--> END
 

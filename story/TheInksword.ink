@@ -16,7 +16,7 @@ VAR can_visit_tavern = false
 
 === function can_pull_the_sword() ===
 
-~return won_against_bandits && mood < Rested || knows_about_chris_house && mood < Rested
+~return mood < Rested && (won_against_bandits || knows_about_chris_house )
 
 === function mood_event(event) ===
 >>> Mood event, initial mood: {mood}, event: {event}

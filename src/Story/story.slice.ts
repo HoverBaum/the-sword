@@ -92,6 +92,11 @@ export const storySlice = createSlice({
     clearChoices: (state) => {
       state.choices = []
     },
+    fadeAllLines: (state) => {
+      state.storyLines.forEach((line) => {
+        if (line.type === 'paragraph') line.isFaded = true
+      })
+    },
     reset: () => {
       return initialState
     },
@@ -186,6 +191,7 @@ export const makeChoice = (choice: ChoiceType) => (dispatch: RootDispatch) => {
   dispatch({ type: 'story/makeChoice', payload: choice })
   story.ChooseChoiceIndex(choice.index)
   dispatch(clearChoices())
+  dispatch(fadeAllLines())
   continueStory(dispatch)
   dispatch(saveGame())
 }
@@ -279,6 +285,7 @@ const {
   setScene,
   setMood,
   loadState,
+  fadeAllLines,
 } = storySlice.actions
 // Actions to be used by the application.
 export const {

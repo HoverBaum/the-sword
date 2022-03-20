@@ -72,7 +72,7 @@ And again the dice rolled, this time landing on {player1Wins:
         -> watchDiceGame
     * We left them to it.
         -> END
-    * "Let us join" 
+    * "I would love to join" 
         -> playDiceGame
 
 === playDiceGame

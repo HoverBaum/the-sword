@@ -115,6 +115,7 @@ export const TextLine: ComponentType<TextLineProps> = ({ storyLine }) => {
           key={index + word}
           css={css`
             opacity: 0;
+            transition: all 0.3s ease-in-out;
             animation: ${fadeIn} ${wordFadeInTime}s ease-in-out forwards;
             // 0-indexed array require us to add 1 again so the config does what it says.
             animation-delay: ${(wordCount +

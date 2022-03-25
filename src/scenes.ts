@@ -4,6 +4,7 @@ import {
   bonfireSoundAsset,
   campImageAsset,
   diceImageAsset,
+  campSoundAsset,
   forrestAmbienceSoundAsset,
   forrestImageAsset,
   fortuneImageAsset,
@@ -54,6 +55,7 @@ export const scenes: Scene[] = [
     textColor: 'white',
     backgroundColor: '#033300',
     image: campImageAsset,
+    sound: campSoundAsset,
   },
   {
     id: 'fortune',

@@ -17,6 +17,7 @@ import PageTurnSound from './sounds/page_turn.mp3'
 import MorgningBirtsSound from './sounds/birds.mp3'
 import ForrestAmbienceSound from './sounds/forrest.mp3'
 import MountainMeadowSound from './sounds/mountain.mp3'
+import CampSound from './sounds/camp.wav'
 import { SwordIcon } from './Icons/SwordIcon'
 import { IconAsset, ImageAsset, SoundAsset } from './assetTypes'
 
@@ -151,5 +152,14 @@ export const mountainMeadowSoundAsset: SoundAsset = {
   file: MountainMeadowSound,
   credit: 'Tonmeister',
   creditLink: 'https://freesound.org/people/Tonmeister88/sounds/454841/',
+  license: 'CC0 1.0',
+}
+
+export const campSoundAsset: SoundAsset = {
+  name: 'Camp Ambience',
+  type: 'backgroundMusic',
+  file: CampSound,
+  credit: 'GagaMan',
+  creditLink: 'https://freesound.org/people/GagaMan/sounds/46730/',
   license: 'CC0 1.0',
 }

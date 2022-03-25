@@ -162,4 +162,5 @@ export const campSoundAsset: SoundAsset = {
   credit: 'GagaMan',
   creditLink: 'https://freesound.org/people/GagaMan/sounds/46730/',
   license: 'CC0 1.0',
+  volume: 0.2,
 }

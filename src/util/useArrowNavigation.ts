@@ -2,6 +2,12 @@ import { KeyCode, useKeyboard } from '@geist-ui/core'
 
 type nextIndexFunction = (activeIndex: number, totalElements: number) => number
 
+const shakeElement = (element: HTMLElement) => {
+  const duration = 0.25
+  element.setAttribute('style', `animation: shakeY ${duration}s ease-in-out`)
+  setTimeout(() => element.setAttribute('style', ''), duration * 1000)
+}
+
 /**
  * Enable navigation between "tabbable" buttons using arrows keys.
  * Buttons are "tabbable" if they "tabindex" !== -1.
@@ -21,7 +27,12 @@ export const useArrowNavigation = (
       if (button === document.activeElement) return index
       return foundIndex
     }, -1 + offset)
-    tabableButtons[nextIndex(activeIndex, tabableButtons.length)].focus()
+    const targetIndex = nextIndex(activeIndex, tabableButtons.length)
+    if (targetIndex === activeIndex) {
+      shakeElement(tabableButtons[activeIndex])
+    } else {
+      tabableButtons[targetIndex].focus()
+    }
   }
 
   const nextElement: nextIndexFunction = (

@@ -17,6 +17,32 @@ function App() {
             padding: 0;
             margin: 0;
           }
+
+          @keyframes shakeY {
+            from,
+            to {
+              transform: translate3d(0, 0, 0);
+            }
+
+            20% {
+              transform: translate3d(0, -5px, 0);
+            }
+            60% {
+              transform: translate3d(0, -2px, 0);
+            }
+
+            40% {
+              transform: translate3d(0, 4px, 0);
+            }
+
+            80% {
+              transform: translate3d(0, 1px, 0);
+            }
+          }
+          .shakeY {
+            animation: 0.3s;
+            animation-name: shakeY;
+          }
         `}
       />
 

@@ -50,15 +50,15 @@ export const ChoiceButton: ComponentType<ChoiceButtonProps> = ({
     }
   }, [buttonRef.current])
 
-  const playFocusSound = () => {
+  const onClickWithSound = () => {
     playSoundEffect(pageTurnSoundAsset)
+    onClick()
   }
 
   // We sadly need two buttons here to make display of continue buttons work properly.
   // That is why we gather shared props here.
   const buttonProps: ButtonProps = {
-    onFocus: playFocusSound,
-    onClick,
+    onClick: onClickWithSound,
     autoFocus,
     type: 'secondary',
     ghost: true,

@@ -143,7 +143,7 @@ export const forrestAmbienceSoundAsset: SoundAsset = {
   credit: 'tbrenneche',
   creditLink: 'https://freesound.org/people/tbrenneche/sounds/475566/',
   license: 'CC0 1.0',
-  volume: 0.5,
+  volume: 0.3,
 }
 
 export const mountainMeadowSoundAsset: SoundAsset = {

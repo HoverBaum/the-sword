@@ -7,7 +7,8 @@
     "preview": "vite preview",
     "viute:clearcache": "rm -rf node_modules/.vite",
     "ink:compile": "zx ./scripts/compile.mjs",
-    "itch": "zx ./scripts/itch.mjs"
+    "itch": "zx ./scripts/itch.mjs",
+    "overview": "zx ./scripts/overview.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.8.1",

@@ -25,6 +25,7 @@
     "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^9.0.3",
     "@types/color": "^3.0.3",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.13",

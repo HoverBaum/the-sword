@@ -47,6 +47,15 @@ const knotAndStichIdentifiers = knots.reduce((identifiers, knot) => {
 
 console.log(knotAndStichIdentifiers)
 
+/**
+ *
+ * @param {*} container any[]
+ * @param {*} identifiers string[]
+ */
+const transitionsFromContainer = (container, identifiers) => {
+  const containerTerminator = container.pop()
+}
+
 // Now we find all transitions to all identifiers.
 terminaotrKeys(rootTerminator).forEach((knot) => {
   // For each knot exclude the terminator and find transitions in the rest of the json.

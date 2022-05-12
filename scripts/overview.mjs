@@ -47,6 +47,40 @@ const knotAndStichIdentifiers = knots.reduce((identifiers, knot) => {
 
 console.log(knotAndStichIdentifiers)
 
+// Now we find all transitions to all identifiers.
+terminaotrKeys(rootTerminator).forEach((knot) => {
+  // For each knot exclude the terminator and find transitions in the rest of the json.
+  // KnotObject is a container array.
+  const knotObject = rootTerminator[knot]
+  if (!Array.isArray(knotObject)) {
+    console.log('Knot object:')
+    console.log(knotObject)
+    console.error('Knot Object is not an array but expected to be a container.')
+    process.exit()
+  }
+  const knotTerminator = knotObject.pop()
+  const knotJson = JSON.stringify(knotObject, null, 2)
+  // Find transitions in the main part of the container.
+  knotJson
+    .split('\n')
+    .filter((line) => line.includes('->"'))
+    .forEach((line) => {
+      const destination = line.split(':')[1].trim().replace(/"/g, '')
+      const targetIdentifier = knotAndStichIdentifiers.find(
+        (identifier) => destination === identifier
+      )
+      if (knot === 'TheCamp') {
+        console.log(line)
+        console.log(targetIdentifier)
+      }
+      if (!targetIdentifier) return
+      if (targetIdentifier === knot) return
+      transitions.push({ from: knot, to: targetIdentifier })
+    })
+  // Now also look for transitions in all sub-parts of the terminator.
+  if (!knotTerminator) return
+})
+
 // const knotsObject = parsedInk.root[2]
 // Object.keys(knotsObject).forEach((knot) => {
 //   const knotObject = knotsObject[knot]

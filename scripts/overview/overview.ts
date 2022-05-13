@@ -33,15 +33,18 @@ const transitionsFromContainer = (
   if (!Array.isArray(container)) return []
   const containerTerminator = container.pop()
   const containerJSON = JSON.stringify(container, null, 2)
-
   const containerTransitions = containerJSON
     .split('\n')
     .filter((line) => line.includes('->":'))
     .reduce((transitions, line) => {
       const destination = line.split(':')[1].trim().replace(/"/g, '')
-      const targetIdentifier = identifiers.find(
-        (identifier) => destination === identifier
-      )
+
+      const targetIdentifier = identifiers.find((identifier) => {
+        const identifierRegEx = new RegExp(
+          `(^${identifier}$)|((\\.\\^)+\\.${identifier.split('.').pop()})`
+        )
+        return identifierRegEx.test(destination)
+      })
       if (!targetIdentifier) return transitions
       if (targetIdentifier === containerIdentifier) return transitions
       return transitions.concat([
@@ -86,16 +89,21 @@ const run = async () => {
 
   const knots = terminaotrKeys(rootTerminator)
 
-  const knotAndStichIdentifiers = knots.reduce((identifiers, knot) => {
-    identifiers.push(knot)
-    const knotTerminator = rootTerminator[knot][rootTerminator[knot].length - 1]
-    // knotTerminator can be null.
-    if (knotTerminator) {
-      const keys = terminaotrKeys(knotTerminator)
-      identifiers = identifiers.concat(keys.map((key) => `${knot}.${key}`))
-    }
-    return identifiers
-  }, [])
+  const knotAndStichIdentifiers = knots
+    .reduce((identifiers, knot) => {
+      identifiers.push(knot)
+      const knotTerminator =
+        rootTerminator[knot][rootTerminator[knot].length - 1]
+      // knotTerminator can be null.
+      if (knotTerminator) {
+        const keys = terminaotrKeys(knotTerminator)
+        identifiers = identifiers.concat(keys.map((key) => `${knot}.${key}`))
+      }
+      return identifiers
+    }, [])
+    .filter((identifier) => identifier !== 'global decl')
+    // Assuming all function include a "_" we filter them out.
+    .filter((identifier) => !identifier.includes('_'))
 
   console.log(knotAndStichIdentifiers)
 
@@ -112,19 +120,32 @@ const run = async () => {
     [] as Transition[]
   )
 
-  console.log(transitions)
-
   // Remove duplicates from transitions.
   const transitionsMap = {}
   transitions.forEach((transition) => {
     transitionsMap[JSON.stringify(transition)] = transition
   })
-  const uniqueTransitions = Object.values(transitionsMap)
+  const uniqueTransitions = Object.values(transitionsMap) as Transition[]
 
   console.log(uniqueTransitions)
 
-  const mermaidDiagram = `graph TD;${uniqueTransitions
+  // A list of all endpoints that have a transition to but not from them.
+  const endpoints = uniqueTransitions.reduce((endpoints, transition) => {
+    return endpoints.filter((endpoint) => endpoint !== transition.from)
+  }, knotAndStichIdentifiers)
+
+  const startpoints = uniqueTransitions.reduce((startpoints, transition) => {
+    return startpoints.filter((startpoint) => startpoint !== transition.to)
+  }, knotAndStichIdentifiers)
+
+  const mermaidDiagram = `graph TD;${knotAndStichIdentifiers.join(
+    ';'
+  )};${uniqueTransitions
     .map(({ from, to }) => `${from}-->${to}`)
+    .join(';')};${endpoints
+    .map((endpoint) => `${endpoint}((${endpoint}))`)
+    .join(';')};${startpoints
+    .map((startpoint) => `${startpoint}{${startpoint}}`)
     .join(';')};`
 
   console.log(mermaidDiagram)

@@ -1,3 +1,4 @@
+import { isIdentifier } from 'typescript'
 import { $, fs } from 'zx'
 
 console.log('Generating overview 🗺')
@@ -20,6 +21,12 @@ const tmpMermaidFile = './../../story/overview.mmd'
  * Might be nice to initially just implement a warning for that :D
  */
 
+type Identifier = {
+  id: string
+  isThread: boolean
+  regex: RegExp
+}
+
 type Transition = {
   to: string
   from: string
@@ -28,7 +35,7 @@ type Transition = {
 const transitionsFromContainer = (
   containerIdentifier: string,
   container: any[],
-  identifiers: string[]
+  identifiers: Identifier[]
 ): Transition[] => {
   if (!Array.isArray(container)) return []
   const containerTerminator = container.pop()
@@ -40,19 +47,22 @@ const transitionsFromContainer = (
       const destination = line.split(':')[1].trim().replace(/"/g, '')
 
       const targetIdentifier = identifiers.find((identifier) => {
-        const identifierRegEx = new RegExp(
-          `(^${identifier}$)|((\\.\\^)+\\.${identifier.split('.').pop()})`
-        )
-        return identifierRegEx.test(destination)
+        return identifier.regex.test(destination)
       })
       if (!targetIdentifier) return transitions
-      if (targetIdentifier === containerIdentifier) return transitions
-      return transitions.concat([
+      if (targetIdentifier.id === containerIdentifier) return transitions
+      const transitionsToAdd = [
         {
           from: containerIdentifier,
-          to: targetIdentifier,
+          to: targetIdentifier.id,
         },
-      ])
+      ]
+      if (targetIdentifier.isThread)
+        transitionsToAdd.push({
+          from: targetIdentifier.id,
+          to: containerIdentifier,
+        })
+      return transitions.concat(transitionsToAdd)
     }, [] as Transition[])
 
   // Now also find all transitions from sub-containers.
@@ -89,21 +99,34 @@ const run = async () => {
 
   const knots = terminaotrKeys(rootTerminator)
 
-  const knotAndStichIdentifiers = knots
+  const knotAndStichIdentifiers: Identifier[] = knots
     .reduce((identifiers, knot) => {
-      identifiers.push(knot)
+      const knotIdentifier: Identifier = {
+        id: knot,
+        isThread: false,
+        regex: new RegExp(`(^${knot}$)`),
+      }
+      if (rootTerminator[knot][rootTerminator[knot].length - 2] === 'done')
+        knotIdentifier.isThread = true
+      identifiers.push(knotIdentifier)
       const knotTerminator =
         rootTerminator[knot][rootTerminator[knot].length - 1]
       // knotTerminator can be null.
       if (knotTerminator) {
         const keys = terminaotrKeys(knotTerminator)
-        identifiers = identifiers.concat(keys.map((key) => `${knot}.${key}`))
+        identifiers = identifiers.concat(
+          keys.map((key) => ({
+            id: `${knot}.${key}`,
+            isThread: false,
+            regex: new RegExp(`(^${knot}.${key}$)|((\\.\\^)+\\.${key})`),
+          }))
+        )
       }
       return identifiers
-    }, [])
-    .filter((identifier) => identifier !== 'global decl')
+    }, [] as Identifier[])
+    .filter((identifier) => identifier.id !== 'global decl')
     // Assuming all function include a "_" we filter them out.
-    .filter((identifier) => !identifier.includes('_'))
+    .filter((identifier) => !identifier.id.includes('_'))
 
   console.log(knotAndStichIdentifiers)
 
@@ -130,17 +153,23 @@ const run = async () => {
   console.log(uniqueTransitions)
 
   // A list of all endpoints that have a transition to but not from them.
-  const endpoints = uniqueTransitions.reduce((endpoints, transition) => {
-    return endpoints.filter((endpoint) => endpoint !== transition.from)
-  }, knotAndStichIdentifiers)
+  const endpoints = uniqueTransitions.reduce(
+    (endpoints, transition) => {
+      return endpoints.filter((endpoint) => endpoint !== transition.from)
+    },
+    knotAndStichIdentifiers.map((identifier) => identifier.id)
+  )
 
-  const startpoints = uniqueTransitions.reduce((startpoints, transition) => {
-    return startpoints.filter((startpoint) => startpoint !== transition.to)
-  }, knotAndStichIdentifiers)
+  const startpoints = uniqueTransitions.reduce(
+    (startpoints, transition) => {
+      return startpoints.filter((startpoint) => startpoint !== transition.to)
+    },
+    knotAndStichIdentifiers.map((identifier) => identifier.id)
+  )
 
-  const mermaidDiagram = `graph TD;${knotAndStichIdentifiers.join(
-    ';'
-  )};${uniqueTransitions
+  const mermaidDiagram = `graph TD;${knotAndStichIdentifiers
+    .map((identifier) => identifier.id)
+    .join(';')};${uniqueTransitions
     .map(({ from, to }) => `${from}-->${to}`)
     .join(';')};${endpoints
     .map((endpoint) => `${endpoint}((${endpoint}))`)

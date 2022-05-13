@@ -1,0 +1,12 @@
+{
+  "name": "overview",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader ts-node/esm overview.ts"
+  },
+  "dependencies": {
+    "ts-node": "^10.7.0",
+    "zx": "^6.1.0"
+  }
+}

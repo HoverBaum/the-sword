@@ -121,8 +121,8 @@ Back then it had been a bright place full of wonders to discover and adventures 
 - After walking for a while I started to wonder whether my {mood == Adventurous: excitement | fears} had been for naught.
 
 // Twice as likely to meet bandits than to have a boring but fast walk through the forrest.
-//{~ -> BoringForrestWalk | -> MeetBanditsInForrest | -> MeetBanditsInForrest}
--> MeetBanditsInForrest
+{~ -> BoringForrestWalk | -> MeetBanditsInForrest | -> MeetBanditsInForrest}
+//-> MeetBanditsInForrest
 
 === BoringForrestWalk ===
 

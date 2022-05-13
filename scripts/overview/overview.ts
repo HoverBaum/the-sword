@@ -30,6 +30,18 @@ type Identifier = {
 type Transition = {
   to: string
   from: string
+  isThread?: boolean
+  isTunnel?: boolean
+}
+
+/**
+ * Calculate the right arrow for a transition.
+ * Threads and Tunnels get dotted lines because their detection is based on assumptions.
+ */
+const arrowForTransition = (transition: Transition): string => {
+  if (transition.isTunnel) return '-. tunnel .->'
+  if (transition.isThread) return '-. thread .->'
+  return '--->'
 }
 
 const transitionsFromContainer = (
@@ -51,7 +63,7 @@ const transitionsFromContainer = (
       })
       if (!targetIdentifier) return transitions
       if (targetIdentifier.id === containerIdentifier) return transitions
-      const transitionsToAdd = [
+      const transitionsToAdd: Transition[] = [
         {
           from: containerIdentifier,
           to: targetIdentifier.id,
@@ -61,7 +73,35 @@ const transitionsFromContainer = (
         transitionsToAdd.push({
           from: targetIdentifier.id,
           to: containerIdentifier,
+          isThread: true,
         })
+      return transitions.concat(transitionsToAdd)
+    }, [] as Transition[])
+
+  // Assumign tunnels will always continue where they left off 😅
+  // Apart from that copy from above.
+  const tunnelTransitions = containerJSON
+    .split('\n')
+    .filter((line) => line.includes('t->":'))
+    .reduce((transitions, line) => {
+      console.log('TUNNEL', line)
+      const destination = line.split(':')[1].trim().replace(/"/g, '')
+
+      const targetIdentifier = identifiers.find((identifier) => {
+        return identifier.regex.test(destination)
+      })
+      if (!targetIdentifier) return transitions
+      if (targetIdentifier.id === containerIdentifier) return transitions
+      // Since we found a tunnel we add a transition in the opposite way.
+      // Assuming that tunnels will always continue where they started.
+      const transitionsToAdd: Transition[] = [
+        {
+          to: containerIdentifier,
+          from: targetIdentifier.id,
+          isTunnel: true,
+        },
+      ]
+      console.log(transitionsToAdd)
       return transitions.concat(transitionsToAdd)
     }, [] as Transition[])
 
@@ -79,7 +119,9 @@ const transitionsFromContainer = (
       ),
     [] as Transition[]
   )
-  return containerTransitions.concat(terminatorTransitions)
+  return containerTransitions
+    .concat(tunnelTransitions)
+    .concat(terminatorTransitions)
 }
 
 const terminaotrKeys = (terminator): string[] => {
@@ -170,7 +212,10 @@ const run = async () => {
   const mermaidDiagram = `graph TD;${knotAndStichIdentifiers
     .map((identifier) => identifier.id)
     .join(';')};${uniqueTransitions
-    .map(({ from, to }) => `${from}-->${to}`)
+    .map(
+      (transition) =>
+        `${transition.from}${arrowForTransition(transition)}${transition.to}`
+    )
     .join(';')};${endpoints
     .map((endpoint) => `${endpoint}((${endpoint}))`)
     .join(';')};${startpoints

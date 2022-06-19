@@ -128,7 +128,7 @@ Back then it had been a bright place full of wonders to discover and adventures 
 
 And nothing happened for all the time that we walked through the woods. Except all of us wishfully glancing up at the mountain, there we would at least have had a good view. {mood == Prudent: Though secretly I was happy about my fears being unfounded.}
 
-* Soon, we arrived -> AlphaOver
+* Soon, we arrived -> TheCamp
 
 === MeetBanditsInForrest ===
 
@@ -178,9 +178,6 @@ It was only when we arrived at a log barring the road that my suspiciouns arose 
     
 - Fighting was all we could do! -> BanditEncounterWin
     
-    
-    * [continue] -> AlphaOver
-    
 = BanditEncounterWin
 ~won_against_bandits = true
 
@@ -191,7 +188,7 @@ Soon we managed to push the bandits back into the woods where they belonged.
 ~ has_money = true
 - All through the clearing lay remains of the fight. We gathered up the coins dropped by the fleeing bandits and took a rest before moving on through the woods.
 
-    * [Soon after, we arrived] -> AlphaOver
+    * [Soon after, we arrived] -> TheCamp
     
 = LooseToBanditsAndDie
 
@@ -201,7 +198,7 @@ Soon we managed to push the bandits back into the woods where they belonged.
 
 - It was the last thing I ever remembered. Now only my ghost, a mere fraction of my former self remains to tell the story.
 
--> AlphaOver
+-> theEnd
 
 = BanditsCaptureUs
 ~mood = Dishearted
@@ -220,17 +217,7 @@ We had last been in this place when the Crimson Bandits had been subjugated two 
 
 It just wasn't ment to be our adventure.
 
--> AlphaOver
-
-
-=== AlphaOver ===
-#CHAPTER: Alpha End
-
-This concludes the Alpha.
-
-Please do provide feedback 🙂
-
--> END
+-> theEnd
 
 === theEnd ===
 
